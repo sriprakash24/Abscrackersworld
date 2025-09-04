@@ -216,7 +216,11 @@
   opacity: 0.9;               /* 👈 visible when scrolled down */
 }
 
-
+@keyframes slideNote {
+  0%   { transform: translateX(100%); }
+  50%  { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
 
 
   </style>
@@ -240,11 +244,24 @@
   </div>
 
   <div class="container" style="padding-bottom:12px;">
-    <div class="filters">
-      <select id="categoryFilter"></select>
-      <input id="search" type="search" placeholder="Search item name…"/>
-    </div>
+  <div class="filters">
+    <select id="categoryFilter"></select>
+    <input id="search" type="search" placeholder="Search item name…"/>
   </div>
+
+  <!-- Customer Note -->
+  <div style="margin-top:6px; overflow:hidden; white-space:nowrap;">
+    <span style="
+      display:inline-block;
+      font-size:12px;
+      font-style:italic;
+      color:#facc15; /* golden-yellow accent */
+      animation: slideNote 20s ease-in-out infinite;
+    ">
+      The Product Image is only for your reference, the packing and brand may change
+    </span>
+  </div>
+</div>
   <div class="cart-icon" onclick="scrollToCart()">
   🛒
   <span id="cartCount" class="badge-count">0</span>
@@ -998,3 +1015,4 @@ el('#placeOrder').addEventListener('click', async ()=>{
 
 </body>
 </html>
+
