@@ -517,12 +517,12 @@
 
             const invoiceNo = "INV-" + o.id.slice(0, 6).toUpperCase();
             const msg =
-              `🎇 Welcome to ABS Crackers World! 🎇%0A%0A` +
-              `Dear ${o.name || "Customer"}, thank you for choosing us!%0A` +
-              `🧾 Invoice No: ${invoiceNo}%0A%0A` +
-              `✅ Your order has been successfully received.%0A` +
-              `Our team will reach out shortly with confirmation & delivery details.%0A%0A` +
-              `Wishing you a safe, bright, and joyful celebration! 🎆✨%0A` +
+              `🎇 Welcome to ABS Crackers World! 🎇\n\n` +
+              `Dear ${o.name || "Customer"}, thank you for choosing us!\n` +
+              `🧾 Invoice No: ${invoiceNo}\n\n` +
+              `✅ Your order has been successfully received.\n` +
+              `Our team will reach out shortly with confirmation & delivery details.\n\n` +
+              `Wishing you a safe, bright, and joyful celebration! 🎆✨\n` +
               `- Team ABS Crackers`;
             const waLink = `https://wa.me/91${
               o.phone
@@ -817,3 +817,4 @@
     </script>
   </body>
 </html>
+
