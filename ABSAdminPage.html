@@ -1,340 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ABS Crackers — Admin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ABS Crackers — Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    :root{
-      --bg:#0f172a; --card:#111827; --muted:#9ca3af; --text:#e5e7eb; --brand:#60a5fa; --ok:#22c55e;
-      --border:#1f2937;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1200px;margin:32px auto;padding:0 16px}
-    h1{font-size:28px;margin:0 0 16px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-    .toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}
-    .badge{background:#0b1220;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px}
-    input.search{width:420px;max-width:100%;padding:10px 12px;border-radius:10px;background:#0b1220;border:1px solid var(--border);color:var(--text)}
-    button{cursor:pointer;border:none}
-    .btn{padding:8px 12px;border-radius:10px;background:#0b1220;border:1px solid var(--border);color:var(--text)}
-    .btn:hover{border-color:#2b3647}
-    .btn-primary{background:var(--brand);color:#00122a;border-color:transparent}
-    .btn-danger{background:#ef4444;color:white}
-    .btn-xs{padding:6px 8px;font-size:12px;border-radius:8px}
-    table{width:100%;border-collapse:collapse;border-spacing:0}
-    th,td{padding:12px;border-top:1px solid var(--border);text-align:left;font-size:14px}
-    th{font-weight:600;color:#cbd5e1;background:#0b1220;position:sticky;top:0;z-index:1}
-    tr:hover td{background:#0b1220}
-
-    /* ---- Invoice preview modal ---- */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px}
-    .modal.show{display:flex}
-    .modal-card{width:min(780px,100%);max-height:90vh;overflow:auto;background:#fff;color:#111;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.45)}
-    .modal-head{padding:14px 18px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between}
-    .modal-head h3{margin:0;font-size:18px}
-    .modal-body{padding:18px}
-    .invoice{font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-    .inv-row{display:flex;gap:16px;flex-wrap:wrap}
-    .inv-col{flex:1 1 260px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
-    .inv-k{color:#64748b;font-size:12px}
-    .inv-v{font-weight:600}
-    .inv-table{width:100%;border-collapse:collapse;margin-top:12px}
-    .inv-table th,.inv-table td{border:1px solid #e5e7eb;padding:8px 10px;font-size:13px}
-    .inv-total{display:flex;justify-content:flex-end;margin-top:12px;font-size:16px;font-weight:700}
-    .close-x{background:transparent;font-size:22px;line-height:1}
-
-    /* --- Mobile Friendly Tweaks --- */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-
-  .toolbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  input.search {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  table {
-    font-size: 12px;
-  }
-
-  th, td {
-    padding: 8px;
-  }
-
-  .btn, .btn-xs {
-    font-size: 12px;
-    padding: 6px 8px;
-  }
-
-  /* Table wrapper for horizontal scroll */
-  .card > div {
-    overflow-x: auto;
-  }
-
-  /* Actions buttons stack on mobile */
-  td:last-child {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 18px;
-  }
-  .inv-col {
-    flex: 1 1 100%;
-  }
-  .modal-card {
-    width: 95%;
-  }
-}
-
-  </style>
-
-  <!-- NEW: jsPDF + AutoTable for invoice PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.min.js"></script>
-</head>
-<body>
-  <div class="wrap">
-    <h1>ABS Crackers – Admin</h1>
-
-    <div class="card">
-      <div class="toolbar">
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <span id="userEmail" class="badge">Not signed in</span>
-          <span id="orderCount" class="badge">0 orders</span>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <input class="search" id="searchInput" placeholder="Search name / phone / address…">
-          <button id="authBtn" class="btn-primary btn">Sign in</button>
-        </div>
-      </div>
-
-      <div style="overflow:auto;border-radius:10px">
-        <table id="ordersTable">
-          <thead>
-            <tr>
-              <th>Customer</th>
-              <th>Mobile</th>
-              <th>Address</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Items</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="ordersTbody">
-            <tr><td colspan="7" style="text-align:center;color:var(--muted)">Please sign in</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- NEW: Invoice Preview Modal -->
-  <div id="invoiceModal" class="modal" aria-hidden="true">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>Invoice Preview</h3>
-        <div style="display:flex;gap:8px">
-          <button id="downloadPdfBtn" class="btn btn-primary btn-xs">Download PDF</button>
-          <button id="closeModalBtn" class="close-x" title="Close">✕</button>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div id="invoicePreview" class="invoice"></div>
-      </div>
-    </div>
-  </div>
-
-  <script type="module">
-    // ---------- Firebase ----------
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-    import {
-      getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut
-    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-    import {
-      getFirestore, collection, query, orderBy, onSnapshot, doc, getDoc
-    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyC47paJy6jtyR6IH8Wq1wddeEXxS26zQeU",
-      authDomain: "abscrackersworld-5e2e8.firebaseapp.com",
-      projectId: "abscrackersworld-5e2e8",
-      storageBucket: "abscrackersworld-5e2e8.appspot.com",
-      messagingSenderId: "1045745449432",
-      appId: "1:1045745449432:web:c807324227ec41afb85aad",
-      measurementId: "G-Q6G22EPHS5"
-    };
-
-    const app  = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db   = getFirestore(app);
-    const provider = new GoogleAuthProvider();
-
-    // ---------- DOM refs ----------
-    const authBtn      = document.querySelector('#authBtn');
-    const userEmailEl  = document.querySelector('#userEmail');
-    const orderCountEl = document.querySelector('#orderCount');
-    const tbody        = document.querySelector('#ordersTbody');
-    const searchInput  = document.querySelector('#searchInput');
-
-    // modal refs
-    const modal        = document.querySelector('#invoiceModal');
-    const closeModal   = document.querySelector('#closeModalBtn');
-    const downloadBtn  = document.querySelector('#downloadPdfBtn');
-    const previewEl    = document.querySelector('#invoicePreview');
-
-    let ORDERS = [];            // cached snapshot for search
-    let CURRENT_ORDER_ID = null;
-    let CURRENT_ORDER = null;
-
-    // ---------- Auth ----------
-    authBtn.addEventListener('click', async () => {
-      if (auth.currentUser) await signOut(auth);
-      else await signInWithPopup(auth, provider);
-    });
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        userEmailEl.textContent = 'Not signed in';
-        userEmailEl.className = 'badge';
-        authBtn.textContent = 'Sign in';
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted)">Please sign in</td></tr>`;
-        return;
+    <style>
+      :root {
+        --bg: #0f172a;
+        --card: #111827;
+        --muted: #9ca3af;
+        --text: #e5e7eb;
+        --brand: #60a5fa;
+        --ok: #22c55e;
+        --border: #1f2937;
       }
-      userEmailEl.textContent = user.email || 'Signed in';
-      userEmailEl.className = 'badge';
-      authBtn.textContent = 'Sign out';
-      startOrdersListener();
-    });
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 32px auto;
+        padding: 0 16px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 16px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .badge {
+        background: #0b1220;
+        border: 1px solid var(--border);
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+      input.search {
+        width: 420px;
+        max-width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #0b1220;
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+      button {
+        cursor: pointer;
+        border: none;
+      }
+      .btn {
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: #0b1220;
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+      .btn:hover {
+        border-color: #2b3647;
+      }
+      .btn-primary {
+        background: var(--brand);
+        color: #00122a;
+        border-color: transparent;
+      }
+      .btn-danger {
+        background: #ef4444;
+        color: white;
+      }
+      .btn-xs {
+        padding: 6px 8px;
+        font-size: 12px;
+        border-radius: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      th,
+      td {
+        padding: 12px;
+        border-top: 1px solid var(--border);
+        text-align: left;
+        font-size: 14px;
+      }
+      th {
+        font-weight: 600;
+        color: #cbd5e1;
+        background: #0b1220;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+      tr:hover td {
+        background: #0b1220;
+      }
 
-    // ---------- Orders listener ----------
-    function startOrdersListener(){
-      const q = query(collection(db,'orders'), orderBy('createdAt','desc'));
-      onSnapshot(q, (snap) => {
-        ORDERS = snap.docs.map(d => ({ id:d.id, ...d.data() }));
-        orderCountEl.textContent = `${ORDERS.length} orders`;
-        renderRows(ORDERS);
+      /* ---- Invoice preview modal ---- */
+      /* ---- Invoice preview modal ---- */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 1000; /* 👈 higher than table headers */
+      }
+      .modal.show {
+        display: flex;
+      }
+      .modal-card {
+        width: min(780px, 100%);
+        max-height: 90vh;
+        overflow: auto;
+        background: #fff;
+        color: #111;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+        z-index: 1001; /* 👈 above backdrop */
+        position: relative;
+      }
+
+      .modal-head {
+        padding: 14px 18px;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .modal-head h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .modal-body {
+        padding: 18px;
+      }
+      .invoice {
+        font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+      }
+      .inv-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .inv-col {
+        flex: 1 1 260px;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px;
+      }
+      .inv-k {
+        color: #64748b;
+        font-size: 12px;
+      }
+      .inv-v {
+        font-weight: 600;
+      }
+      .inv-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+      }
+      .inv-table th,
+      .inv-table td {
+        border: 1px solid #e5e7eb;
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+      .inv-total {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 12px;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .close-x {
+        background: transparent;
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      /* --- Mobile Friendly Tweaks --- */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+
+        .toolbar {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+
+        input.search {
+          width: 100%;
+          font-size: 14px;
+        }
+
+        table {
+          font-size: 12px;
+        }
+
+        th,
+        td {
+          padding: 8px;
+        }
+
+        .btn,
+        .btn-xs {
+          font-size: 12px;
+          padding: 6px 8px;
+        }
+
+        /* Table wrapper for horizontal scroll */
+        .card > div {
+          overflow-x: auto;
+        }
+
+        /* Actions buttons stack on mobile */
+        td:last-child {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 18px;
+        }
+        .inv-col {
+          flex: 1 1 100%;
+        }
+        .modal-card {
+          width: 95%;
+        }
+      }
+      /* Prevent dark hover inside invoice modal */
+      .inv-table tr:hover td {
+        background: #f1f5f9; /* light gray, matches invoice background */
+      }
+    </style>
+
+    <!-- NEW: jsPDF + AutoTable for invoice PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.min.js"></script>
+  </head>
+  <body>
+    <div
+      id="loginBox"
+      class="card"
+      style="max-width: 400px; margin: 0 auto 20px; display: none"
+    >
+      <h2 style="margin-bottom: 12px; font-size: 18px">Admin Login</h2>
+      <input
+        id="emailInput"
+        type="email"
+        placeholder="Email"
+        style="
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+        "
+      />
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="Password"
+        style="
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+        "
+      />
+      <button id="loginBtn" class="btn btn-primary" style="width: 100%">
+        Sign In
+      </button>
+      <div id="loginError" style="color: red; display: none; margin-top: 8px">
+        Invalid email or password
+      </div>
+    </div>
+
+    <div class="wrap">
+      <h1>ABS Crackers – Admin</h1>
+
+      <div id="ordersPanel" class="card">
+        <div class="toolbar">
+          <div
+            style="
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <span id="userEmail" class="badge">Not signed in</span>
+            <span id="orderCount" class="badge">0 orders</span>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center">
+            <input
+              class="search"
+              id="searchInput"
+              placeholder="Search name / phone / address…"
+            />
+            <button id="authBtn" class="btn-primary btn">Sign in</button>
+          </div>
+        </div>
+
+        <div style="overflow: auto; border-radius: 10px">
+          <table id="ordersTable">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Date-Time</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="ordersTbody">
+              <tr>
+                <td colspan="7" style="text-align: center; color: var(--muted)">
+                  Please sign in
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW: Invoice Preview Modal -->
+    <div id="invoiceModal" class="modal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>Invoice Preview</h3>
+          <div style="display: flex; gap: 8px">
+            <button id="downloadPdfBtn" class="btn btn-primary btn-xs">
+              Download PDF
+            </button>
+            <button id="closeModalBtn" class="close-x" title="Close">✕</button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div id="invoicePreview" class="invoice"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      // ---------- Firebase ----------
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+      import {
+        getFirestore,
+        collection,
+        query,
+        orderBy,
+        onSnapshot,
+        doc,
+        getDoc,
+        deleteDoc,
+      } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyC47paJy6jtyR6IH8Wq1wddeEXxS26zQeU",
+        authDomain: "abscrackersworld-5e2e8.firebaseapp.com",
+        projectId: "abscrackersworld-5e2e8",
+        storageBucket: "abscrackersworld-5e2e8.appspot.com",
+        messagingSenderId: "1045745449432",
+        appId: "1:1045745449432:web:c807324227ec41afb85aad",
+        measurementId: "G-Q6G22EPHS5",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      // ---------- DOM refs ----------
+      const authBtn = document.querySelector("#authBtn");
+      const userEmailEl = document.querySelector("#userEmail");
+      const orderCountEl = document.querySelector("#orderCount");
+      const tbody = document.querySelector("#ordersTbody");
+      const searchInput = document.querySelector("#searchInput");
+
+      // modal refs
+      const modal = document.querySelector("#invoiceModal");
+      const closeModal = document.querySelector("#closeModalBtn");
+      const downloadBtn = document.querySelector("#downloadPdfBtn");
+      const previewEl = document.querySelector("#invoicePreview");
+
+      // ---------- DOM refs for login ----------
+      const loginBox = document.querySelector("#loginBox");
+      const loginBtn = document.querySelector("#loginBtn");
+      const loginError = document.querySelector("#loginError");
+      const ordersPanel = document.querySelector("#ordersPanel");
+
+      // Initially: show login, hide orders
+      ordersPanel.style.display = "none";
+      loginBox.style.display = "block";
+
+      // Handle login button click
+      loginBtn.addEventListener("click", async () => {
+        const email = document.querySelector("#emailInput").value.trim();
+        const pass = document.querySelector("#passwordInput").value.trim();
+
+        try {
+          await signInWithEmailAndPassword(auth, email, pass);
+          loginError.style.display = "none";
+        } catch (err) {
+          console.error("Login error:", err.message);
+          loginError.style.display = "block";
+        }
       });
-    }
 
-    function renderRows(rows){
-  const terms = (searchInput.value || '').trim().toLowerCase();
-  const list = terms
-    ? rows.filter(r =>
-        [r.name, r.phone, r.address].join(' ').toLowerCase().includes(terms))
-    : rows;
+      // ✅ Single Auth state listener
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // Logged in
+          loginBox.style.display = "none";
+          ordersPanel.style.display = "block";
+          userEmailEl.textContent = user.email || "Signed in";
+          authBtn.textContent = "Sign out";
+          startOrdersListener();
+        } else {
+          // Logged out
+          loginBox.style.display = "block";
+          ordersPanel.style.display = "none";
+          userEmailEl.textContent = "Not signed in";
+          authBtn.textContent = "Sign in";
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted)">Please sign in</td></tr>`;
+        }
+      });
 
-  if (!list.length){
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted)">No orders</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = list.map(o => {
-    const itemCount = (o.items||[]).reduce((a,b)=>a+(b.qty||1),0);
-    const amount = o.amount ?? o.total ?? 0;
-    const date = o.createdAt?.toDate ? o.createdAt.toDate() : (o.createdAt || new Date());
-    const dateStr = new Date(date).toLocaleString('en-IN');
+      let ORDERS = []; // cached snapshot for search
+      let CURRENT_ORDER_ID = null;
+      let CURRENT_ORDER = null;
 
-    const invoiceNo = "INV-" + o.id.slice(0,6).toUpperCase();
-    const msg = `🎇 Welcome to ABS Crackers World! 🎇%0A%0A` +
-                `Dear ${o.name || "Customer"}, thank you for choosing us!%0A` +
-                `🧾 Invoice No: ${invoiceNo}%0A%0A` +
-                `✅ Your order has been successfully received.%0A` +
-                `Our team will reach out shortly with confirmation & delivery details.%0A%0A` +
-                `Wishing you a safe, bright, and joyful celebration! 🎆✨%0A` +
-                `- Team ABS Crackers`;
-    const waLink = `https://wa.me/${o.phone}?text=${encodeURIComponent(msg)}`;
-
-
-    return `
-      <tr>
-        <td>${escapeHtml(o.name||'')}</td>
-        <td>${escapeHtml(o.phone||'')}</td>
-        <td>${escapeHtml(o.address||'')}</td>
-        <td>₹${formatINR(amount)}</td>
-        <td>${dateStr}</td>
-        <td>${itemCount}</td>
-        <td>
-          <button class="btn btn-xs" data-act="invoice" data-id="${o.id}">Invoice</button>
-          <a href="${waLink}" target="_blank" title="Send WhatsApp Message">
-            <img src="https://img.icons8.com/color/24/whatsapp.png" style="vertical-align:middle;cursor:pointer;" />
-          </a>
-        </td>
-      </tr>
-    `;
-  }).join('');
-}
-
-
-    searchInput.addEventListener('input', () => renderRows(ORDERS));
-
-    tbody.addEventListener('click', async (e) => {
-      const btn = e.target.closest('button[data-act]');
-      if (!btn) return;
-      const id = btn.dataset.id;
-
-      if (btn.dataset.act === 'invoice') {
-        // fetch latest data and open preview
-        const snap = await getDoc(doc(db,'orders',id));
-        if (!snap.exists()) return;
-        CURRENT_ORDER_ID = id;
-        CURRENT_ORDER    = snap.data();
-        openInvoicePreview(id, CURRENT_ORDER);
+      // ---------- Orders listener ----------
+      function startOrdersListener() {
+        const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snap) => {
+          ORDERS = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          orderCountEl.textContent = `${ORDERS.length} orders`;
+          renderRows(ORDERS);
+        });
       }
-    });
 
-    // ---------- Invoice preview + PDF ----------
-    function openInvoicePreview(id, order){
-      // HTML preview for quick look
-      previewEl.innerHTML = buildInvoiceHtml(id, order);
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
-    }
-    closeModal.addEventListener('click', () => {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal.click();
-    });
+      function renderRows(rows) {
+        const terms = (searchInput.value || "").trim().toLowerCase();
+        const list = terms
+          ? rows.filter((r) =>
+              [r.name, r.phone, r.address]
+                .join(" ")
+                .toLowerCase()
+                .includes(terms)
+            )
+          : rows;
 
-    downloadBtn.addEventListener('click', () => {
-      if (!CURRENT_ORDER) return;
-      downloadInvoicePdf(CURRENT_ORDER_ID, CURRENT_ORDER);
-    });
+        if (!list.length) {
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted)">No orders</td></tr>`;
+          return;
+        }
 
-    function buildInvoiceHtml(id, o){
-      const date = o.createdAt?.toDate ? o.createdAt.toDate() : new Date();
-      const items = (o.items||[]).map(it => `
-        <tr>
-          <td>${escapeHtml(it.name||'')}</td>
-          <td style="text-align:right">${it.qty||1}</td>
-          <td style="text-align:right">₹${formatINR(it.price ?? it.sale ?? 0)}</td>
-          <td style="text-align:right">₹${formatINR((it.price ?? it.sale ?? 0) * (it.qty||1))}</td>
+        tbody.innerHTML = list
+          .map((o) => {
+            const itemCount = (o.items || []).reduce(
+              (a, b) => a + (b.qty || 1),
+              0
+            );
+            const amount = o.amount ?? o.total ?? 0;
+            const dateObj = o.createdAt?.toDate
+              ? o.createdAt.toDate()
+              : o.createdAt || new Date();
+
+            const dateStr = new Date(dateObj).toLocaleDateString("en-IN");
+            const timeStr = new Date(dateObj).toLocaleTimeString("en-IN");
+
+            const invoiceNo = "INV-" + o.id.slice(0, 6).toUpperCase();
+            const msg =
+              `🎇 Welcome to ABS Crackers World! 🎇%0A%0A` +
+              `Dear ${o.name || "Customer"}, thank you for choosing us!%0A` +
+              `🧾 Invoice No: ${invoiceNo}%0A%0A` +
+              `✅ Your order has been successfully received.%0A` +
+              `Our team will reach out shortly with confirmation & delivery details.%0A%0A` +
+              `Wishing you a safe, bright, and joyful celebration! 🎆✨%0A` +
+              `- Team ABS Crackers`;
+            const waLink = `https://wa.me/91${
+              o.phone
+            }?text=${encodeURIComponent(msg)}`;
+
+            return `
+        <tr data-id="${o.id}">
+          <td>
+            <div class="name-wrapper">
+              <button class="collapse-btn btn btn-xs" style="background:transparent;color:#60a5fa;cursor:pointer;">
+                ${escapeHtml(o.name || "")} ▼
+              </button>
+              <div class="details" style="display:none;margin-top:6px;font-size:12px;color:#cbd5e1;">
+                <div><b>Mobile:</b> ${escapeHtml(o.phone || "")}</div>
+                <div><b>Address:</b> ${escapeHtml(o.address || "")}</div>
+                <div><b>Items:</b> ${itemCount}</div>
+              </div>
+            </div>
+          </td>
+          <td>₹${formatINR(amount)}</td>
+          <td>${dateStr} ${timeStr}</td>
+          <td>
+            <button class="btn btn-xs" data-act="invoice" data-id="${
+              o.id
+            }">Invoice</button>
+            <a href="${waLink}" target="_blank" title="Send WhatsApp Message">
+              <img src="https://img.icons8.com/color/24/whatsapp.png" style="vertical-align:middle;cursor:pointer;" />
+            </a>
+            <button class="btn btn-danger btn-xs" data-act="delete" data-id="${
+              o.id
+            }" title="Delete Order">🗑️</button>
+          </td>
         </tr>
-      `).join('');
-      const total = o.amount ?? o.total ?? (o.items||[])
-        .reduce((s,it)=> s + (it.qty||1) * (it.price ?? it.sale ?? 0), 0);
+      `;
+          })
+          .join("");
+      }
 
-      return `
+      searchInput.addEventListener("input", () => renderRows(ORDERS));
+
+      tbody.addEventListener("click", async (e) => {
+        const btn = e.target.closest("button[data-act]");
+        if (!btn) return;
+        const id = btn.dataset.id;
+
+        if (btn.dataset.act === "invoice") {
+          // fetch latest data and open preview
+          const snap = await getDoc(doc(db, "orders", id));
+          if (!snap.exists()) return;
+          CURRENT_ORDER_ID = id;
+          CURRENT_ORDER = snap.data();
+          openInvoicePreview(id, CURRENT_ORDER);
+        }
+        if (btn.dataset.act === "delete") {
+          if (confirm("Are you sure you want to delete this order?")) {
+            await deleteDoc(doc(db, "orders", id));
+            alert("Order deleted successfully!");
+          }
+        }
+      });
+      // Toggle collapse row when clicking customer name
+      tbody.addEventListener("click", (e) => {
+        if (e.target.classList.contains("collapse-btn")) {
+          const details = e.target
+            .closest(".name-wrapper")
+            .querySelector(".details");
+          if (details) {
+            details.style.display =
+              details.style.display === "none" ? "block" : "none";
+            e.target.textContent = e.target.textContent.includes("▼")
+              ? e.target.textContent.replace("▼", "▲")
+              : e.target.textContent.replace("▲", "▼");
+          }
+        }
+      });
+
+      // ---------- Invoice preview + PDF ----------
+      function openInvoicePreview(id, order) {
+        // HTML preview for quick look
+        previewEl.innerHTML = buildInvoiceHtml(id, order);
+        modal.classList.add("show");
+        modal.setAttribute("aria-hidden", "false");
+      }
+      closeModal.addEventListener("click", () => {
+        modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
+      });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal.click();
+      });
+
+      downloadBtn.addEventListener("click", () => {
+        if (!CURRENT_ORDER) return;
+        downloadInvoicePdf(CURRENT_ORDER_ID, CURRENT_ORDER);
+      });
+
+      function buildInvoiceHtml(id, o) {
+        const date = o.createdAt?.toDate ? o.createdAt.toDate() : new Date();
+        const items = (o.items || [])
+          .map(
+            (it) => `
+        <tr>
+          <td>${escapeHtml(it.name || "")}</td>
+          <td style="text-align:right">${it.qty || 1}</td>
+          <td style="text-align:right">₹${formatINR(
+            it.price ?? it.sale ?? 0
+          )}</td>
+          <td style="text-align:right">₹${formatINR(
+            (it.price ?? it.sale ?? 0) * (it.qty || 1)
+          )}</td>
+        </tr>
+      `
+          )
+          .join("");
+        const total =
+          o.amount ??
+          o.total ??
+          (o.items || []).reduce(
+            (s, it) => s + (it.qty || 1) * (it.price ?? it.sale ?? 0),
+            0
+          );
+
+        return `
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
           <div>
             <div style="font-size:20px;font-weight:700">ABS Crackers World</div>
@@ -342,20 +653,28 @@
           </div>
           <div style="text-align:right">
             <div style="font-size:12px;color:#334155">Invoice No</div>
-            <div style="font-weight:700">INV-${id.slice(0,6).toUpperCase()}</div>
+            <div style="font-weight:700">INV-${id
+              .slice(0, 6)
+              .toUpperCase()}</div>
           </div>
         </div>
 
         <div class="inv-row">
           <div class="inv-col">
             <div class="inv-k">Billed To</div>
-            <div class="inv-v" style="margin-top:2px">${escapeHtml(o.name||'')}</div>
-            <div>${escapeHtml(o.phone||'')}</div>
-            <div style="white-space:pre-wrap">${escapeHtml(o.address||'')}</div>
+            <div class="inv-v" style="margin-top:2px">${escapeHtml(
+              o.name || ""
+            )}</div>
+            <div>${escapeHtml(o.phone || "")}</div>
+            <div style="white-space:pre-wrap">${escapeHtml(
+              o.address || ""
+            )}</div>
           </div>
           <div class="inv-col">
             <div class="inv-k">Invoice Date</div>
-            <div class="inv-v" style="margin-top:2px">${new Date(date).toLocaleString('en-IN')}</div>
+            <div class="inv-v" style="margin-top:2px">${new Date(
+              date
+            ).toLocaleString("en-IN")}</div>
             <div class="inv-k" style="margin-top:8px">Company</div>
             <div>ABS Crackers World</div>
           </div>
@@ -373,116 +692,128 @@
 
         <div style="margin-top:10px;font-size:12px;color:#475569">Thanks for your business!</div>
       `;
-    }
-
-    function downloadInvoicePdf(id, o) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
-  // --- Load ABS Logo ---
-  const logo = new Image();
-  logo.crossOrigin = "anonymous";
-  logo.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-
-  // --- Load God Image ---
-  const godImg = new Image();
-  godImg.crossOrigin = "anonymous";
-  godImg.src = "https://i.postimg.cc/MGmbtLv7/abs-god.webp";
-
-  // Wait for both images
-  Promise.all([
-    new Promise(res => { logo.onload = res; }),
-    new Promise(res => { godImg.onload = res; })
-  ]).then(() => {
-    // --- Place Logo (left) ---
-    doc.addImage(logo, "JPEG", 14, 10, 30, 30);
-    // --- Place God Image (right) ---
-    doc.addImage(godImg, "WEBP", 165, 10, 30, 30);
-
-    // --- Header ---
-    doc.setFontSize(16);
-    doc.text("ABS Crackers World", 60, 20);
-    doc.setFontSize(10);
-    doc.text("5/288/33, Sivakasi - 626189", 60, 26);
-    doc.text("Contact: +91 80720 98251 / 95971 89599", 60, 32);
-
-    // --- Invoice Info ---
-    const invoiceNo = "INV-" + id.slice(0, 6).toUpperCase();
-    const date = o.createdAt?.toDate ? o.createdAt.toDate() : new Date();
-    doc.setFontSize(11);
-    doc.text(`Invoice No: ${invoiceNo}`, 150, 48);
-    doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 150, 54);
-
-    // --- Customer Details ---
-    doc.setFontSize(12);
-    doc.text("Bill To:", 14, 50);
-    doc.text(o.name || "N/A", 50, 50);
-    doc.text("Mobile:", 14, 56);
-    doc.text(o.phone || "N/A", 50, 56);
-    doc.text("Ship To:", 14, 66);
-    doc.text((o.address || "").replace(/\r?\n/g, ", "), 50, 66);
-
-    // --- Table Data ---
-    const rows = [];
-    let idx = 1, subtotal = 0;
-    for (const it of o.items || []) {
-      const qty = it.qty || 1;
-      const price = it.price ?? it.sale ?? 0;
-      const lineTotal = price * qty;
-      subtotal += lineTotal;
-
-      rows.push([
-        idx++,
-        it.name,
-        qty,
-        "Rs. " + (price || 0).toLocaleString("en-IN"),
-        "Rs. " + lineTotal.toLocaleString("en-IN")
-      ]);
-    }
-
-    doc.autoTable({
-      head: [["#", "Product", "Qty", "Price", "Total"]],
-      body: rows,
-      startY: 80,
-      theme: "striped",
-      headStyles: { fillColor: [0, 123, 255] },
-      styles: { halign: "center" },
-      columnStyles: {
-        1: { halign: "left" },
-        2: { halign: "center" },
-        3: { halign: "right" },
-        4: { halign: "right" }
       }
-    });
 
-    const finalY = doc.lastAutoTable.finalY + 10;
+      function downloadInvoicePdf(id, o) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-    // --- Total ---
-    doc.setFontSize(14);
-    doc.setLineWidth(0.5);
-    doc.line(150, finalY - 4, 200, finalY - 4);
-    doc.text(`Total: Rs. ${subtotal.toLocaleString("en-IN")}`, 200, finalY + 4, { align: "right" });
+        // --- Load ABS Logo ---
+        const logo = new Image();
+        logo.crossOrigin = "anonymous";
+        logo.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
 
-    // --- Footer ---
-    doc.setFontSize(12);
-    doc.text("Thank you for your order!", 80, 290);
+        // --- Load God Image ---
+        const godImg = new Image();
+        godImg.crossOrigin = "anonymous";
+        godImg.src = "https://i.postimg.cc/MGmbtLv7/abs-god.webp";
 
-    // --- Save PDF ---
-    doc.save(`Invoice_${invoiceNo}.pdf`);
-  });
-}
+        // Wait for both images
+        Promise.all([
+          new Promise((res) => {
+            logo.onload = res;
+          }),
+          new Promise((res) => {
+            godImg.onload = res;
+          }),
+        ]).then(() => {
+          // --- Place Logo (left) ---
+          doc.addImage(logo, "JPEG", 14, 10, 30, 30);
+          // --- Place God Image (right) ---
+          doc.addImage(godImg, "WEBP", 165, 10, 30, 30);
 
+          // --- Header ---
+          doc.setFontSize(16);
+          doc.text("ABS Crackers World", 60, 20);
+          doc.setFontSize(10);
+          doc.text("5/288/33, Sivakasi - 626189", 60, 26);
+          doc.text("Contact: +91 80720 98251 / 95971 89599", 60, 32);
 
-    // ---------- helpers ----------
-    function formatINR(n){
-      const num = Number(n||0);
-      return num.toLocaleString('en-IN');
-    }
-    function escapeHtml(s=''){
-      return String(s)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
-    }
-  </script>
-</body>
+          // --- Invoice Info ---
+          const invoiceNo = "INV-" + id.slice(0, 6).toUpperCase();
+          const date = o.createdAt?.toDate ? o.createdAt.toDate() : new Date();
+          doc.setFontSize(11);
+          doc.text(`Invoice No: ${invoiceNo}`, 150, 48);
+          doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 150, 54);
+
+          // --- Customer Details ---
+          doc.setFontSize(12);
+          doc.text("Bill To:", 14, 50);
+          doc.text(o.name || "N/A", 50, 50);
+          doc.text("Mobile:", 14, 56);
+          doc.text(o.phone || "N/A", 50, 56);
+          doc.text("Ship To:", 14, 66);
+          doc.text((o.address || "").replace(/\r?\n/g, ", "), 50, 66);
+
+          // --- Table Data ---
+          const rows = [];
+          let idx = 1,
+            subtotal = 0;
+          for (const it of o.items || []) {
+            const qty = it.qty || 1;
+            const price = it.price ?? it.sale ?? 0;
+            const lineTotal = price * qty;
+            subtotal += lineTotal;
+
+            rows.push([
+              idx++,
+              it.name,
+              qty,
+              "Rs. " + (price || 0).toLocaleString("en-IN"),
+              "Rs. " + lineTotal.toLocaleString("en-IN"),
+            ]);
+          }
+
+          doc.autoTable({
+            head: [["#", "Product", "Qty", "Price", "Total"]],
+            body: rows,
+            startY: 80,
+            theme: "striped",
+            headStyles: { fillColor: [0, 123, 255] },
+            styles: { halign: "center" },
+            columnStyles: {
+              1: { halign: "left" },
+              2: { halign: "center" },
+              3: { halign: "right" },
+              4: { halign: "right" },
+            },
+          });
+
+          const finalY = doc.lastAutoTable.finalY + 10;
+
+          // --- Total ---
+          doc.setFontSize(14);
+          doc.setLineWidth(0.5);
+          doc.line(150, finalY - 4, 200, finalY - 4);
+          doc.text(
+            `Total: Rs. ${subtotal.toLocaleString("en-IN")}`,
+            200,
+            finalY + 4,
+            { align: "right" }
+          );
+
+          // --- Footer ---
+          doc.setFontSize(12);
+          doc.text("Thank you for your order!", 80, 290);
+
+          // --- Save PDF ---
+          doc.save(`Invoice_${invoiceNo}.pdf`);
+        });
+      }
+
+      // ---------- helpers ----------
+      function formatINR(n) {
+        const num = Number(n || 0);
+        return num.toLocaleString("en-IN");
+      }
+      function escapeHtml(s = "") {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+    </script>
+  </body>
 </html>
