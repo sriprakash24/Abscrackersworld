@@ -105,10 +105,121 @@
     gap: 8px;
   }
 }
-  </style>
-  <!-- jsPDF for PDF generation -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script> -->
+/* Customer form styling */
+.customer-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #0a0f1c;
+  color: #e2e8f0;
+  transition: border 0.2s, box-shadow 0.2s;
+}
 
+.customer-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px rgba(14,165,233,0.6);
+}
+
+.error {
+  color: var(--bad);
+  font-size: 12px;
+  margin-top: 2px;
+  display: none;
+}
+
+.toast-success {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #16a34a; /* green */
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: none;
+  animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -60%); }
+  10% { opacity: 1; transform: translate(-50%, -50%); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+.summary .payable {
+  background: #1e3a8a; /* blue background */
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.cart-icon {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: #0ea5e9;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.badge-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.3;               /* 👈 very light by default */
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+.back-to-top:hover {
+  opacity: 1;                 /* 👈 fully visible when hovered */
+}
+.back-to-top.visible {
+  opacity: 0.9;               /* 👈 visible when scrolled down */
+}
+
+
+
+
+  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-/F1OeG0cJ4c9bYkG5oB12tYt7cO2k5gKQx2i6C2zq7bQ9QttC5+n7m9GJm9kQxHk6qL1b0D5V6lJg3QfL7iVwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
@@ -134,84 +245,12 @@
       <input id="search" type="search" placeholder="Search item name…"/>
     </div>
   </div>
-</header>
-
-  <!-- <header>
-    <div class="container topbar">
-      <div class="brand">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.39 4.84 5.34.78-3.86 3.76.91 5.3L12 14.77 6.22 16.68l.91-5.3L3.27 7.62l5.34-.78L12 2z" stroke="#38bdf8"/></svg>
-        <h1>ABS Crackers World</h1>
-      </div>
-    </div>
-    <div class="container" style="padding-bottom:12px;">
-      <div class="filters">
-        <select id="categoryFilter"></select>
-        <input id="search" type="search" placeholder="Search item name…"/>
-      </div>
-    </div>
-  </header> -->
-
-
-  <!-- <header>
-  <div class="container topbar">
-    <div class="brand">
-      
-      <img src="https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg" 
-           alt="ABS Crackers Logo" 
-           style="height:40px; width:auto; margin-right:8px; border-radius:6px;">
-      <h1>ABS Crackers World</h1>
-    </div>
-  </div>
-  <div class="container" style="padding-bottom:12px;">
-    <div class="filters">
-      <select id="categoryFilter"></select>
-      <input id="search" type="search" placeholder="Search item name…"/>
-    </div>
-  </div>
-</header> -->
-
-<!-- <header>
-  <div class="container topbar" style="position: relative;">
-    <div class="brand">
-      
-      <img src="https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg" 
-           alt="ABS Crackers Logo" 
-           style="height:40px; width:auto; margin-right:8px; border-radius:6px;">
-      <h1>ABS Crackers World</h1>
-    </div> -->
-
-    <!-- Offer Badge -->
-    <!-- <div style="
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff0040;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    ">
-      90% OFFER<br>
-      <small>Min Order ₹3000</small>
-    </div> -->
-    <!-- Offer Badge -->
-<!-- <div class="offer-badge">
-  🎆 90% OFFER 🎆<br>
-  <small>Min Order ₹3000</small>
+  <div class="cart-icon" onclick="scrollToCart()">
+  🛒
+  <span id="cartCount" class="badge-count">0</span>
 </div>
-  </div>
 
-  <div class="container" style="padding-bottom:12px;">
-    <div class="filters">
-      <select id="categoryFilter"></select>
-      <input id="search" type="search" placeholder="Search item name…"/>
-    </div>
-  </div>
-</header> -->
-
+</header>
 
 
   <main class="container layout">
@@ -225,72 +264,134 @@
       <div id="cartList" class="cart-list"></div>
       <div class="divider"></div>
       <div class="summary">
-        <div class="row"><span>Items</span><strong id="sumItems">0</strong></div>
-        <div class="row"><span>MRP Total</span><strong id="sumMrp">₹0</strong></div>
-        <div class="row"><span>Discount Total</span><strong id="sumSale">₹0</strong></div>
-        <div class="row"><span>You Save</span><strong id="sumSave" style="color:var(--ok)">₹0</strong></div>
-      </div>
+  <div class="row"><span>Items</span><strong id="sumItems">0</strong></div>
+  <div class="row"><span>MRP Total</span><strong id="sumMrp">₹0</strong></div>
+  <div class="row payable"><span>Payable Amount</span><strong id="sumSale">₹0</strong></div>
+  <div class="row"><span>You Save</span><strong id="sumSave" style="color:var(--ok)">₹0</strong></div>
+</div>
+
 
       <div class="divider"></div>
 <div class="summary">
-  <label style="display:block; margin-bottom:6px;">
+  <label>
     Name:
-    <input id="custName" type="text" placeholder="Enter your name"
-      style="width:100%; padding:6px; border-radius:6px; border:1px solid #1f2937; background:#0a0f1c; color:#e2e8f0;" />
+    <input id="custName" type="text" class="customer-input" placeholder="Enter your name"/>
+    <div id="errName" class="error">Name is required</div>
   </label>
-  <label style="display:block; margin-bottom:6px;">
+  <label>
     Mobile:
-    <input id="custPhone" type="text" placeholder="Enter your mobile"
-      style="width:100%; padding:6px; border-radius:6px; border:1px solid #1f2937; background:#0a0f1c; color:#e2e8f0;" />
+    <input id="custPhone" type="text" class="customer-input" placeholder="Enter your mobile"/>
+    <div id="errPhone" class="error">Enter a valid 10-digit mobile number</div>
   </label>
-  <label style="display:block; margin-bottom:6px;">
+  <label>
     Address:
-    <textarea id="custAddress" placeholder="Enter your address"
-      style="width:100%; padding:6px; border-radius:6px; border:1px solid #1f2937; background:#0a0f1c; color:#e2e8f0;"></textarea>
+    <textarea id="custAddress" class="customer-input" placeholder="Enter your address"></textarea>
+    <div id="errAddress" class="error">Address is required</div>
   </label>
 </div>
 
 
 
       <div class="divider"></div>
-      <div class="row" style="gap:8px">
-        <button id="clearCart" class="btn btn-ghost" title="Remove all">Clear</button>
-        <button id="placeOrder" class="btn btn-primary" style="flex:1">Place Order on WhatsApp</button>
-      </div>
-      <div class="row" style="margin-top:8px;gap:8px">
-        <button id="downloadPdf" class="btn btn-ghost" style="flex:1">Download Order PDF</button>
-        <button id="placeOrderWithPdf" class="btn btn-primary" style="flex:1">
-    Place Order on WhatsApp (with PDF)
-  </button>
-      </div>
-      <!-- <small class="muted">Orders go to WhatsApp: <strong>+91 81110 87914</strong></small> -->
+<div class="row" style="gap:8px">
+  <button id="clearCart" class="btn btn-ghost" title="Remove all">Clear</button>
+  <button id="placeOrder" class="btn btn-primary" style="flex:1">Place Order</button>
+</div>
+
     </aside>
   </main>
-
-  <!-- <div id="admin" class="container" style="margin-top:24px">
-    <h3>Admin – Bulk Import (CSV)</h3>
-    <p class="muted">Paste CSV with headers: <code>name,category,unit,mrp,sale</code>. One item per row.</p>
-    <textarea id="csvInput" rows="6" style="width:100%;padding:10px;border-radius:10px;border:1px solid #1f2937;background:#0b1220;color:var(--text)" placeholder="Example:\n10 CM ELECTRIC SPARKLERS,SPARKLERS,1 BOX,150,135\nCHAKKARAM BIG (10 PCS),GROUND CHAKKARAS,1 BOX,300,270"></textarea>
-    <div class="row" style="margin-top:8px;gap:8px">
-      <button id="importCsv" class="btn btn-primary">Import to Catalog</button>
-      <button id="exportCsv" class="btn btn-ghost">Export Current Catalog</button>
-    </div>
-  </div> -->
 
   <footer>
     <div class="container">© 2025 ABS Crackers World • Sivakasi • Call: 80720 98251 / 95971 89599 / 82487 10751</div>
   </footer>
 
   <div id="toast" class="toast"></div>
+  <!-- ✅ new success popup -->
+  <div id="successPopup" class="toast-success"></div>
+  <!-- ✅ Back to Top Button -->
+<div id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</div>
 
   <!-- ✅ jsPDF (no integrity attribute to avoid blocking) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf-font@1.0.0/noto-sans.js"></script>
 
+<!-- Firebase Setup -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+  // Your Firebase config
+//   const firebaseConfig = {
+//     apiKey: "AIzaSyC47paJy6jtyR6IH8Wq1wddeEXxS26zQeU",
+//     authDomain: "abscrackersworld-5e2e8.firebaseapp.com",
+//     projectId: "abscrackersworld-5e2e8",
+//     storageBucket: "abscrackersworld-5e2e8.firebasestorage.app",
+//     messagingSenderId: "1045745449432",
+//     appId: "1:1045745449432:web:c807324227ec41afb85aad",
+//     measurementId: "G-Q6G22EPHS5"
+//   };
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC47paJy6jtyR6IH8Wq1wddeEXxS26zQeU",
+  authDomain: "abscrackersworld-5e2e8.firebaseapp.com",
+  projectId: "abscrackersworld-5e2e8",
+  storageBucket: "abscrackersworld-5e2e8.appspot.com",   // ✅ FIXED
+  messagingSenderId: "1045745449432",
+  appId: "1:1045745449432:web:c807324227ec41afb85aad",
+  measurementId: "G-Q6G22EPHS5"
+};
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Expose db globally so your other script (below) can use it
+  window.db = db;
+  window.addDoc = addDoc;
+  window.collection = collection;
+  window.serverTimestamp = serverTimestamp;
+</script>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+
+//     async function saveOrderToFirebase(name, phone, addr, amount, items) {
+//   try {
+//     await window.addDoc(window.collection(window.db, "orders"), {
+//       name,
+//       phone,
+//       address: addr,
+//       amount,
+//       items,
+//       createdAt: window.serverTimestamp()
+//     });
+//     console.log("✅ Order saved to Firestore");
+//   } catch (e) {
+//     console.error("❌ Error saving order:", e);
+//   }
+// }
+
+async function saveOrderToFirebase(name, phone, addr, amount, items) {
+  try {
+    const docRef = await window.addDoc(window.collection(window.db, "orders"), {
+      name,
+      phone,
+      address: addr,
+      amount,
+      items,
+      createdAt: window.serverTimestamp()
+    });
+    console.log("✅ Order saved with ID:", docRef.id);
+  } catch (e) {
+    console.error("❌ Error saving order:", e);
+    throw e; // rethrow so Place Order catches it
+  }
+}
+
+
   // --- Data: Starter catalog ---
   const STARTER_ITEMS = [
 
@@ -414,127 +515,6 @@ document.addEventListener("DOMContentLoaded", () => {
   {id:118, name:"RING CAP", category:"GUN", unit:"1 PKT", mrp:80, sale:8, img:"https://i.postimg.cc/bvg2BGzN/image.png"},
   {id:119, name:"POP-POP", category:"GUN", unit:"1 BOX", mrp:100, sale:10, img:"https://i.postimg.cc/t4StfVSC/image.png"}
 
-  
-
-//     {id:1, name:"10 CM ELECTRIC SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:120, sale:12},
-//   {id:2, name:"10 CM COLOR SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:150, sale:15},
-//   {id:3, name:"10 CM GREEN SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:180, sale:18},
-//   {id:4, name:"10 CM RED SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:200, sale:20},
-//   {id:5, name:"15 CM ELECTRIC SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:300, sale:30},
-//   {id:6, name:"15 CM CRACKLING SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:330, sale:33},
-//   {id:7, name:"15 CM GREEN SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:380, sale:38},
-//   {id:8, name:"15 CM RED SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:420, sale:42},
-//   {id:9, name:"30 CM ELECTRIC SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:300, sale:30},
-//   {id:10, name:"30 CM CRACKLING SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:330, sale:33},
-//   {id:11, name:"30 CM GREEN SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:380, sale:38},
-//   {id:12, name:"30 CM RED SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:420, sale:42},
-//   {id:13, name:"50 CM ELECTRIC SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:1300, sale:130},
-//   {id:14, name:"50 CM COLOR SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:1400, sale:140},
-//   {id:15, name:"ROTATING SPARKLERS", category:"SPARKLERS", unit:"1 BOX", mrp:1650, sale:165},
-//   {id:16, name:"CHAKKARAM BIG (10 PCS)", category:"GROUND CHAKKARAS", unit:"1 BOX", mrp:250, sale:25},
-//   {id:17, name:"CHAKKARAM BIG (25 PCS)", category:"GROUND CHAKKARAS", unit:"1 BOX", mrp:650, sale:65},
-//   {id:18, name:"CHAKKARAM SPECIAL", category:"GROUND CHAKKARAS", unit:"1 BOX", mrp:800, sale:80},
-//   {id:19, name:"CHAKKARAM DELUXE", category:"GROUND CHAKKARAS", unit:"1 BOX", mrp:1000, sale:100},
-//   {id:20, name:"FLOWER POT BIG", category:"FLOWER POT", unit:"1 BOX", mrp:500, sale:50},
-//   {id:21, name:"FLOWER POT SPECIAL", category:"FLOWER POT", unit:"1 BOX", mrp:700, sale:70},
-//   {id:22, name:"FLOWER POT ASHOKA", category:"FLOWER POT", unit:"1 BOX", mrp:1000, sale:100},
-//   {id:23, name:"FLOWER POT DELUXE", category:"FLOWER POT", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:24, name:"COLOR KOTI", category:"FLOWER POT", unit:"1 BOX", mrp:1700, sale:170},
-//   {id:25, name:"1 1", category:"TWINKLING STAR", unit:"1 BOX", mrp:150, sale:15},
-//   {id:26, name:"4\" TWINKLING STAR DELUXE", category:"TWINKLING STAR", unit:"1 BOX", mrp:450, sale:45},
-//   {id:27, name:"2 3", category:"ONE SOUND CRACKERS", unit:"1 PKT", mrp:60, sale:6},
-//   {id:28, name:"3 1", category:"ONE SOUND CRACKERS", unit:"1 PKT", mrp:150, sale:15},
-//   {id:29, name:"4\" PARROT", category:"ONE SOUND CRACKERS", unit:"1 PKT", mrp:200, sale:20},
-//   {id:30, name:"4\" DELUXE HULK", category:"ONE SOUND CRACKERS", unit:"1 PKT", mrp:250, sale:25},
-//   {id:31, name:"4\" GOLD LAKSHMI DLX", category:"ONE SOUND CRACKERS", unit:"1 PKT", mrp:250, sale:25},
-//   {id:32, name:"5\" JALLIKATTU DLX", category:"ONE SOUND CRACKERS", unit:"1 PKT", mrp:350, sale:35},
-//   {id:33, name:"BULLET (FOILS BOMB)", category:"BOMB", unit:"1BOX", mrp:250, sale:25},
-//   {id:34, name:"HYDRO BOMB CLASSIC", category:"BOMB", unit:"1BOX", mrp:500, sale:50},
-//   {id:35, name:"HYDROGEN BOMB", category:"BOMB", unit:"1 BOX", mrp:700, sale:70},
-//   {id:36, name:"DINOSAUR BOMB", category:"BOMB", unit:"1BOX", mrp:1100, sale:110},
-//   {id:37, name:"SINDHU BOMB DLX", category:"BOMB", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:38, name:"BADA BOMB ULTRA DLX", category:"GIANT & DELUXE", unit:"1BOX", mrp:2750, sale:275},
-//   {id:39, name:"28 GIANT", category:"GIANT & DELUXE", unit:"1 PKT", mrp:220, sale:22},
-//   {id:40, name:"56 GIANT", category:"GIANT & DELUXE", unit:"1 PKT", mrp:440, sale:44},
-//   {id:41, name:"50 DELUXE", category:"GIANT & DELUXE", unit:"1 PKT", mrp:1000, sale:100},
-//   {id:42, name:"4\" 100 MEGA DELUXE", category:"GIANT & DELUXE", unit:"1 PKT", mrp:2000, sale:200},
-//   {id:43, name:"1K", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:1200, sale:120},
-//   {id:44, name:"2K", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:3000, sale:300},
-//   {id:45, name:"5K", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:7000, sale:700},
-//   {id:46, name:"10K", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:16000, sale:1600},
-//   {id:47, name:"1K (BRAND)", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:3500, sale:350},
-//   {id:48, name:"2K (BRAND)", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:6000, sale:600},
-//   {id:49, name:"5K (BRAND)", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:14000, sale:1400},
-//   {id:50, name:"10K (BRAND)", category:"RED MAGIC CRACKERS", unit:"1 BOX", mrp:25000, sale:2500},
-//   {id:51, name:"SKY SHOT", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:400, sale:40},
-//   {id:52, name:"2\" ARIAL FANCY", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:900, sale:90},
-//   {id:53, name:"2\" ARIAL FANCY (3 PCS)", category:"MEGA FANCY OUT", unit:"3 PCS", mrp:2200, sale:220},
-//   {id:54, name:"3 1", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:2500, sale:250},
-//   {id:55, name:"3 1", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:2800, sale:280},
-//   {id:56, name:"4\" ARIAL FANCY", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:3500, sale:350},
-//   {id:57, name:"4\" PIPE (ULTRA SHOW)", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:5000, sale:500},
-//   {id:58, name:"5\" PIPE FANCY", category:"MEGA FANCY OUT", unit:"1 PCS", mrp:7000, sale:700},
-//   {id:59, name:"5\" FANCY (ULTRA SHOW)", category:"MEGA FANCY OUT", unit:"2 PCS", mrp:15000, sale:1500},
-//   {id:60, name:"12 SHOT", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:1200, sale:120},
-//   {id:61, name:"25 SHOT", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:2100, sale:210},
-//   {id:62, name:"30 SHOT MULTI COLOUR (GOLD)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:3000, sale:300},
-//   {id:63, name:"60 SHOT MULTI COLOUR (GOLD)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:7500, sale:750},
-//   {id:64, name:"120 SHOT MULTI COLOUR (GOLD)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:15000, sale:1500},
-//   {id:65, name:"240 SHOT MULTI COLOUR (GOLD)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:26000, sale:2600},
-//   {id:66, name:"30 SHOT MULTI COLOUR (PREMIUM)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:5000, sale:500},
-//   {id:67, name:"60 SHOT MULTI COLOUR (PREMIUM)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:11000, sale:1100},
-//   {id:68, name:"120 SHOT MULTI COLOUR (PREMIUM)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:22000, sale:2200},
-//   {id:69, name:"240 SHOT MULTI COLOUR (PREMIUM)", category:"MULTI COLOUR SKY SHOT", unit:"1 BOX", mrp:30000, sale:3000},
-//   {id:70, name:"KITKAT", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:250, sale:25},
-//   {id:71, name:"SNAKE TABLET", category:"FANCY FOUNTAINS", unit:"1 PKT", mrp:250, sale:25},
-//   {id:72, name:"BUTTERFLY (10 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:600, sale:60},
-//   {id:73, name:"GANGA JAMUNA", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:800, sale:80},
-//   {id:74, name:"TOM & JERRY", category:"FANCY FOUNTAINS", unit:"5 PCS", mrp:1600, sale:160},
-//   {id:75, name:"MASTER TREAT CRACKLING", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1000, sale:100},
-//   {id:76, name:"DRONE", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:800, sale:80},
-//   {id:77, name:"DANCING BAMBARAM (5 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1000, sale:100},
-//   {id:78, name:"BINGO SHOWER (5 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1100, sale:110},
-//   {id:79, name:"TIN BEER (RED, GREEN, CRACKLING)", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:900, sale:90},
-//   {id:80, name:"GOLDEN POPS (5 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1200, sale:120},
-//   {id:81, name:"PEACOCK (RED, GREEN, GOLD)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:82, name:"PENTA FANCY (5 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:83, name:"RAINBOW COLOUR SMOKE (3 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1800, sale:180},
-//   {id:84, name:"MEGA SIREN (3 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:2000, sale:200},
-//   {id:85, name:"SILVER MOON", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:2000, sale:200},
-//   {id:86, name:"PHOTO FLASH (5 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:700, sale:70},
-//   {id:87, name:"COCKFITE CRACKLING (2 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:2200, sale:220},
-//   {id:88, name:"WELCOME ANGEL", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:1750, sale:175},
-//   {id:89, name:"TRICOLOUR FOUNTAIN (5 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:2500, sale:250},
-//   {id:90, name:"FIRE EGG (2 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:91, name:"HANUMAN KADA", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:1500, sale:150},
-//   {id:92, name:"GUITAR", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:2200, sale:220},
-//   {id:93, name:"WATER QUEEN (COLD PYRO)", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:3500, sale:350},
-//   {id:94, name:"BADA PEACOCK", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:3000, sale:300},
-//   {id:95, name:"MAGIC SHOW MONEY PAPER (2 PCS)", category:"FANCY FOUNTAINS", unit:"1 BOX", mrp:2000, sale:200},
-//   {id:96, name:"PAPER BOMB 1/4 KG", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:450, sale:45},
-//   {id:97, name:"PAPER BOMB 1/2 KG", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:900, sale:90},
-//   {id:98, name:"PAPER BOMB 1 KG", category:"FANCY FOUNTAINS", unit:"1 PCS", mrp:1800, sale:180},
-//   {id:99, name:"RED BIJILI 50 PCS (GOLD PKT)", category:"BIJILI", unit:"1PKT", mrp:200, sale:20},
-//   {id:100, name:"RED BIJILI 100 PCS (GOLD PKT)", category:"BIJILI", unit:"1PKT", mrp:400, sale:40},
-//   {id:101, name:"BABY ROCKET", category:"ROCKET", unit:"1 BOX", mrp:300, sale:30},
-//   {id:102, name:"BOMB ROCKET", category:"ROCKET", unit:"1 BOX", mrp:600, sale:60},
-//   {id:103, name:"LUNIC ROCKET", category:"ROCKET", unit:"1 BOX", mrp:1200, sale:120},
-//   {id:104, name:"WHISTLING ROCKET", category:"ROCKET", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:105, name:"GIFT BOX", category:"GIFT BOX", unit:"18 ITEMS", mrp:2000, sale:200},
-//   {id:106, name:"GIFT BOX", category:"GIFT BOX", unit:"21 ITEMS", mrp:3000, sale:300},
-//   {id:107, name:"GIFT BOX", category:"GIFT BOX", unit:"30 ITEMS", mrp:5000, sale:500},
-//   {id:108, name:"GIFT BOX", category:"GIFT BOX", unit:"40 ITEMS", mrp:7000, sale:700},
-//   {id:109, name:"GIFT BOX", category:"GIFT BOX", unit:"50 ITEMS", mrp:9000, sale:900},
-//   {id:110, name:"ANNAM", category:"MATCH BOX", unit:"1 BOX", mrp:600, sale:60},
-//   {id:111, name:"HERO", category:"MATCH BOX", unit:"1 BOX", mrp:1000, sale:100},
-//   {id:112, name:"ROYAL SUPER MEGA", category:"MATCH BOX", unit:"1 BOX", mrp:1500, sale:150},
-//   {id:113, name:"GUN SMALL", category:"GUN", unit:"1 PIECE", mrp:300, sale:30},
-//   {id:114, name:"GUN MEDIUM", category:"GUN", unit:"1 PIECE", mrp:500, sale:50},
-//   {id:115, name:"GUN BIG", category:"GUN", unit:"1 PIECE", mrp:800, sale:80},
-//   {id:116, name:"GUN BADA BIG", category:"GUN", unit:"1 PIECE", mrp:1200, sale:120},
-//   {id:117, name:"ROLL CAP", category:"GUN", unit:"1 PIECE", mrp:100, sale:10},
-//   {id:118, name:"RING CAP", category:"GUN", unit:"1 PKT", mrp:80, sale:8},
-//   {id:119, name:"POP-POP", category:"GUN", unit:"1 BOX", mrp:100, sale:10}
   ];
 
   // --- State ---
@@ -662,77 +642,41 @@ document.addEventListener("DOMContentLoaded", () => {
   el('#emptyState').style.display = items.length ? 'none' : 'block';
 }
 
-
-//   function renderGrid(){
-//   const grid = el('#productGrid');
-//   const items = filteredItems();
-//   grid.innerHTML = items.map(it=>{
-//     const save = (it.mrp||0)-(it.sale||0);
-//     return `
-//       <div class="card" role="group" aria-label="${it.name}">
-//         <img src="${it.img}" alt="${it.name}"
-//              style="width:100%;height:120px;object-fit:cover;border-radius:12px;"/>
-//         <div class="row">
-//           <div class="pill">${it.category}</div>
-//           <div class="muted">${it.unit||''}</div>
-//         </div>
-//         <div class="title">${it.name}</div>
-//         <div class="row">
-//           <div class="price">
-//             <span class="mrp">${fmt(it.mrp)}</span>
-//             <span class="sale">${fmt(it.sale)}</span>
-//           </div>
-//           <div class="muted">Save ${fmt(save)}</div>
-//         </div>
-//         <div class="row" style="margin-top:auto;gap:8px">
-//           <div class="qty">
-//             <button aria-label="decrease" onclick="chgQty(${it.id},-1)">−</button>
-//             <input id="q_${it.id}" type="number" min="1" value="1" />
-//             <button aria-label="increase" onclick="chgQty(${it.id},1)">+</button>
-//           </div>
-//           <button class="btn btn-primary" style="flex:1" onclick="addToCart(${it.id})">Add</button>
-//         </div>
-//       </div>`;
-//   }).join('');
-//   el('#emptyState').style.display = items.length? 'none':'block';
-// }
-
-
-
-//   function renderGrid(){
-//     const grid = el('#productGrid');
-//     const items = filteredItems();
-//     grid.innerHTML = items.map(it=>{
-//       const save = (it.mrp||0)-(it.sale||0);
-//       return `
-//       <div class="card" role="group" aria-label="${it.name}">
-//         <div class="row"><div class="pill">${it.category}</div><div class="muted">${it.unit||''}</div></div>
-//         <div class="title">${it.name}</div>
-//         <div class="row">
-//           <div class="price">
-//             <span class="mrp">${fmt(it.mrp)}</span>
-//             <span class="sale">${fmt(it.sale)}</span>
-//           </div>
-//           <div class="muted">Save ${fmt(save)}</div>
-//         </div>
-//         <div class="row" style="margin-top:auto;gap:8px">
-//           <div class="qty">
-//             <button aria-label="decrease" onclick="chgQty(${it.id},-1)">−</button>
-//             <input id="q_${it.id}" type="number" min="1" value="1" />
-//             <button aria-label="increase" onclick="chgQty(${it.id},1)">+</button>
-//           </div>
-//           <button class="btn btn-primary" style="flex:1" onclick="addToCart(${it.id})">Add</button>
-//         </div>
-//       </div>`;
-//     }).join('');
-//     el('#emptyState').style.display = items.length? 'none':'block';
-//   }
   function chgQty(id, delta){
     const inp = el('#q_'+id); let v = parseInt(inp.value||'1',10); v = Math.max(1, v+delta); inp.value=v;
   }
   function addToCart(id){
     const q = parseInt(el('#q_'+id)?.value||'1',10); Cart.add(id, q);
   }
+
+  function scrollToCart() {
+  document.querySelector('.cart')?.scrollIntoView({ behavior: 'smooth' });
+}
+window.scrollToCart = scrollToCart; // ✅ expose globally
+
+
+// Update cart count bubble whenever cart changes
+function updateCartCount() {
+  let sum = 0;
+  for (const qty of Object.values(Cart.items)) sum += qty;
+  el('#cartCount').textContent = sum;
+  el('#cartCount').style.display = sum > 0 ? 'block' : 'none';
+}
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.scrollToTop = scrollToTop; // expose for onclick
+
+// show/hide button while scrolling
+const backToTopBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add('visible');
+  } else {
+    backToTopBtn.classList.remove('visible');
+  }
+});
+
 
   // --- Render Cart ---
   function renderCart(){
@@ -767,6 +711,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el('#sumMrp').textContent = fmt(mrp);
     el('#sumSale').textContent = fmt(sale);
     el('#sumSave').textContent = fmt(mrp-sale);
+    updateCartCount();
   }
 
   // --- WhatsApp Order ---
@@ -793,6 +738,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(`https://wa.me/${number}?text=${text}`, '_blank');
   }
 
+  function showSuccess(msg) {
+  const box = el('#successPopup');
+  box.textContent = msg;
+  box.style.display = 'block';
+  setTimeout(()=> box.style.display = 'none', 3000);
+}
+
+
   // --- PDF Generation ---
 
   // final
@@ -815,21 +768,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Place Logo (left corner) ---
   doc.addImage(logo, "JPEG", 14, 10, 30, 30);
-
-//   // --- Place God Image (right corner) ---
-//   doc.addImage(godImg, "WEBP", 165, 10, 30, 30);
-
-//   // --- Header Text (shifted to center-left) ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 60, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 60, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 60, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
 
   // --- Place God Image (right corner) ---
   doc.addImage(godImg, "WEBP", 165, 10, 30, 30);
@@ -909,788 +847,107 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 
-//   async function downloadOrderPdf() {
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
 
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous";
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
+function validateCustomer() {
+  let valid = true;
 
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
+  const name = el('#custName').value.trim();
+  const phone = el('#custPhone').value.trim();
+  const addr = el('#custAddress').value.trim();
 
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
+  // Reset errors
+  ['errName','errPhone','errAddress'].forEach(id => el('#'+id).style.display = 'none');
 
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
+  if (!name) { el('#errName').style.display = 'block'; valid = false; }
+  if (!/^[6-9]\d{9}$/.test(phone)) { el('#errPhone').style.display = 'block'; valid = false; }
+  if (!addr) { el('#errAddress').style.display = 'block'; valid = false; }
 
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-//   doc.setFontSize(12);
-
-//   // Bill To
-//   doc.text("Bill To:", 14, 50);
-//   doc.text(name, 50, 50);
-
-//   // Mobile
-//   doc.text("Mobile:", 14, 56);
-//   doc.text(phone, 50, 56);
-
-//   // Ship To
-//   doc.text("Ship To:", 14, 66);
-//   doc.text(addr, 50, 66);
-
-//   // --- Table Data ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-
-//     // ✅ Replace ₹ with Rs. only for PDF
-//     const price = fmt(it.sale).replace("₹", "Rs. ");
-//     const total = fmt(lineTotal).replace("₹", "Rs. ");
-
-//     rows.push([idx++, it.name, qty, price, total]);
-//   }
-
-//   // --- AutoTable ---
-//   doc.autoTable({
-//     head: [["#", "Product", "Qty", "Price", "Total"]],
-//     body: rows,
-//     startY: 80,
-//     theme: "striped",
-//     headStyles: { fillColor: [0, 123, 255] },
-//     styles: { halign: "center" },
-//     columnStyles: {
-//       1: { halign: "left" },
-//       2: { halign: "center" },
-//       3: { halign: "right" },
-//       4: { halign: "right" }
-//     }
-//   });
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-
-//   // --- Total ---
-//   const subText = fmt(subtotal).replace("₹", "Rs. ");
-//   doc.setFontSize(12);
-
-//   // Separator line before total
-//   doc.setLineWidth(0.5);
-//   doc.line(150, finalY - 4, 200, finalY - 4);
-
-//   // Total (only, no subtotal)
-//   doc.setFontSize(14); // make it stand out
-//   doc.text(`Total: ${subText}`, 200, finalY + 4, { align: "right" });
-
-//   // --- Footer ---
-//   doc.setFontSize(12);
-//   doc.text("Thank you for your order!", 80, 290);
-
-//   // --- Save PDF ---
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-// }
-
-
-
-//   async function downloadOrderPdf() {
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
-
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous";
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
-
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
-
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-// //   doc.setFontSize(12);
-// //   doc.text("Bill To:", 14, 50);
-// //   doc.text(`${name}`, 30, 50);
-// //   doc.text(`Mobile: ${phone}`, 30, 56);
-// //   doc.text("Ship To:", 14, 66);
-// //   doc.text(`${addr}`, 30, 66);
-// doc.setFontSize(12);
-
-// // Bill To
-// doc.text("Bill To:", 14, 50);
-// doc.text(name, 50, 50);
-
-// // Mobile
-// doc.text("Mobile:", 14, 56);
-// doc.text(phone, 50, 56);
-
-// // Ship To
-// doc.text("Ship To:", 14, 66);
-// doc.text(addr, 50, 66);
-
-
-//   // --- Table Data ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-
-//     // ✅ Replace ₹ with Rs. only for PDF
-//     const price = fmt(it.sale).replace("₹", "Rs. ");
-//     const total = fmt(lineTotal).replace("₹", "Rs. ");
-
-//     rows.push([idx++, it.name, qty, price, total]);
-//   }
-
-//   // --- AutoTable ---
-//   doc.autoTable({
-//     head: [["#", "Product", "Qty", "Price", "Total"]],
-//     body: rows,
-//     startY: 80,
-//     theme: "striped",
-//     headStyles: { fillColor: [0, 123, 255] },
-//     styles: { halign: "center" },
-//     columnStyles: {
-//       1: { halign: "left" },
-//       2: { halign: "center" },
-//       3: { halign: "right" },
-//       4: { halign: "right" }
-//     }
-//   });
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-
-//   // --- Totals ---
-//   // --- Totals ---
-// const subText = fmt(subtotal).replace("₹", "Rs. ");
-// doc.setFontSize(12);
-
-// // Separator line before total
-// doc.setLineWidth(0.5);
-// doc.line(150, finalY - 4, 200, finalY - 4);
-
-// doc.text(`Total: ${subText}`, 200, finalY + 2, { align: "right" });
-
-// //   const subText = fmt(subtotal).replace("₹", "Rs. ");
-// //   doc.setFontSize(12);
-// // //   doc.text(`Subtotal: ${subText}`, 200, finalY, { align: "right" });
-// //   doc.text(`Total: ${subText}`, 200, finalY + 6, { align: "right" });
-
-//   // ✅ New Page for Bank Details & Footer
-//   doc.addPage();
-
-//   // --- Bank Details Page ---
-//   doc.setFontSize(14);
-//   doc.text("Bank Details", 14, 30);
-
-//   doc.setFontSize(11);
-//   doc.text("Account Name: ABS Crackers", 14, 40);
-//   doc.text("A/C No: 1234567890", 14, 50);
-//   doc.text("IFSC: ABCD0123456", 14, 60);
-//   doc.text("Bank: SBI, Sivakasi Branch", 14, 70);
-
-//   // --- Footer ---
-//   doc.setFontSize(12);
-//   doc.text("Thank you for your order!", 80, 270);
-
-//   // --- Save PDF ---
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-// }
-
-
-
-//   async function downloadOrderPdf() {
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
-
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous";
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
-
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
-
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-//   doc.setFontSize(12);
-//   doc.text("Bill To:", 14, 50);
-//   doc.text(`${name}`, 30, 50);
-//   doc.text(`Mobile: ${phone}`, 30, 56);
-//   doc.text("Ship To:", 14, 66);
-//   doc.text(`${addr}`, 30, 66);
-
-//   // --- Table Data ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-
-//     // ✅ Replace ₹ with Rs. only for PDF
-//     const price = fmt(it.sale).replace("₹", "Rs. ");
-//     const total = fmt(lineTotal).replace("₹", "Rs. ");
-
-//     rows.push([idx++, it.name, qty, price, total]);
-//   }
-
-//   // --- AutoTable ---
-//   doc.autoTable({
-//     head: [["#", "Product", "Qty", "Price", "Total"]],
-//     body: rows,
-//     startY: 80,
-//     theme: "striped",
-//     headStyles: { fillColor: [0, 123, 255] },
-//     styles: { halign: "center" },
-//     columnStyles: {
-//       1: { halign: "left" },
-//       2: { halign: "center" },
-//       3: { halign: "right" },
-//       4: { halign: "right" }
-//     }
-//   });
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-
-//   // --- Totals ---
-//   const subText = fmt(subtotal).replace("₹", "Rs. ");
-//   doc.setFontSize(12);
-//   doc.text(`Subtotal: ${subText}`, 200, finalY, { align: "right" });
-//   doc.text(`Total: ${subText}`, 200, finalY + 6, { align: "right" });
-
-//   // --- Bank Details ---
-//   doc.setFontSize(10);
-//   doc.text("Bank Details", 14, finalY + 20);
-//   doc.text("Account Name: ABS Crackers", 14, finalY + 26);
-//   doc.text("A/C No: 1234567890", 14, finalY + 32);
-//   doc.text("IFSC: ABCD0123456", 14, finalY + 38);
-//   doc.text("Bank: SBI, Sivakasi Branch", 14, finalY + 44);
-
-//   // --- Footer ---
-//   doc.setFontSize(11);
-//   doc.text("Thank you for your order!", 80, 290);
-
-//   // --- Save PDF ---
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-// }
-
-
-//   async function downloadOrderPdf() {
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
-
-//   // ✅ use Noto Sans font (supports ₹)
-//   doc.setFont("NotoSans", "normal");
-
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous";
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
-
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
-
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-//   doc.setFontSize(12);
-//   doc.text("Bill To:", 14, 50);
-//   doc.text(`${name}`, 30, 50);
-//   doc.text(`Mobile: ${phone}`, 30, 56);
-//   doc.text("Ship To:", 14, 66);
-//   doc.text(`${addr}`, 30, 66);
-
-//   // --- Table Data ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-//     rows.push([
-//       idx++,
-//       it.name,
-//       qty,
-//       `₹${it.sale}`,      // correct rupee symbol
-//       `₹${lineTotal}`
-//     ]);
-//   }
-
-//   // --- AutoTable ---
-//   doc.autoTable({
-//     head: [["#", "Product", "Qty", "Price", "Total"]],
-//     body: rows,
-//     startY: 80,
-//     theme: "striped",
-//     headStyles: { fillColor: [0, 123, 255] },
-//     styles: { font: "NotoSans", halign: "center" },
-//     columnStyles: {
-//       1: { halign: "left" },
-//       2: { halign: "center" },
-//       3: { halign: "right" },
-//       4: { halign: "right" }
-//     }
-//   });
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-
-//   // --- Totals ---
-//   doc.setFontSize(12);
-//   doc.text(`Subtotal: ₹${subtotal}`, 200, finalY, { align: "right" });
-//   doc.text(`Total: ₹${subtotal}`, 200, finalY + 6, { align: "right" });
-
-//   // --- Bank Details ---
-//   doc.setFontSize(10);
-//   doc.text("Bank Details", 14, finalY + 20);
-//   doc.text("Account Name: ABS Crackers", 14, finalY + 26);
-//   doc.text("A/C No: 1234567890", 14, finalY + 32);
-//   doc.text("IFSC: ABCD0123456", 14, finalY + 38);
-//   doc.text("Bank: SBI, Sivakasi Branch", 14, finalY + 44);
-
-//   // --- Footer ---
-//   doc.setFontSize(11);
-//   doc.text("Thank you for your order!", 80, 290);
-
-//   // --- Save PDF ---
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-// }
-
-
-
-//   async function downloadOrderPdf() {
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
-
-//    // ✅ use Noto Sans font (supports ₹)
-//   doc.setFont("NotoSans", "normal");
-
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous"; // allow external image
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
-
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
-
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-//   doc.setFontSize(12);
-//   doc.text("Bill To:", 14, 50);
-//   doc.text(`${name}`, 30, 50);
-//   doc.text(`Mobile: ${phone}`, 30, 56);
-//   doc.text("Ship To:", 14, 66);
-//   doc.text(`${addr}`, 30, 66);
-
-//   // --- Table Data ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-//     rows.push([
-//       idx++,
-//       it.name,
-//       qty,
-//       `\u20B9${it.sale}`,      // fixed rupee symbol
-//       `\u20B9${lineTotal}`     // fixed rupee symbol
-//     ]);
-//   }
-
-//   // --- AutoTable ---
-//   doc.autoTable({
-//     head: [["#", "Product", "Qty", "Price", "Total"]],
-//     body: rows,
-//     startY: 80,
-//     theme: "striped",
-//     headStyles: { fillColor: [0, 123, 255] }, // nice blue header
-//     styles: { halign: "center" },
-//     columnStyles: {
-//       1: { halign: "left" }, // product name aligned left
-//       2: { halign: "center" }, // qty center
-//       3: { halign: "right" }, // price right
-//       4: { halign: "right" }  // total right
-//     }
-//   });
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-
-//   // --- Totals ---
-//   doc.setFontSize(12);
-//   doc.text(`Subtotal: \u20B9${subtotal}`, 150, finalY, { align: "right" });
-//   doc.text(`Total: \u20B9${subtotal}`, 150, finalY + 6, { align: "right" });
-
-//   // --- Bank Details ---
-//   doc.setFontSize(10);
-//   doc.text("Bank Details", 14, finalY + 20);
-//   doc.text("Account Name: ABS Crackers", 14, finalY + 26);
-//   doc.text("A/C No: 1234567890", 14, finalY + 32);
-//   doc.text("IFSC: ABCD0123456", 14, finalY + 38);
-//   doc.text("Bank: SBI, Sivakasi Branch", 14, finalY + 44);
-
-//   // --- Footer ---
-//   doc.setFontSize(11);
-//   doc.text("Thank you for your order!", 80, 290);
-
-//   // --- Save PDF ---
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-// }
-
-
-// async function downloadOrderPdf() {
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
-
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous"; // allow external image
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
-
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
-
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-//   doc.setFontSize(12);
-//   doc.text("Bill To:", 14, 50);
-//   doc.text(`${name}`, 30, 50);
-//   doc.text(`Mobile: ${phone}`, 30, 56);
-//   doc.text("Ship To:", 14, 66);
-//   doc.text(`${addr}`, 30, 66);
-
-//   // --- Table Data ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-//     rows.push([idx++, it.name, qty, `₹${it.sale}`, `₹${lineTotal}`]);
-//   }
-
-//   // --- AutoTable (with UMD call style) ---
-// //   window.jspdf.jsPDF.autoTable(doc, {
-// //     head: [["#", "Product", "Qty", "Price", "Total"]],
-// //     body: rows,
-// //     startY: 80,
-// //   });
-
-// doc.autoTable({
-//   head: [["#", "Product", "Qty", "Price", "Total"]],
-//   body: rows,
-//   startY: 80,
-// });
-
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-//   doc.text(`Subtotal: ₹${subtotal}`, 150, finalY);
-//   doc.text(`Total: ₹${subtotal}`, 150, finalY + 6);
-
-//   // --- Bank Details ---
-//   doc.setFontSize(10);
-//   doc.text("Bank Details", 14, finalY + 20);
-//   doc.text("Account Name: ABS Crackers", 14, finalY + 26);
-//   doc.text("A/C No: 1234567890", 14, finalY + 32);
-//   doc.text("IFSC: ABCD0123456", 14, finalY + 38);
-//   doc.text("Bank: SBI, Sivakasi Branch", 14, finalY + 44);
-
-//   // --- Footer ---
-//   doc.setFontSize(11);
-//   doc.text("Thank you for your order!", 80, 290);
-
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-// }
-
-
-//   async function downloadOrderPdf(){
-//   const { jsPDF } = window.jspdf;
-//   const doc = new jsPDF();
-
-//   // --- Load Logo from URL ---
-//   const img = new Image();
-//   img.crossOrigin = "anonymous"; // important for hosted images
-//   img.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-//   await new Promise(resolve => { img.onload = resolve; });
-
-//   // Place logo
-//   doc.addImage(img, "JPEG", 14, 10, 30, 30);
-
-//   // --- Header ---
-//   doc.setFontSize(16);
-//   doc.text("ABS Crackers World", 50, 20);
-//   doc.setFontSize(10);
-//   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-//   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-//   // --- Invoice Info ---
-//   const invoiceNo = "INV-" + Date.now();
-//   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-//   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-//   // --- Customer Details ---
-//   const name = document.getElementById('custName')?.value || 'N/A';
-//   const phone = document.getElementById('custPhone')?.value || 'N/A';
-//   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-//   doc.setFontSize(12);
-//   doc.text("Bill To:", 14, 50);
-//   doc.text(`${name}`, 30, 50);
-//   doc.text(`Mobile: ${phone}`, 30, 56);
-//   doc.text("Ship To:", 14, 66);
-//   doc.text(`${addr}`, 30, 66);
-
-//   // --- Table ---
-//   const rows = [];
-//   let idx = 1, subtotal = 0;
-//   for (const [id, qty] of Object.entries(Cart.items)) {
-//     const it = Catalog.list.find(x => x.id == id);
-//     if (!it) continue;
-//     const lineTotal = (it.sale || 0) * qty;
-//     subtotal += lineTotal;
-//     rows.push([idx++, it.name, qty, `₹${it.sale}`, `₹${lineTotal}`]);
-//   }
-
-//   doc.autoTable({
-//     head: [["#", "Product", "Qty", "Price", "Total"]],
-//     body: rows,
-//     startY: 80,
-//   });
-
-//   const finalY = doc.lastAutoTable.finalY + 10;
-//   doc.text(`Subtotal: ₹${subtotal}`, 150, finalY);
-//   doc.text(`Total: ₹${subtotal}`, 150, finalY + 6);
-
-//   // --- Bank Details ---
-//   doc.setFontSize(10);
-//   doc.text("Bank Details", 14, finalY + 20);
-//   doc.text("Account Name: ABS Crackers", 14, finalY + 26);
-//   doc.text("A/C No: 1234567890", 14, finalY + 32);
-//   doc.text("IFSC: ABCD0123456", 14, finalY + 38);
-//   doc.text("Bank: SBI, Sivakasi Branch", 14, finalY + 44);
-
-//   // --- Footer ---
-//   doc.setFontSize(11);
-//   doc.text("Thank you for your order!", 80, 290);
-
-//   doc.save(`Invoice_${invoiceNo}.pdf`);
-
-
-
-
-
-
-
-
-// //     const { jsPDF } = window.jspdf;
-// //   const doc = new jsPDF();
-
-// //   // --- Add Logo ---
-// //   const logoUrl = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
-// //   doc.addImage(logo, 'PNG', 14, 10, 30, 30);
-
-// //   // --- Header ---
-// //   doc.setFontSize(16);
-// //   doc.text("ABS Crackers World", 50, 20);
-// //   doc.setFontSize(10);
-// //   doc.text("5/288/33, Sivakasi - 626189", 50, 26);
-// //   doc.text("Contact: +91 80720 98251 / 95971 89599", 50, 32);
-
-// //   // --- Invoice Info ---
-// //   const invoiceNo = "INV-" + Date.now();
-// //   doc.text(`Invoice No: ${invoiceNo}`, 150, 20);
-// //   doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 26);
-
-// //   // --- Customer Details ---
-// //   const name = document.getElementById('custName')?.value || 'N/A';
-// //   const phone = document.getElementById('custPhone')?.value || 'N/A';
-// //   const addr = document.getElementById('custAddress')?.value || 'N/A';
-
-// //   doc.setFontSize(12);
-// //   doc.text("Bill To:", 14, 50);
-// //   doc.text(`${name}`, 30, 50);
-// //   doc.text(`Mobile: ${phone}`, 30, 56);
-// //   doc.text("Ship To:", 14, 66);
-// //   doc.text(`${addr}`, 30, 66);
-
-// //   // --- Table ---
-// //   const rows = [];
-// //   let idx = 1, subtotal = 0;
-// //   for (const [id, qty] of Object.entries(Cart.items)) {
-// //     const it = Catalog.list.find(x => x.id == id);
-// //     if (!it) continue;
-// //     const lineTotal = (it.sale || 0) * qty;
-// //     subtotal += lineTotal;
-// //     rows.push([idx++, it.name, qty, `₹${it.sale}`, `₹${lineTotal}`]);
-// //   }
-
-// //   doc.autoTable({
-// //     head: [["#", "Product", "Qty", "Price", "Total"]],
-// //     body: rows,
-// //     startY: 80,
-// //   });
-
-// //   const finalY = doc.lastAutoTable.finalY + 10;
-// //   doc.text(`Subtotal: ₹${subtotal}`, 150, finalY);
-// //   doc.text(`Total: ₹${subtotal}`, 150, finalY + 6);
-
-// //   // --- Bank Details ---
-// //   doc.setFontSize(10);
-// //   doc.text("Bank Details", 14, finalY + 20);
-// //   doc.text("Account Name: ABS Crackers", 14, finalY + 26);
-// //   doc.text("A/C No: 1234567890", 14, finalY + 32);
-// //   doc.text("IFSC: ABCD0123456", 14, finalY + 38);
-// //   doc.text("Bank: SBI, Sivakasi Branch", 14, finalY + 44);
-
-// //   // --- Footer ---
-// //   doc.setFontSize(11);
-// //   doc.text("Thank you for your order!", 80, 290);
-
-// //   doc.save(`Invoice_${invoiceNo}.pdf`);
-// // }
-
-// // // Helper to convert image path to Base64
-// // function toDataUrl(url) {
-// //   return fetch(url)
-// //     .then(response => response.blob())
-// //     .then(blob => new Promise((resolve) => {
-// //       const reader = new FileReader();
-// //       reader.onloadend = () => resolve(reader.result);
-// //       reader.readAsDataURL(blob);
-// //     }));
-
-
-
-
-//     //old
-
-//     // const { jsPDF } = window.jspdf;
-//     // const doc = new jsPDF();
-//     // const margin=14; let y=16;
-//     // doc.setFontSize(16); doc.text('ABS Crackers – Order Summary', margin, y); y+=8;
-//     // doc.setFontSize(10); doc.text(new Date().toLocaleString(), margin, y); y+=8;
-//     // doc.setFontSize(12);
-//     // for(const [id, qty] of Object.entries(Cart.items)){
-//     //   const it = Catalog.list.find(x=>x.id==id); if(!it) continue;
-//     //   const line = `${it.name} (${it.unit})  x${qty}    @ ₹${it.sale}  =  ₹${(it.sale||0)*qty}`;
-//     //   if(y>280){ doc.addPage(); y=16; }
-//     //   doc.text(line, margin, y); y+=7;
-//     // }
-//     // y+=4; doc.setLineWidth(0.4); doc.line(margin, y, 200, y); y+=8;
-//     // doc.text(`MRP Total: ${el('#sumMrp').textContent}`, margin, y); y+=7;
-//     // doc.text(`Discount Total: ${el('#sumSale').textContent}`, margin, y); y+=7;
-//     // doc.text(`You Save: ${el('#sumSave').textContent}`, margin, y); y+=10;
-//     // doc.setFontSize(10);
-//     // doc.text('WhatsApp: +91 81110 87914 • Location: Sivakasi', margin, y);
-//     // doc.save('ABS_Crackers_Order.pdf');
-//   }
+  return valid;
+}
 
   // --- Events ---
   el('#search').addEventListener('input', renderGrid);
   el('#categoryFilter').addEventListener('change', renderGrid);
-  el('#placeOrder').addEventListener('click', ()=>{ if(Object.keys(Cart.items).length===0){ toast('Add items first'); return; } openWhatsApp(); });
-  el('#downloadPdf').addEventListener('click', ()=>{ if(Object.keys(Cart.items).length===0){ toast('Add items first'); return; } downloadOrderPdf(); });
+//   el('#placeOrder').addEventListener('click', async ()=>{ 
+//   if(Object.keys(Cart.items).length===0){ 
+//     toast('Add items first'); 
+//     return; 
+//   }
+//   if(!validateCustomer()){ 
+//     toast('Please fix errors'); 
+//     return; 
+//   }
+
+//   // --- Collect customer details ---
+//   const name = el('#custName').value.trim();
+//   const phone = el('#custPhone').value.trim();
+//   const addr = el('#custAddress').value.trim();
+
+//   // Amount from Discount Total
+//   const amount = parseInt(el('#sumSale').textContent.replace(/[₹,]/g,''), 10);
+
+//   // Prepare items list
+//   const items = Object.entries(Cart.items).map(([id, qty]) => {
+//     const it = Catalog.list.find(x => x.id == id);
+//     return { name: it?.name || '', qty, price: it?.sale || 0 };
+//   });
+
+//   // --- Download invoice ---
+//   await downloadOrderPdf();
+
+//   // --- Save to Firestore ---
+//   await saveOrderToFirebase(name, phone, addr, amount, items);
+
+//   // --- Success message ---
+//   showSuccess('✅ Order placed successfully! Invoice downloaded.');
+
+//   // --- Clear cart ---
+//   Cart.clear();
+// });
+
+el('#placeOrder').addEventListener('click', async ()=>{ 
+  if(Object.keys(Cart.items).length===0){ 
+    toast('Add items first'); 
+    return; 
+  }
+  if(!validateCustomer()){ 
+    toast('Please fix errors'); 
+    return; 
+  }
+
+  try {
+    // --- Collect customer details ---
+    const name = el('#custName').value.trim();
+    const phone = el('#custPhone').value.trim();
+    const addr = el('#custAddress').value.trim();
+
+    // Amount from Discount Total
+    const amount = parseInt(el('#sumSale').textContent.replace(/[₹,]/g,''), 10);
+
+    // Prepare items list
+    const items = Object.entries(Cart.items).map(([id, qty]) => {
+      const it = Catalog.list.find(x => x.id == id);
+      return { name: it?.name || '', qty, price: it?.sale || 0 };
+    });
+
+    // --- Download invoice ---
+    await downloadOrderPdf();
+
+    // --- Save to Firestore ---
+    await saveOrderToFirebase(name, phone, addr, amount, items);
+
+    // --- Show success ---
+    showSuccess('✅ Order placed successfully! Invoice downloaded.');
+
+    // --- Clear cart ---
+    Cart.clear();
+  } catch (err) {
+    console.error("❌ Error in Place Order:", err);
+    toast("Something went wrong while placing order.");
+  }
+});
+
+
   el('#clearCart').addEventListener('click', ()=>{ Cart.clear(); toast('Cart cleared'); });
   if (el('#importCsv')) {
     el('#importCsv').addEventListener('click', ()=>{
@@ -1704,14 +961,13 @@ document.addEventListener("DOMContentLoaded", () => {
       download('abs_crackers_catalog.csv', toCsv(Catalog.list));
     });
   }
-  el('#placeOrderWithPdf').addEventListener('click', ()=>{ if(Object.keys(Cart.items).length===0){ toast('Add items first'); return; } buildAndSendPdfToWhatsApp(); });
 
   // --- Init ---
   Catalog.load(); Cart.load(); renderFilters(); renderGrid(); renderCart();
   console.log("First item with image:1576", Catalog.list[0]);
 
   // expose for inline handlers
-  window.addToCart = addToCart; window.Cart = Cart; window.chgQty = chgQty;
+  window.addToCart = addToCart; window.Cart = Cart; window.chgQty = chgQty; window.scrollToCart = scrollToCart;
 
   // --- Extra helpers for CSV ---
   function parseCsv(text){
@@ -1736,24 +992,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const blob = new Blob([content], {type:'text/plain'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click();
     URL.revokeObjectURL(a.href);
-  }
-  async function buildAndSendPdfToWhatsApp(){
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF(); let y = 16;
-    doc.setFontSize(16); doc.text('ABS Crackers – Order Summary', 14, y); y+=10;
-    for(const [id, qty] of Object.entries(Cart.items)){
-      const it = Catalog.list.find(x=>x.id==id); if(!it) continue;
-      doc.text(`${it.name} (${it.unit}) x${qty}  @ ₹${it.sale}`, 14, y); y+=7;
-    }
-    y+=5;
-    doc.text(`MRP Total: ${el('#sumMrp').textContent}`, 14, y); y+=7;
-    doc.text(`Discount Total: ${el('#sumSale').textContent}`, 14, y); y+=7;
-    doc.text(`You Save: ${el('#sumSave').textContent}`, 14, y); y+=7;
-    const pdfBlob = doc.output('blob');
-    const pdfUrl = URL.createObjectURL(pdfBlob);
-    const number = '918111087914';
-    const msg = encodeURIComponent(`Hello, please find my crackers order summary PDF:\n${pdfUrl}`);
-    window.open(`https://wa.me/${number}?text=${msg}`, '_blank');
   }
 });
 </script>
