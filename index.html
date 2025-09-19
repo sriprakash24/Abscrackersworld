@@ -556,6 +556,101 @@
         text-shadow: 0 0 6px rgba(250, 204, 21, 0.8);
         animation: sparkle 2s infinite alternate ease-in-out;
       }
+      /* Spinner for Place Order button */
+      .btn-loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.8;
+      }
+
+      .btn-loading::after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        width: 16px;
+        height: 16px;
+        margin-top: -8px;
+        border: 2px solid #fff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      /* 🆕 Success Modal */
+      .success-modal {
+        display: none; /* hidden by default */
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .success-modal-content {
+        background: rgba(255, 255, 255, 0.9); /* glassy white */
+        backdrop-filter: blur(8px); /* glass effect */
+        color: #0f5132; /* deep festive green */
+        padding: 25px 40px;
+        border-radius: 16px;
+        font-size: 18px;
+        text-align: center;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        border: 2px solid #22c55e;
+        animation: popIn 0.5s ease, glowPulse 2s infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Entry animation */
+      @keyframes popIn {
+        from {
+          transform: scale(0.8) translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Glow pulse like fireworks */
+      @keyframes glowPulse {
+        0% {
+          box-shadow: 0 0 8px #22c55e, 0 0 20px #22c55e;
+        }
+        50% {
+          box-shadow: 0 0 20px #4ade80, 0 0 40px #22c55e;
+        }
+        100% {
+          box-shadow: 0 0 8px #22c55e, 0 0 20px #22c55e;
+        }
+      }
+
+      @keyframes fadeInScale {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
     </style>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
@@ -722,6 +817,16 @@
             ></textarea>
             <div id="errAddress" class="error">Address is required</div>
           </label>
+        </div>
+
+        <!-- 🆕 Success Modal -->
+        <div id="successModal" class="success-modal">
+          <div class="success-modal-content">
+            <!-- <span style="font-size: 22px">🎇</span> -->
+            <p id="successMessage" style="margin: 0">
+              Order placed successfully! Invoice downloaded.
+            </p>
+          </div>
         </div>
 
         <div class="divider"></div>
@@ -2336,6 +2441,19 @@
           // --- Save PDF ---
           doc.save(`Invoice_${invoiceNo}.pdf`);
         }
+        // 🆕 Show success modal for 3-5 seconds
+        function showSuccessModal(message) {
+          const modal = document.getElementById("successModal");
+          const msgBox = document.getElementById("successMessage");
+          msgBox.textContent = message;
+
+          modal.style.display = "flex";
+
+          // Auto-close after 4s
+          setTimeout(() => {
+            modal.style.display = "none";
+          }, 4000);
+        }
 
         function validateCustomer() {
           let valid = true;
@@ -2405,13 +2523,72 @@
         //   Cart.clear();
         // });
 
-        el("#placeOrder").addEventListener("click", async () => {
+        // el("#placeOrder").addEventListener("click", async () => {
+        //   if (Object.keys(Cart.items).length === 0) {
+        //     toast("Add items first");
+        //     return;
+        //   }
+        //   if (!validateCustomer()) {
+        //     toast("Please fix errors");
+        //     return;
+        //   }
+
+        //   try {
+        //     // --- Collect customer details ---
+        //     const name = el("#custName").value.trim();
+        //     const phone = el("#custPhone").value.trim();
+        //     const addr = el("#custAddress").value.trim();
+
+        //     // Amount from Discount Total
+        //     const amount = parseInt(
+        //       el("#sumSale").textContent.replace(/[₹,]/g, ""),
+        //       10
+        //     );
+
+        //     // Prepare items list
+        //     const items = Object.entries(Cart.items).map(([id, qty]) => {
+        //       const it = Catalog.list.find((x) => x.id == id);
+        //       return { name: it?.name || "", qty, price: it?.sale || 0 };
+        //     });
+
+        //     // --- Download invoice ---
+        //     await downloadOrderPdf();
+
+        //     // --- Save to Firestore ---
+        //     await saveOrderToFirebase(name, phone, addr, amount, items);
+
+        //     // --- Show success ---
+        //     showSuccess("✅ Order placed successfully! Invoice downloaded.");
+
+        //     // --- Clear cart ---
+        //     Cart.clear();
+        //   } catch (err) {
+        //     console.error("❌ Error in Place Order:", err);
+        //     toast("Something went wrong while placing order.");
+        //   }
+        // });
+
+        el("#placeOrder").addEventListener("click", async (e) => {
+          // 🆕 Added: disable + spinner
+          const btn = e.currentTarget; // 🆕
+          btn.disabled = true; // 🆕
+          btn.classList.add("btn-loading"); // 🆕
+          btn.textContent = "Placing Order..."; // 🆕
+
           if (Object.keys(Cart.items).length === 0) {
             toast("Add items first");
+            // 🆕 re-enable button if failed
+            btn.disabled = false; // 🆕
+            btn.classList.remove("btn-loading"); // 🆕
+            btn.textContent = "Place Order"; // 🆕
             return;
           }
           if (!validateCustomer()) {
             toast("Please fix errors");
+            // 🆕 re-enable button if failed
+            btn.disabled = false; // 🆕
+            btn.classList.remove("btn-loading"); // 🆕
+            btn.textContent = "Place Order"; // 🆕
             return;
           }
 
@@ -2440,13 +2617,21 @@
             await saveOrderToFirebase(name, phone, addr, amount, items);
 
             // --- Show success ---
-            showSuccess("✅ Order placed successfully! Invoice downloaded.");
+            // showSuccess("✅ Order placed successfully! Invoice downloaded.");
+            showSuccessModal(
+              "🎇 Order placed successfully! Invoice downloaded."
+            ); //
 
             // --- Clear cart ---
             Cart.clear();
           } catch (err) {
             console.error("❌ Error in Place Order:", err);
             toast("Something went wrong while placing order.");
+          } finally {
+            // 🆕 Re-enable button after success/failure
+            btn.disabled = false; // 🆕
+            btn.classList.remove("btn-loading"); // 🆕
+            btn.textContent = "Place Order"; // 🆕
           }
         });
 
@@ -2529,5 +2714,3 @@
     </script>
   </body>
 </html>
-
-
