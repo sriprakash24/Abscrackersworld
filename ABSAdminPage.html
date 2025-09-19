@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ABS Crackers — Admin</title>
+    <title>ABS Crackers — Admin (Updated)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -96,6 +96,23 @@
         font-size: 12px;
         border-radius: 8px;
       }
+      .view-toggle {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .view-toggle button {
+        padding: 6px 10px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+      .view-toggle button.active {
+        background: var(--brand);
+        color: #00122a;
+        border-color: transparent;
+      }
       table {
         width: 100%;
         border-collapse: collapse;
@@ -118,6 +135,41 @@
       }
       tr:hover td {
         background: #0b1220;
+      }
+
+      .status-badges {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+      .sbadge {
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: #0b1220;
+        border: 1px solid var(--border);
+      }
+      .sbadge.paid {
+        background: #fef3c7;
+        color: #92400e;
+        border-color: transparent;
+      }
+      .sbadge.packing {
+        background: #fff7ed;
+        color: #92400e;
+        border-color: transparent;
+      }
+      .sbadge.packed {
+        background: #bbf7d0;
+        color: #064e3b;
+        border-color: transparent;
+      }
+      .sbadge.delivered {
+        background: #dbeafe;
+        color: #1e3a8a;
+        border-color: transparent;
       }
 
       /* ---- Invoice preview modal ---- */
@@ -284,6 +336,15 @@
       .inv-table tr:hover td {
         background: #f1f5f9; /* light gray, matches invoice background */
       }
+      /* Fix hover visibility inside consolidation view */
+      #consolidationPanel table tr:hover td {
+        background: #1e293b; /* slate-800 style, lighter than card */
+        color: #e5e7eb; /* keep text visible */
+        cursor: pointer;
+      }
+      #consolidationPanel table tr#details-* td {
+        background: #0b1220 !important; /* keep expanded details dark */
+      }
     </style>
 
     <!-- NEW: jsPDF + AutoTable for invoice PDF -->
@@ -355,6 +416,27 @@
             <span id="orderCount" class="badge">0 orders</span>
           </div>
           <div style="display: flex; gap: 8px; align-items: center">
+            <div class="view-toggle" role="tablist" aria-label="Views">
+              <button id="viewAll" class="active">All Orders</button>
+              <button id="viewConfirmed">Confirmed</button>
+              <button id="viewDelivered">Delivered</button>
+            </div>
+            <!-- Consolidation Toggle (only visible in Confirmed view) -->
+            <div
+              id="confirmedViewToggle"
+              style="margin: 10px 0; display: none; gap: 8px"
+            >
+              <button id="showConfirmedOrders" class="btn btn-xs btn-primary">
+                View Orders
+              </button>
+              <button id="showConsolidation" class="btn btn-xs">
+                View Consolidation
+              </button>
+            </div>
+
+            <!-- Consolidation Panel -->
+            <div id="consolidationPanel" style="display: none"></div>
+
             <input
               class="search"
               id="searchInput"
@@ -466,6 +548,10 @@
       const tbody = document.querySelector("#ordersTbody");
       const searchInput = document.querySelector("#searchInput");
 
+      const viewAllBtn = document.querySelector("#viewAll");
+      const viewConfirmedBtn = document.querySelector("#viewConfirmed");
+      const viewDeliveredBtn = document.querySelector("#viewDelivered");
+
       // modal refs
       const modal = document.querySelector("#invoiceModal");
       const closeModal = document.querySelector("#closeModalBtn");
@@ -522,37 +608,234 @@
         }
       });
 
+      authBtn.addEventListener("click", async () => {
+        if (auth.currentUser) {
+          await signOut(auth);
+        } else {
+          // show login box (already visible when signed out)
+          loginBox.style.display = "block";
+        }
+      });
+
       let ORDERS = []; // cached snapshot for search
       let CURRENT_ORDER_ID = null;
       let CURRENT_ORDER = null;
+      let ACTIVE_VIEW = "all"; // all | confirmed | delivered
+      let CONFIRMED_MODE = "orders"; // "orders" | "consolidation"
+
+      document
+        .querySelector("#showConfirmedOrders")
+        .addEventListener("click", () => {
+          CONFIRMED_MODE = "orders";
+          document
+            .querySelector("#showConfirmedOrders")
+            .classList.add("btn-primary");
+          document
+            .querySelector("#showConsolidation")
+            .classList.remove("btn-primary");
+          document.querySelector("#consolidationPanel").style.display = "none";
+          document.querySelector("#ordersTable").style.display = "table";
+          renderCurrentView();
+        });
+
+      document
+        .querySelector("#showConsolidation")
+        .addEventListener("click", () => {
+          CONFIRMED_MODE = "consolidation";
+          document
+            .querySelector("#showConsolidation")
+            .classList.add("btn-primary");
+          document
+            .querySelector("#showConfirmedOrders")
+            .classList.remove("btn-primary");
+          document.querySelector("#ordersTable").style.display = "none";
+          document.querySelector("#consolidationPanel").style.display = "block";
+          renderCurrentView();
+        });
 
       // ---------- Orders listener ----------
       function startOrdersListener() {
         const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
         onSnapshot(q, (snap) => {
           ORDERS = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          // ensure backward-compatible fields
+          ORDERS = ORDERS.map((o) => ({
+            paymentStatus: o.paymentStatus || "pending",
+            deliveryStatus:
+              o.deliveryStatus ||
+              (o.status === "packed" ? "delivered" : "notDelivered"),
+            ...o,
+          }));
           orderCountEl.textContent = `${ORDERS.length} orders`;
-          renderRows(ORDERS);
+          renderCurrentView();
         });
       }
 
-      function renderRows(rows) {
-        const terms = (searchInput.value || "").trim().toLowerCase();
-        const list = terms
-          ? rows.filter((r) =>
-              [r.name, r.phone, r.address]
-                .join(" ")
-                .toLowerCase()
-                .includes(terms)
-            )
-          : rows;
+      // view toggle
+      viewAllBtn.addEventListener("click", () => {
+        setActiveView("all");
+      });
+      viewConfirmedBtn.addEventListener("click", () => {
+        setActiveView("confirmed");
+      });
+      viewDeliveredBtn.addEventListener("click", () => {
+        setActiveView("delivered");
+      });
 
-        if (!list.length) {
+      // function setActiveView(v) {
+      //   ACTIVE_VIEW = v;
+      //   [viewAllBtn, viewConfirmedBtn, viewDeliveredBtn].forEach((b) =>
+      //     b.classList.remove("active")
+      //   );
+      //   if (v === "all") viewAllBtn.classList.add("active");
+      //   if (v === "confirmed") viewConfirmedBtn.classList.add("active");
+      //   if (v === "delivered") viewDeliveredBtn.classList.add("active");
+      //   renderCurrentView();
+      // }
+      function setActiveView(v) {
+        ACTIVE_VIEW = v;
+        [viewAllBtn, viewConfirmedBtn, viewDeliveredBtn].forEach((b) =>
+          b.classList.remove("active")
+        );
+        if (v === "all") viewAllBtn.classList.add("active");
+        if (v === "confirmed") viewConfirmedBtn.classList.add("active");
+        if (v === "delivered") viewDeliveredBtn.classList.add("active");
+
+        // show consolidation toggle only in confirmed view
+        document.querySelector("#confirmedViewToggle").style.display =
+          v === "confirmed" ? "flex" : "none";
+
+        renderCurrentView();
+      }
+
+      function renderCurrentView() {
+        const terms = (searchInput.value || "").trim().toLowerCase();
+        let list = ORDERS.slice();
+
+        // if (ACTIVE_VIEW === "confirmed") {
+        //   list = list.filter((o) => (o.paymentStatus || "pending") === "paid");
+        // } else if (ACTIVE_VIEW === "delivered") {
+        //   list = list.filter(
+        //     (o) =>
+        //       o.paymentStatus === "paid" &&
+        //       (o.status === "packed" || o.deliveryStatus === "delivered")
+        //   );
+        // }
+        if (ACTIVE_VIEW === "confirmed") {
+          list = list.filter(
+            (o) =>
+              (o.paymentStatus || "pending") === "paid" &&
+              o.deliveryStatus !== "delivered" &&
+              o.status !== "packed" // exclude delivered/packed
+          );
+        } else if (ACTIVE_VIEW === "delivered") {
+          list = list.filter(
+            (o) =>
+              o.paymentStatus === "paid" &&
+              (o.status === "packed" || o.deliveryStatus === "delivered")
+          );
+        }
+
+        if (CONFIRMED_MODE === "consolidation") {
+          renderConsolidation(list);
+          return;
+        }
+
+        if (terms) {
+          list = list.filter((r) =>
+            [r.name, r.phone, r.address].join(" ").toLowerCase().includes(terms)
+          );
+        }
+
+        renderTable(list);
+      }
+
+      function renderConsolidation(orders) {
+        if (!orders.length) {
+          document.querySelector(
+            "#consolidationPanel"
+          ).innerHTML = `<div style="text-align:center;color:var(--muted)">No confirmed orders</div>`;
+          return;
+        }
+
+        // Step 1: Aggregate totals
+        const productMap = {}; // { itemName: { total: X, customers: [{name, qty}] } }
+
+        orders.forEach((o) => {
+          (o.items || []).forEach((it) => {
+            const name = it.name || "Unnamed";
+            const qty = it.qty || 1;
+            if (!productMap[name])
+              productMap[name] = { total: 0, customers: [] };
+            productMap[name].total += qty;
+            productMap[name].customers.push({
+              name: o.name || "Customer",
+              qty,
+            });
+          });
+        });
+
+        // Step 2: Build table
+        let html = `<table class="inv-table">
+    <thead>
+      <tr><th>Item</th><th style="text-align:right">Total Qty</th></tr>
+    </thead>
+    <tbody>`;
+
+        Object.entries(productMap).forEach(([name, data], idx) => {
+          html += `
+      <tr class="expandable" data-key="${idx}">
+        <td>▶ ${escapeHtml(name)}</td>
+        <td style="text-align:right">${data.total}</td>
+      </tr>
+      <tr id="details-${idx}" style="display:none;background:#0b1220">
+        <td colspan="2">
+          ${data.customers
+            .map(
+              (c) =>
+                `<div style="padding:4px 0;border-bottom:1px solid #1f2937">
+                   ${escapeHtml(c.name)} → ${c.qty}
+                 </div>`
+            )
+            .join("")}
+        </td>
+      </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        document.querySelector("#consolidationPanel").innerHTML = html;
+
+        // Step 3: Toggle expand on click
+        document
+          .querySelectorAll("#consolidationPanel .expandable")
+          .forEach((row) => {
+            row.addEventListener("click", () => {
+              const key = row.dataset.key;
+              const detailRow = document.querySelector(`#details-${key}`);
+              if (detailRow.style.display === "none") {
+                detailRow.style.display = "table-row";
+                row.querySelector("td").textContent = row
+                  .querySelector("td")
+                  .textContent.replace("▶", "▼");
+              } else {
+                detailRow.style.display = "none";
+                row.querySelector("td").textContent = row
+                  .querySelector("td")
+                  .textContent.replace("▼", "▶");
+              }
+            });
+          });
+      }
+
+      searchInput.addEventListener("input", () => renderCurrentView());
+
+      function renderTable(rows) {
+        if (!rows.length) {
           tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted)">No orders</td></tr>`;
           return;
         }
 
-        tbody.innerHTML = list
+        tbody.innerHTML = rows
           .map((o) => {
             const itemCount = (o.items || []).reduce(
               (a, b) => a + (b.qty || 1),
@@ -575,19 +858,47 @@
               `Our team will reach out shortly with confirmation & delivery details.\n\n` +
               `Wishing you a safe, bright, and joyful celebration! 🎆✨\n` +
               `- Team ABS Crackers`;
+
             const waLink = `https://wa.me/91${
               o.phone
             }?text=${encodeURIComponent(msg)}`;
 
-            // Determine status badge
-            const packStatus =
-              (o.packing && o.packing.status) || o.status || "";
-            const statusBadge =
-              packStatus === "packed"
-                ? `<span class="badge" style="background:var(--ok);color:#00122a;margin-left:6px">Packed ✅</span>`
-                : packStatus === "packing"
-                ? `<span class="badge" style="background:#f59e0b;color:#04111a;margin-left:6px">Packing</span>`
-                : "";
+            // Determine badges
+            const badges = [];
+            if ((o.paymentStatus || "pending") === "paid")
+              badges.push('<span class="sbadge paid">Paid 💰</span>');
+            if ((o.status || "") === "packing")
+              badges.push('<span class="sbadge packing">Packing 🟡</span>');
+            if ((o.status || "") === "packed")
+              badges.push('<span class="sbadge packed">Packed ✅</span>');
+            if (
+              (o.paymentStatus || "") === "paid" &&
+              (o.status || "") === "packed"
+            )
+              badges.push('<span class="sbadge delivered">Delivered 📦</span>');
+
+            // action buttons: invoice, package, wa, markPaid, markDelivered, delete
+            // const markPaidBtn =
+            //   o.paymentStatus === "paid"
+            //     ? `<button class="btn btn-xs" disabled>Paid</button>`
+            //     : `<button class="btn btn-xs" data-act="markPaid" data-id="${o.id}">Mark Paid</button>`;
+
+            // const markDeliveredBtn =
+            //   o.paymentStatus === "paid" &&
+            //   (o.status === "packed" || o.deliveryStatus === "delivered")
+            //     ? `<button class="btn btn-xs" disabled>Delivered</button>`
+            //     : `<button class="btn btn-xs" data-act="markDelivered" data-id="${o.id}">Mark Delivered</button>`;
+            // Toggle Paid button
+            const markPaidBtn =
+              o.paymentStatus === "paid"
+                ? `<button class="btn btn-xs" data-act="togglePaid" data-id="${o.id}">Unpaid</button>`
+                : `<button class="btn btn-xs" data-act="togglePaid" data-id="${o.id}">Mark Paid</button>`;
+
+            // Toggle Delivered button
+            const markDeliveredBtn =
+              o.status === "packed" || o.deliveryStatus === "delivered"
+                ? `<button class="btn btn-xs" data-act="toggleDelivered" data-id="${o.id}">Undo Delivered</button>`
+                : `<button class="btn btn-xs" data-act="toggleDelivered" data-id="${o.id}">Mark Delivered</button>`;
 
             return `
         <tr data-id="${o.id}">
@@ -596,7 +907,7 @@
               <button class="collapse-btn btn btn-xs" style="background:transparent;color:#60a5fa;cursor:pointer;">
                 ${escapeHtml(o.name || "")} ▼
               </button>
-              ${statusBadge}
+              <div class="status-badges">${badges.join("")}</div>
               <div class="details" style="display:none;margin-top:6px;font-size:12px;color:#cbd5e1;">
                 <div><b>Mobile:</b> ${escapeHtml(o.phone || "")}</div>
                 <div><b>Address:</b> ${escapeHtml(o.address || "")}</div>
@@ -616,6 +927,8 @@
             <a href="${waLink}" target="_blank" title="Send WhatsApp Message">
               <img src="https://img.icons8.com/color/24/whatsapp.png" style="vertical-align:middle;cursor:pointer;" />
             </a>
+            ${markPaidBtn}
+            ${markDeliveredBtn}
             <button class="btn btn-danger btn-xs" data-act="delete" data-id="${
               o.id
             }" title="Delete Order">🗑️</button>
@@ -625,8 +938,6 @@
           })
           .join("");
       }
-
-      searchInput.addEventListener("input", () => renderRows(ORDERS));
 
       tbody.addEventListener("click", async (e) => {
         const btn = e.target.closest("button[data-act]");
@@ -654,7 +965,91 @@
             alert("Order deleted successfully!");
           }
         }
+        // if (btn.dataset.act === "markPaid") {
+        //   if (!id) return;
+        //   try {
+        //     await updateDoc(doc(db, "orders", id), {
+        //       paymentStatus: "paid",
+        //       updatedAt: serverTimestamp(),
+        //     });
+        //     alert("Marked as paid ✅");
+        //   } catch (err) {
+        //     console.error(err);
+        //     alert("Failed to mark as paid");
+        //   }
+        // }
+        if (btn.dataset.act === "togglePaid") {
+          const snap = await getDoc(doc(db, "orders", id));
+          if (!snap.exists()) return;
+          const data = snap.data();
+
+          if (data.paymentStatus === "paid") {
+            if (
+              !confirm(
+                "⚠️ Are you sure you want to revert this order to Unpaid?"
+              )
+            )
+              return;
+            await updateDoc(doc(db, "orders", id), {
+              paymentStatus: "pending",
+              updatedAt: serverTimestamp(),
+            });
+            alert("Reverted to Unpaid ❌");
+          } else {
+            await updateDoc(doc(db, "orders", id), {
+              paymentStatus: "paid",
+              updatedAt: serverTimestamp(),
+            });
+            alert("Marked as Paid ✅");
+          }
+        }
+
+        // if (btn.dataset.act === "markDelivered") {
+        //   if (!id) return;
+        //   // mark as delivered only if packed & paid ideally but allow admin to force
+        //   try {
+        //     const snap = await getDoc(doc(db, "orders", id));
+        //     if (!snap.exists()) return;
+        //     const data = snap.data();
+        //     // set both deliveryStatus and status to packed/delivered if not already
+        //     const updates = {
+        //       deliveryStatus: "delivered",
+        //       updatedAt: serverTimestamp(),
+        //     };
+        //     // if not packed, also set status to packed (admin forced)
+        //     if (data.status !== "packed") updates.status = "packed";
+        //     await updateDoc(doc(db, "orders", id), updates);
+        //     alert("Marked as delivered ✅");
+        //   } catch (err) {
+        //     console.error(err);
+        //     alert("Failed to mark as delivered");
+        //   }
+        // }
+        if (btn.dataset.act === "toggleDelivered") {
+          const snap = await getDoc(doc(db, "orders", id));
+          if (!snap.exists()) return;
+          const data = snap.data();
+
+          if (data.deliveryStatus === "delivered" || data.status === "packed") {
+            if (!confirm("⚠️ Are you sure you want to undo Delivered?")) return;
+            await updateDoc(doc(db, "orders", id), {
+              deliveryStatus: "notDelivered",
+              status: "packing",
+              updatedAt: serverTimestamp(),
+            });
+            alert("Delivery undone ❌");
+          } else {
+            const updates = {
+              deliveryStatus: "delivered",
+              updatedAt: serverTimestamp(),
+            };
+            if (data.status !== "packed") updates.status = "packed";
+            await updateDoc(doc(db, "orders", id), updates);
+            alert("Marked as Delivered ✅");
+          }
+        }
       });
+
       // Toggle collapse row when clicking customer name
       tbody.addEventListener("click", (e) => {
         if (e.target.classList.contains("collapse-btn")) {
@@ -770,45 +1165,44 @@
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // --- Load ABS Logo ---
+        // --- Load ABS Logo --- (if images fail it's okay)
         const logo = new Image();
         logo.crossOrigin = "anonymous";
         logo.src = "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg";
 
-        // --- Load God Image ---
         const godImg = new Image();
         godImg.crossOrigin = "anonymous";
         godImg.src = "https://i.postimg.cc/MGmbtLv7/abs-god.webp";
 
-        // Wait for both images
         Promise.all([
           new Promise((res) => {
             logo.onload = res;
+            logo.onerror = res;
           }),
           new Promise((res) => {
             godImg.onload = res;
+            godImg.onerror = res;
           }),
         ]).then(() => {
-          // --- Place Logo (left) ---
-          doc.addImage(logo, "JPEG", 14, 10, 30, 30);
-          // --- Place God Image (right) ---
-          doc.addImage(godImg, "WEBP", 165, 10, 30, 30);
+          try {
+            doc.addImage(logo, "JPEG", 14, 10, 30, 30);
+          } catch (e) {}
+          try {
+            doc.addImage(godImg, "WEBP", 165, 10, 30, 30);
+          } catch (e) {}
 
-          // --- Header ---
           doc.setFontSize(16);
           doc.text("ABS Crackers World", 60, 20);
           doc.setFontSize(10);
           doc.text("5/288/33, Sivakasi - 626189", 60, 26);
           doc.text("Contact: +91 80720 98251 / 95971 89599", 60, 32);
 
-          // --- Invoice Info ---
           const invoiceNo = "INV-" + id.slice(0, 6).toUpperCase();
           const date = o.createdAt?.toDate ? o.createdAt.toDate() : new Date();
           doc.setFontSize(11);
           doc.text(`Invoice No: ${invoiceNo}`, 150, 48);
           doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 150, 54);
 
-          // --- Customer Details ---
           doc.setFontSize(12);
           doc.text("Bill To:", 14, 50);
           doc.text(o.name || "N/A", 50, 50);
@@ -817,7 +1211,6 @@
           doc.text("Ship To:", 14, 66);
           doc.text((o.address || "").replace(/\r?\n/g, ", "), 50, 66);
 
-          // --- Table Data ---
           const rows = [];
           let idx = 1,
             subtotal = 0;
@@ -826,7 +1219,6 @@
             const price = it.price ?? it.sale ?? 0;
             const lineTotal = price * qty;
             subtotal += lineTotal;
-
             rows.push([
               idx++,
               it.name,
@@ -852,8 +1244,6 @@
           });
 
           const finalY = doc.lastAutoTable.finalY + 10;
-
-          // --- Total ---
           doc.setFontSize(14);
           doc.setLineWidth(0.5);
           doc.line(150, finalY - 4, 200, finalY - 4);
@@ -863,12 +1253,8 @@
             finalY + 4,
             { align: "right" }
           );
-
-          // --- Footer ---
           doc.setFontSize(12);
           doc.text("Thank you for your order!", 80, 290);
-
-          // --- Save PDF ---
           doc.save(`Invoice_${invoiceNo}.pdf`);
         });
       }
@@ -1043,7 +1429,6 @@
       function closePackageModal() {
         packageModal.classList.remove("show");
         packageModal.setAttribute("aria-hidden", "true");
-        // clear modal contents to avoid duplicate event listeners on re-open
         packageChecklistEl.innerHTML = "";
       }
 
