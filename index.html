@@ -656,16 +656,17 @@
       }
       .toast-add {
         position: fixed;
-        top: 20%;
+        bottom: 20%; /* ✅ move up from bottom (adjust % as you like) */
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%); /* center horizontally */
         background: linear-gradient(270deg, #22c55e, #3b82f6, #ec4899, #facc15);
         background-size: 800% 800%;
         color: #fff;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
-        padding: 14px 24px;
+        padding: 10px 24px; /* smaller padding for single-line look */
         border-radius: 12px;
+        white-space: nowrap; /* ✅ keep text on one line */
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
         z-index: 2000;
         display: none;
@@ -2306,4 +2307,5 @@
     </script>
   </body>
 </html>
+
 
