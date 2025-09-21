@@ -186,7 +186,8 @@
         cursor: pointer;
       }
       .btn-primary {
-        background: linear-gradient(180deg, #0284c7, #0369a1);
+        background: linear-gradient(90deg, #8b5cf6, #ec4899);
+
         color: white;
         border: 1px solid #075985;
       }
@@ -419,7 +420,8 @@
         position: fixed;
         top: 12px;
         right: 12px;
-        background: #0ea5e9;
+        background: linear-gradient(90deg, #8b5cf6, #ec4899);
+
         color: white;
         font-size: 20px;
         font-weight: bold;
@@ -452,7 +454,8 @@
         width: 42px;
         height: 42px;
         border-radius: 50%;
-        background: #0ea5e9;
+        background: linear-gradient(90deg, #8b5cf6, #ec4899);
+
         color: white;
         font-size: 20px;
         font-weight: bold;
@@ -650,6 +653,670 @@
           transform: scale(1);
           opacity: 1;
         }
+      }
+      .toast-add {
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(270deg, #22c55e, #3b82f6, #ec4899, #facc15);
+        background-size: 800% 800%;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 14px 24px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        display: none;
+        animation: fadeInOut 3s ease forwards, gradientMove 5s ease infinite;
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+      }
+      .tag-limited {
+        background: #facc15;
+        color: #0f172a;
+      }
+      .tag-out {
+        background: #ef4444;
+      }
+      .tag-fast {
+        background: #22c55e;
+      }
+      .video-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .video-content {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        background: #000;
+        border-radius: 12px;
+        /* overflow: hidden;  <-- remove or change */
+        overflow: visible; /* ✅ allow the X to be clickable */
+      }
+
+      .video-content video {
+        width: 100%;
+        height: auto;
+      }
+      .video-content .close {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 28px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 10000; /* make sure it's above the video */
+      }
+
+      .video-btn {
+        border: none;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .video-btn {
+        border: none;
+        background: radial-gradient(circle at 30% 30%, #d500f9, #ff4081);
+
+        color: white;
+        border-radius: 50%;
+        width: 48px; /* bigger & easier to tap */
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 0 12px rgba(249, 212, 35, 0.6);
+        /* animation: pulsePlay 1.8s infinite ease-in-out; */
+        transition: transform 0.2s ease;
+      }
+
+      .video-btn:hover {
+        transform: scale(1.15);
+      }
+
+      /* 🔄 gentle pulse to attract attention */
+      @keyframes pulsePlay {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 8px rgba(249, 212, 35, 0.6);
+        }
+        50% {
+          transform: scale(1.15);
+          box-shadow: 0 0 20px rgba(255, 78, 80, 0.9);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 8px rgba(249, 212, 35, 0.6);
+        }
+      }
+
+      /* Optional: larger play symbol inside */
+      .video-btn::before {
+        content: "▶";
+        font-size: 20px;
+        margin-left: 2px; /* center the triangle optically */
+      }
+      .video-btn {
+        border: none;
+        background: #ff0000; /* YouTube red */
+        color: white; /* white play icon */
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+        animation: pulsePlay 1.8s infinite ease-in-out;
+        transition: transform 0.2s ease;
+      }
+
+      .video-btn:hover {
+        transform: scale(1.15);
+      }
+
+      @keyframes pulsePlay {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+        50% {
+          transform: scale(1.15);
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+      }
+
+      .video-btn::before {
+        content: "▶";
+        font-size: 20px;
+        margin-left: 2px; /* visually center the triangle */
+      }
+      /* ===== Modern Video Modal ===== */
+
+      .video-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6); /* softer dark overlay */
+        backdrop-filter: blur(8px); /* glassy blur */
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        padding: 5vh 2vw; /* top/bottom breathing space */
+      }
+
+      .video-content {
+        position: relative;
+        width: 90%;
+        max-width: 640px;
+        max-height: 80vh;
+        background: #000;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+        transform: scale(0.9);
+        opacity: 0;
+        animation: popIn 0.35s ease forwards; /* smooth entrance */
+      }
+
+      @keyframes popIn {
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .video-content video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 20px;
+      }
+
+      .video-content .close {
+        position: absolute;
+        top: 2px;
+        right: 5px;
+        width: 19px;
+        height: 36px;
+        line-height: 36px;
+        background: #fff;
+        border-radius: 50%;
+        color: #000;
+        font-size: 29px;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        transition: background 0.2s;
+      }
+      .video-content .close:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .offer-badge {
+        /* animated gradient background like .toast-add */
+        background: linear-gradient(270deg, #22c55e, #3b82f6, #ec4899, #facc15);
+        background-size: 800% 800%;
+
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+
+        /* reuse the gradientMove animation for smooth color shifting */
+        animation: gradientMove 5s ease infinite, pulse 1.5s infinite;
+      }
+
+      /* keep your existing keyframes or ensure these are present */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+        }
+        100% {
+          box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        }
+      }
+      /* Offer badge: animated gradient + pulse + dancing (firework) */
+      .offer-badge {
+        /* gradient background (same style as .toast-add) */
+        background: linear-gradient(270deg, #22c55e, #3b82f6, #ec4899, #facc15);
+        background-size: 800% 800%;
+        /* fallback (keeps your old sky-blue when gradient unsupported) */
+        background-color: #38bdf8;
+
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+
+        /* subtle shadow */
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+        /* combined animations: gradient move, soft pulse, and dance */
+        animation: gradientMove 6s ease infinite, pulse 1.6s infinite,
+          firework 2s infinite;
+
+        transform-origin: center center;
+        will-change: background-position, box-shadow, transform;
+      }
+
+      /* Smooth gradient shift (reused from .toast-add) */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Gentle glow pulse to attract attention */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 6px 12px rgba(255, 255, 255, 0.06),
+            0 0 6px rgba(255, 255, 255, 0.04);
+        }
+        50% {
+          box-shadow: 0 10px 22px rgba(255, 255, 255, 0.1),
+            0 0 20px rgba(255, 255, 255, 0.06);
+        }
+        100% {
+          box-shadow: 0 6px 12px rgba(255, 255, 255, 0.06),
+            0 0 6px rgba(255, 255, 255, 0.04);
+        }
+      }
+
+      /* Dancing / wiggle animation you had earlier */
+      @keyframes firework {
+        0% {
+          transform: scale(1) rotate(0deg);
+        }
+        25% {
+          transform: scale(1.06) rotate(-4deg);
+        }
+        50% {
+          transform: scale(1.08) rotate(4deg);
+        }
+        75% {
+          transform: scale(1.06) rotate(-2deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      /* ===== Success Modal ===== */
+      .success-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(6px); /* soft glassy backdrop */
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        padding: 5vh 2vw;
+      }
+
+      /* Inner content with gradient + pulse + wiggle */
+      .success-modal-content {
+        background: linear-gradient(270deg, #22c55e, #3b82f6, #ec4899, #facc15);
+        background-size: 800% 800%;
+        color: #fff;
+        padding: 24px 40px;
+        border-radius: 16px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+        /* 🎉 combined animations: moving gradient, soft glow, dancing wiggle */
+        animation: gradientMove 6s ease infinite, pulse 1.5s infinite,
+          firework 2s infinite;
+
+        transform-origin: center;
+        will-change: background-position, box-shadow, transform;
+      }
+
+      /* --- reused keyframes --- */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+        100% {
+          box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      @keyframes firework {
+        0% {
+          transform: scale(1) rotate(0deg);
+        }
+        25% {
+          transform: scale(1.06) rotate(-4deg);
+        }
+        50% {
+          transform: scale(1.08) rotate(4deg);
+        }
+        75% {
+          transform: scale(1.06) rotate(-2deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      /* New limited-stock badge */
+      .limited-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        padding: 4px 12px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+        background: linear-gradient(45deg, #facc15, #f97316);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        text-transform: uppercase;
+        z-index: 3;
+        animation: badgePulse 1.6s infinite;
+      }
+
+      @keyframes badgePulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
+        }
+        50% {
+          transform: scale(1.1);
+          box-shadow: 0 0 16px rgba(249, 115, 22, 0.7);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
+        }
+      }
+      .soldout-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        padding: 4px 12px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(45deg, #ef4444, #dc2626); /* red shades */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        text-transform: uppercase;
+        z-index: 3;
+        animation: badgePulse 1.6s infinite;
+      }
+      .soldout-disabled {
+        opacity: 0.5;
+        pointer-events: none; /* prevent clicks */
+        cursor: not-allowed;
+      }
+      /* Modern category dropdown */
+      #categoryFilter {
+        appearance: none; /* hide default arrow */
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 40px 10px 14px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.25s, transform 0.25s;
+        position: relative;
+      }
+
+      /* add a custom arrow */
+      #categoryFilter::after {
+        content: "▼";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #fff;
+        font-size: 12px;
+      }
+
+      /* hover / focus effects */
+      #categoryFilter:hover,
+      #categoryFilter:focus {
+        box-shadow: 0 6px 18px rgba(255, 126, 95, 0.6);
+        transform: translateY(-2px);
+        outline: none;
+      }
+
+      /* dropdown list itself */
+      #categoryFilter option {
+        background: #1e293b; /* dark festive backdrop */
+        color: #fff;
+        padding: 8px;
+      }
+      /* Modern select with built-in arrow indicator */
+      #categoryFilter {
+        appearance: none; /* hide native arrow */
+        background: linear-gradient(90deg, #8b5cf6, #ec4899);
+
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 40px 10px 16px; /* extra right padding for arrow */
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        position: relative;
+        transition: box-shadow 0.25s, transform 0.25s;
+      }
+
+      /* custom arrow */
+      #categoryFilter::after {
+        content: "▾"; /* down-arrow glyph */
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #fff;
+        pointer-events: none; /* let clicks pass through */
+      }
+
+      /* hover / focus effects */
+      #categoryFilter:hover,
+      #categoryFilter:focus {
+        box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.4);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      /* style the dropdown list itself */
+      #categoryFilter option {
+        background: #1e293b; /* dark festive list */
+        color: #fff;
+        padding: 8px 12px;
+      }
+      /* Modern festive search box */
+      #search {
+        width: 189px; /* adjust as needed */
+        padding: 10px 44px 10px 16px; /* space for icon on the right */
+        font-size: 16px;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.05); /* subtle translucent dark bg */
+        border: 2px solid transparent;
+        border-radius: 14px;
+        backdrop-filter: blur(6px);
+        outline: none;
+        transition: border-color 0.25s, box-shadow 0.25s;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        caret-color: #fff;
+      }
+
+      /* Placeholder text color */
+      #search::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* glow on focus */
+      #search:focus {
+        border-color: #ff7e5f;
+        box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
+      }
+
+      /* Optional: decorative search icon on right side */
+      #search::after {
+        content: "🔍"; /* choose any icon or emoji */
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      /* container */
+      .summary {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px 24px;
+        border-radius: 16px;
+        max-width: 420px;
+        margin: 30px auto;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(6px);
+      }
+
+      /* each label + field block */
+      .summary label {
+        display: block;
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #f1f5f9;
+        font-size: 15px;
+      }
+
+      /* inputs and textarea */
+      .customer-input {
+        width: 100%;
+        margin-top: 6px;
+        padding: 10px 14px;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-size: 15px;
+        transition: border-color 0.25s, box-shadow 0.25s;
+      }
+
+      .customer-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* focus state with warm glow */
+      .customer-input:focus {
+        outline: none;
+        border-color: #3b82f6; /* choose a theme color */
+        box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+      }
+
+      /* textarea sizing */
+      .summary textarea.customer-input {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      /* error text */
+      .error {
+        color: #f87171;
+        font-size: 13px;
+        margin-top: 4px;
+        display: none; /* hide by default; show when needed */
+      }
+
+      /* optional: show when JS adds .show */
+      .error.show {
+        display: block;
       }
     </style>
     <script
@@ -862,6 +1529,14 @@
       <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WhatsApp" />
     </a>
 
+    <!-- ✅ Video Modal -->
+    <div id="videoModal" class="video-modal">
+      <div class="video-content">
+        <span class="close" onclick="closeVideo()">&times;</span>
+        <video id="modalVideo" controls playsinline></video>
+      </div>
+    </div>
+
     <!-- ✅ jsPDF (no integrity attribute to avoid blocking) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -897,25 +1572,25 @@
       window.collection = collection;
       window.serverTimestamp = serverTimestamp;
     </script>
+    <script src="products.js"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        //     async function saveOrderToFirebase(name, phone, addr, amount, items) {
-        //   try {
-        //     await window.addDoc(window.collection(window.db, "orders"), {
-        //       name,
-        //       phone,
-        //       address: addr,
-        //       amount,
-        //       items,
-        //       createdAt: window.serverTimestamp()
-        //     });
-        //     console.log("✅ Order saved to Firestore");
-        //   } catch (e) {
-        //     console.error("❌ Error saving order:", e);
-        //   }
-        // }
+      function openVideo(src) {
+        const modal = document.getElementById("videoModal");
+        const video = document.getElementById("modalVideo");
+        video.src = src;
+        modal.style.display = "flex";
+        video.play();
+      }
 
+      function closeVideo() {
+        const modal = document.getElementById("videoModal");
+        const video = document.getElementById("modalVideo");
+        video.pause();
+        video.src = "";
+        modal.style.display = "none";
+      }
+      document.addEventListener("DOMContentLoaded", () => {
         async function saveOrderToFirebase(name, phone, addr, amount, items) {
           try {
             const docRef = await window.addDoc(
@@ -936,1127 +1611,15 @@
           }
         }
 
-        // --- Data: Starter catalog ---
-        const STARTER_ITEMS = [
-          {
-            id: 1,
-            name: "10 CM ELECTRIC SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 150,
-            sale: 15,
-            img: "https://i.postimg.cc/Vk63x2xF/image.png",
-          },
-          {
-            id: 2,
-            name: "10 CM COLOR SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 200,
-            sale: 20,
-            img: "https://i.postimg.cc/RFYd2Jgz/image.png",
-          },
-          {
-            id: 3,
-            name: "10 CM GREEN SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 250,
-            sale: 25,
-            img: "https://i.postimg.cc/DzLb7JfT/image.png",
-          },
-          {
-            id: 4,
-            name: "10 CM RED SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/7Z7gZQXd/image.png",
-          },
-          {
-            id: 5,
-            name: "15 CM ELECTRIC SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/Vk63x2xF/image.png",
-          },
-          {
-            id: 6,
-            name: "15 CM CRACKLING SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 350,
-            sale: 35,
-            img: "https://i.postimg.cc/RFYd2Jgz/image.png",
-          },
-          {
-            id: 7,
-            name: "15 CM GREEN SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 400,
-            sale: 40,
-            img: "https://i.postimg.cc/DzLb7JfT/image.png",
-          },
-          {
-            id: 8,
-            name: "15 CM RED SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 450,
-            sale: 45,
-            img: "https://i.postimg.cc/7Z7gZQXd/image.png",
-          },
-          {
-            id: 9,
-            name: "30 CM ELECTRIC SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 400,
-            sale: 40,
-            img: "https://i.postimg.cc/Vk63x2xF/image.png",
-          },
-          {
-            id: 10,
-            name: "30 CM CRACKLING SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 450,
-            sale: 45,
-            img: "https://i.postimg.cc/RFYd2Jgz/image.png",
-          },
-          {
-            id: 11,
-            name: "30 CM GREEN SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 500,
-            sale: 50,
-            img: "https://i.postimg.cc/DzLb7JfT/image.png",
-          },
-          {
-            id: 12,
-            name: "30 CM RED SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 550,
-            sale: 55,
-            img: "https://i.postimg.cc/7Z7gZQXd/image.png",
-          },
-          {
-            id: 13,
-            name: "50 CM ELECTRIC SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 1700,
-            sale: 170,
-            img: "https://i.postimg.cc/yxXMKTtZ/image.png",
-          },
-          {
-            id: 14,
-            name: "50 CM COLOR SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 1900,
-            sale: 190,
-            img: "https://i.postimg.cc/Z5D1Jn7V/image.png",
-          },
-          {
-            id: 15,
-            name: "ROTATING SPARKLERS",
-            category: "SPARKLERS",
-            unit: "1 BOX",
-            mrp: 2500,
-            sale: 250,
-            img: "https://i.postimg.cc/Qx7BQK5W/image.png",
-          },
-          {
-            id: 16,
-            name: "CHAKKARAM BIG (10 PCS)",
-            category: "GROUND CHAKKARAS",
-            unit: "1 BOX",
-            mrp: 350,
-            sale: 35,
-            img: "https://i.postimg.cc/MHVQpnmR/image.png",
-          },
-          {
-            id: 17,
-            name: "CHAKKARAM BIG (25 PCS)",
-            category: "GROUND CHAKKARAS",
-            unit: "1 BOX",
-            mrp: 800,
-            sale: 80,
-            img: "https://i.postimg.cc/MHVQpnmR/image.png",
-          },
-          {
-            id: 18,
-            name: "CHAKKARAM SPECIAL",
-            category: "GROUND CHAKKARAS",
-            unit: "1 BOX",
-            mrp: 1000,
-            sale: 100,
-            img: "https://i.postimg.cc/bwJw6GST/image.png",
-          },
-          {
-            id: 19,
-            name: "CHAKKARAM DELUXE",
-            category: "GROUND CHAKKARAS",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/MG2gnNwQ/image.png",
-          },
-          {
-            id: 20,
-            name: "FLOWER POT BIG",
-            category: "FLOWER POT",
-            unit: "1 BOX",
-            mrp: 700,
-            sale: 70,
-            img: "https://i.postimg.cc/44BKw17q/image.png",
-          },
-          {
-            id: 21,
-            name: "FLOWER POT SPECIAL",
-            category: "FLOWER POT",
-            unit: "1 BOX",
-            mrp: 1000,
-            sale: 100,
-            img: "https://i.postimg.cc/3xDd85SQ/image.png",
-          },
-          {
-            id: 22,
-            name: "FLOWER POT ASHOKA",
-            category: "FLOWER POT",
-            unit: "1 BOX",
-            mrp: 1600,
-            sale: 160,
-            img: "https://i.postimg.cc/3xDd85SQ/image.png",
-          },
-          {
-            id: 23,
-            name: "FLOWER POT DELUXE",
-            category: "FLOWER POT",
-            unit: "1 BOX",
-            mrp: 2500,
-            sale: 250,
-            img: "https://i.postimg.cc/FHjNC9Cz/image.png",
-          },
-          {
-            id: 24,
-            name: "COLOR KOTI",
-            category: "FLOWER POT",
-            unit: "1 BOX",
-            mrp: 2200,
-            sale: 220,
-            img: "https://i.postimg.cc/FHZssryq/image.png",
-          },
-          {
-            id: 25,
-            name: "1 1/2 TWINKLING STAR",
-            category: "TWINKLING STAR",
-            unit: "1 BOX",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/J7ZHfd72/image.png",
-          },
-          {
-            id: 26,
-            name: "4' TWINKLING STAR DELUXE",
-            category: "TWINKLING STAR",
-            unit: "1 BOX",
-            mrp: 800,
-            sale: 80,
-            img: "https://i.postimg.cc/GhMLVkDf/image.png",
-          },
-          {
-            id: 27,
-            name: "2 3/4 KURUVI",
-            category: "ONE SOUND CRACKERS",
-            unit: "1 PKT",
-            mrp: 80,
-            sale: 8,
-            img: "https://i.postimg.cc/bJBFxBb8/image.png",
-          },
-          {
-            id: 28,
-            name: "3 1/2 LAKSHMI",
-            category: "ONE SOUND CRACKERS",
-            unit: "1 PKT",
-            mrp: 180,
-            sale: 18,
-            img: "https://i.postimg.cc/C5bXw4Bg/image.png",
-          },
-          {
-            id: 29,
-            name: "4' PARROT",
-            category: "ONE SOUND CRACKERS",
-            unit: "1 PKT",
-            mrp: 250,
-            sale: 25,
-            img: "https://i.postimg.cc/MKQKQkR6/image.png",
-          },
-          {
-            id: 30,
-            name: "4' DELUXE HULK",
-            category: "ONE SOUND CRACKERS",
-            unit: "1 PKT",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/PxCNVCLZ/image.png",
-          },
-          {
-            id: 31,
-            name: "4' GOLD LAKSHMI DLX",
-            category: "ONE SOUND CRACKERS",
-            unit: "1 PKT",
-            mrp: 350,
-            sale: 35,
-            img: "https://i.postimg.cc/1XRwzm43/image.png",
-          },
-          {
-            id: 32,
-            name: "5' JALLIKATTU DLX",
-            category: "ONE SOUND CRACKERS",
-            unit: "1 PKT",
-            mrp: 450,
-            sale: 45,
-            img: "https://i.postimg.cc/DZkc73qS/image.png",
-          },
-          {
-            id: 33,
-            name: "BULLET (FOILS BOMB)",
-            category: "BOMB",
-            unit: "1BOX",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/L41z33qm/image.png",
-          },
-          {
-            id: 34,
-            name: "HYDRO BOMB CLASSIC",
-            category: "BOMB",
-            unit: "1BOX",
-            mrp: 500,
-            sale: 50,
-            img: "https://i.postimg.cc/rmsjswvw/image.png",
-          },
-          {
-            id: 35,
-            name: "HYDROGEN BOMB",
-            category: "BOMB",
-            unit: "1 BOX",
-            mrp: 750,
-            sale: 75,
-            img: "https://i.postimg.cc/g0jhXVFF/image.png",
-          },
-          {
-            id: 36,
-            name: "DINOSAUR BOMB",
-            category: "BOMB",
-            unit: "1BOX",
-            mrp: 1250,
-            sale: 125,
-            img: "https://i.postimg.cc/Z57BSW9f/image.png",
-          },
-          {
-            id: 37,
-            name: "SINDHU BOMB DLX",
-            category: "BOMB",
-            unit: "1 BOX",
-            mrp: 1900,
-            sale: 190,
-            img: "https://i.postimg.cc/QMy4p7gT/image.png",
-          },
-          {
-            id: 38,
-            name: "BADA BOMB ULTRA DLX",
-            category: "BOMB",
-            unit: "1BOX",
-            mrp: 3500,
-            sale: 350,
-            img: "https://i.postimg.cc/gcQxf2sH/image.png",
-          },
-          {
-            id: 39,
-            name: "28 GIANT",
-            category: "GIANT & DELUXE",
-            unit: "1 PKT",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/2yRf7Mdh/image.png",
-          },
-          {
-            id: 40,
-            name: "56 GIANT",
-            category: "GIANT & DELUXE",
-            unit: "1 PKT",
-            mrp: 600,
-            sale: 60,
-            img: "https://i.postimg.cc/x8SWzHYP/image.png",
-          },
-          {
-            id: 41,
-            name: "50 DELUXE",
-            category: "GIANT & DELUXE",
-            unit: "1 PKT",
-            mrp: 1200,
-            sale: 120,
-            img: "https://i.postimg.cc/Mp43BRmj/image.png",
-          },
-          {
-            id: 42,
-            name: "4' 100 MEGA DELUXE",
-            category: "GIANT & DELUXE",
-            unit: "1 PKT",
-            mrp: 2200,
-            sale: 220,
-            img: "https://i.postimg.cc/ZncDvMwT/image.png",
-          },
-          {
-            id: 43,
-            name: "1K",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/s2QRt7cV/image.png",
-          },
-          {
-            id: 44,
-            name: "2K",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 3500,
-            sale: 350,
-            img: "https://i.postimg.cc/Cx92ntGg/image.png",
-          },
-          {
-            id: 45,
-            name: "5K",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 7000,
-            sale: 700,
-            img: "https://i.postimg.cc/8zSQz4vc/image.png",
-          },
-          {
-            id: 46,
-            name: "10K",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 16000,
-            sale: 1600,
-            img: "https://i.postimg.cc/gJMByqrV/image.png",
-          },
-          {
-            id: 47,
-            name: "1K (BRAND)",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 3500,
-            sale: 350,
-            img: "https://i.postimg.cc/wT7F52TT/image.png",
-          },
-          {
-            id: 48,
-            name: "2K (BRAND)",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 6000,
-            sale: 600,
-            img: "https://i.postimg.cc/CKYj2sY8/image.png",
-          },
-          {
-            id: 49,
-            name: "5K (BRAND)",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 14000,
-            sale: 1400,
-            img: "https://i.postimg.cc/zD9pjWLC/image.png",
-          },
-          {
-            id: 50,
-            name: "10K (BRAND)",
-            category: "RED MAGIC CRACKERS",
-            unit: "1 BOX",
-            mrp: 25000,
-            sale: 2500,
-            img: "https://i.postimg.cc/fL178nbz/image.png",
-          },
-          {
-            id: 51,
-            name: "SKY SHOT",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 400,
-            sale: 40,
-            img: "https://i.postimg.cc/3xvfg1JQ/image.png",
-          },
-          {
-            id: 52,
-            name: "2' ARIAL FANCY",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 1100,
-            sale: 110,
-            img: "https://i.postimg.cc/nhPBTfrX/image.png",
-          },
-          {
-            id: 53,
-            name: "2' ARIAL FANCY (3 PCS)",
-            category: "MEGA FANCY OUT",
-            unit: "3 PCS",
-            mrp: 3000,
-            sale: 300,
-            img: "https://i.postimg.cc/PJXCTSNG/image.png",
-          },
-          {
-            id: 54,
-            name: "3 1/2 ARIAL FANCY",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 3100,
-            sale: 310,
-            img: "https://i.postimg.cc/N0CzmkK1/image.png",
-          },
-          {
-            id: 55,
-            name: "3 1/2 GUN OUT (ULTRA SOUND)",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 3800,
-            sale: 380,
-            img: "https://i.postimg.cc/R0hPSJgq/image.png",
-          },
-          {
-            id: 56,
-            name: "4' ARIAL FANCY",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 4250,
-            sale: 425,
-            img: "https://i.postimg.cc/tJ3kS34v/image.png",
-          },
-          {
-            id: 57,
-            name: "4' PIPE (ULTRA SHOW)",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 6000,
-            sale: 600,
-            img: "https://i.postimg.cc/8cSB67mR/image.png",
-          },
-          {
-            id: 58,
-            name: "5' PIPE FANCY",
-            category: "MEGA FANCY OUT",
-            unit: "1 PCS",
-            mrp: 8500,
-            sale: 850,
-            img: "https://i.postimg.cc/wvKDC1PC/image.png",
-          },
-          {
-            id: 59,
-            name: "5' FANCY (ULTRA SHOW)",
-            category: "MEGA FANCY OUT",
-            unit: "2 PCS",
-            mrp: 16500,
-            sale: 1650,
-            img: "https://i.postimg.cc/DZByqDqx/image.png",
-          },
-          {
-            id: 60,
-            name: "12 SHOT",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/GhZqhDP7/image.png",
-          },
-          {
-            id: 61,
-            name: "25 SHOT",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 2600,
-            sale: 260,
-            img: "https://i.postimg.cc/nzPqS80R/image.png",
-          },
-          {
-            id: 62,
-            name: "30 SHOT MULTI COLOUR (GOLD)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 3750,
-            sale: 375,
-            img: "https://i.postimg.cc/k5R1vcJd/image.png",
-          },
-          {
-            id: 63,
-            name: "60 SHOT MULTI COLOUR (GOLD)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 8000,
-            sale: 800,
-            img: "https://i.postimg.cc/ryNhjzkz/image.png",
-          },
-          {
-            id: 64,
-            name: "120 SHOT MULTI COLOUR (GOLD)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 15000,
-            sale: 1500,
-            img: "https://i.postimg.cc/L593wBp5/image.png",
-          },
-          {
-            id: 65,
-            name: "240 SHOT MULTI COLOUR (GOLD)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 30000,
-            sale: 3000,
-            img: "https://i.postimg.cc/prmxKdVd/image.png",
-          },
-          {
-            id: 66,
-            name: "30 SHOT MULTI COLOUR (PREMIUM)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 6000,
-            sale: 600,
-            img: "https://i.postimg.cc/8cZmSJpH/image.png",
-          },
-          {
-            id: 67,
-            name: "60 SHOT MULTI COLOUR (PREMIUM)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 12000,
-            sale: 1200,
-            img: "https://i.postimg.cc/3JWgGwrs/image.png",
-          },
-          {
-            id: 68,
-            name: "120 SHOT MULTI COLOUR (PREMIUM)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 24000,
-            sale: 2400,
-            img: "https://i.postimg.cc/jq3fRr6Z/image.png",
-          },
-          {
-            id: 69,
-            name: "240 SHOT MULTI COLOUR (PREMIUM)",
-            category: "MULTI COLOUR SKY SHOT",
-            unit: "1 BOX",
-            mrp: 43000,
-            sale: 4300,
-            img: "https://i.postimg.cc/tgm9JPyc/image.png",
-          },
-          {
-            id: 70,
-            name: "KITKAT",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 250,
-            sale: 25,
-            img: "https://i.postimg.cc/GtGMYJCm/image.png",
-          },
-          {
-            id: 71,
-            name: "SNAKE TABLET",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PKT",
-            mrp: 250,
-            sale: 25,
-            img: "https://i.postimg.cc/q7WXLhQh/image.png",
-          },
-          {
-            id: 72,
-            name: "BUTTERFLY (10 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 600,
-            sale: 60,
-            img: "https://i.postimg.cc/15MGdYJZ/image.png",
-          },
-          {
-            id: 73,
-            name: "GANGA JAMUNA",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 1000,
-            sale: 100,
-            img: "https://i.postimg.cc/wTBy1xcS/image.png",
-          },
-          {
-            id: 74,
-            name: "TOM & JERRY",
-            category: "FANCY FOUNTAINS",
-            unit: "5 PCS",
-            mrp: 2000,
-            sale: 200,
-            img: "https://i.postimg.cc/KYt461xg/image.png",
-          },
-          {
-            id: 75,
-            name: "MASTER TREAT CRACKLING",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1750,
-            sale: 175,
-            img: "https://i.postimg.cc/5ySGYdLt/image.png",
-          },
-          {
-            id: 76,
-            name: "DRONE",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/d1psDvsK/image-removebg-preview.jpg",
-          },
-          {
-            id: 77,
-            name: "DANCING BAMBARAM (5 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/pd7bJZgf/image.png",
-          },
-          {
-            id: 78,
-            name: "BINGO SHOWER (5 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/CMbTbbJ8/image.png",
-          },
-          {
-            id: 79,
-            name: "TIN BEER (RED, GREEN, CRACKLING)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 1200,
-            sale: 120,
-            img: "https://i.postimg.cc/wjCQ5Rwt/image-removebg-preview-1.jpg",
-          },
-          {
-            id: 80,
-            name: "GOLDEN POPS (5 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1600,
-            sale: 160,
-            img: "https://i.postimg.cc/ZnWWDVRJ/image.png",
-          },
-          {
-            id: 81,
-            name: "PEACOCK (RED, GREEN, GOLD)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1800,
-            sale: 180,
-            img: "https://i.postimg.cc/6p8N2gPW/image-removebg-preview-2.jpg",
-          },
-          {
-            id: 82,
-            name: "PENTA FANCY (5 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 1750,
-            sale: 175,
-            img: "https://i.postimg.cc/Wb4BCxTG/image.png",
-          },
-          {
-            id: 83,
-            name: "RAINBOW COLOUR SMOKE (3 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2500,
-            sale: 250,
-            img: "https://i.postimg.cc/T2tSVQgp/image.png",
-          },
-          {
-            id: 84,
-            name: "MEGA SIREN (3 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2500,
-            sale: 250,
-            img: "https://i.postimg.cc/NjBpZH1W/image.png",
-          },
-          {
-            id: 85,
-            name: "SILVER MOON",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2000,
-            sale: 200,
-            img: "https://i.postimg.cc/zXSkwG9p/image.png",
-          },
-          {
-            id: 86,
-            name: "PHOTO FLASH (5 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 850,
-            sale: 85,
-            img: "https://i.postimg.cc/nrTCzgPK/image.png",
-          },
-          {
-            id: 87,
-            name: "COCKFITE CRACKLING (2 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2750,
-            sale: 275,
-            img: "https://i.postimg.cc/fTB8nbBy/image.png",
-          },
-          {
-            id: 88,
-            name: "WELCOME ANGEL",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 1750,
-            sale: 175,
-            img: "https://i.postimg.cc/J465Y2zB/image.png",
-          },
-          {
-            id: 89,
-            name: "TRICOLOUR FOUNTAIN (5 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2750,
-            sale: 275,
-            img: "https://i.postimg.cc/kMjS7t30/image.png",
-          },
-          {
-            id: 90,
-            name: "FIRE EGG (2 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2000,
-            sale: 200,
-            img: "https://i.postimg.cc/0QVz5h3Y/image.png",
-          },
-          {
-            id: 91,
-            name: "HANUMAN KADA",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 2200,
-            sale: 220,
-            img: "https://i.postimg.cc/0y7rKzF2/image.png",
-          },
-          {
-            id: 92,
-            name: "GUITAR",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2500,
-            sale: 250,
-            img: "https://i.postimg.cc/y8f6Z0nK/image-removebg-preview-3.jpg",
-          },
-          {
-            id: 93,
-            name: "WATER QUEEN (COLD PYRO)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 3500,
-            sale: 350,
-            img: "https://i.postimg.cc/fyZQFb55/image.png",
-          },
-          {
-            id: 94,
-            name: "BADA PEACOCK",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 4500,
-            sale: 450,
-            img: "https://i.postimg.cc/BbJRpVQV/image.png",
-          },
-          {
-            id: 95,
-            name: "MAGIC SHOW MONEY PAPER (2 PCS)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            mrp: 2750,
-            sale: 275,
-            img: "https://i.postimg.cc/VsHFDh60/image.png",
-          },
-          {
-            id: 96,
-            name: "PAPER BOMB 1/4 KG",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 550,
-            sale: 55,
-            img: "https://i.postimg.cc/rwyxTCK2/image.png",
-          },
-          {
-            id: 97,
-            name: "PAPER BOMB 1/2 KG",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 1100,
-            sale: 110,
-            img: "https://i.postimg.cc/3wVv2s93/image.png",
-          },
-          {
-            id: 98,
-            name: "PAPER BOMB 1 KG",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            mrp: 2200,
-            sale: 220,
-            img: "https://i.postimg.cc/0jdKRbvN/image.png",
-          },
-          {
-            id: 99,
-            name: "RED BIJILI 50 PCS (GOLD PKT)",
-            category: "BIJILI",
-            unit: "1PKT",
-            mrp: 250,
-            sale: 25,
-            img: "https://i.postimg.cc/8kq4kDwT/image.png",
-          },
-          {
-            id: 100,
-            name: "RED BIJILI 100 PCS (GOLD PKT)",
-            category: "BIJILI",
-            unit: "1PKT",
-            mrp: 500,
-            sale: 50,
-            img: "https://i.postimg.cc/HL4RXnZ0/image.png",
-          },
-          {
-            id: 101,
-            name: "BABY ROCKET",
-            category: "ROCKET",
-            unit: "1 BOX",
-            mrp: 300,
-            sale: 30,
-            img: "https://i.postimg.cc/cCK9JBvH/image.png",
-          },
-          {
-            id: 102,
-            name: "BOMB ROCKET",
-            category: "ROCKET",
-            unit: "1 BOX",
-            mrp: 800,
-            sale: 80,
-            img: "https://i.postimg.cc/MGMvdcfB/image.png",
-          },
-          {
-            id: 103,
-            name: "LUNIC ROCKET",
-            category: "ROCKET",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/13L9Rv4g/image.png",
-          },
-          {
-            id: 104,
-            name: "WHISTLING ROCKET",
-            category: "ROCKET",
-            unit: "1 BOX",
-            mrp: 1750,
-            sale: 175,
-            img: "https://i.postimg.cc/j5xBRf6w/image.png",
-          },
-          {
-            id: 105,
-            name: "GIFT BOX (18 ITEMS)",
-            category: "GIFT BOX",
-            unit: "18 ITEMS",
-            mrp: 2500,
-            sale: 250,
-            img: "https://i.postimg.cc/W3ZXZ6Gf/image.png",
-          },
-          {
-            id: 106,
-            name: "GIFT BOX (21 ITEMS)",
-            category: "GIFT BOX",
-            unit: "21 ITEMS",
-            mrp: 3250,
-            sale: 325,
-            img: "https://i.postimg.cc/T1p59569/IMG-20250912-WA0000.jpg",
-          },
-          {
-            id: 107,
-            name: "GIFT BOX (30 ITEMS)",
-            category: "GIFT BOX",
-            unit: "30 ITEMS",
-            mrp: 5500,
-            sale: 550,
-            img: "https://i.postimg.cc/Jzc0j5X8/IMG-20250912-WA0003.jpg",
-          },
-          {
-            id: 108,
-            name: "GIFT BOX (40 ITEMS)",
-            category: "GIFT BOX",
-            unit: "40 ITEMS",
-            mrp: 8000,
-            sale: 800,
-            img: "https://i.postimg.cc/NjYRH4M8/IMG-20250912-WA0002.jpg",
-          },
-          {
-            id: 109,
-            name: "GIFT BOX (50 ITEMS)",
-            category: "GIFT BOX",
-            unit: "50 ITEMS",
-            mrp: 11000,
-            sale: 1100,
-            img: "https://i.postimg.cc/BbH18Lfw/IMG-20250912-WA0001.jpg",
-          },
-          {
-            id: 110,
-            name: "ANNAM",
-            category: "MATCH BOX",
-            unit: "1 BOX",
-            mrp: 750,
-            sale: 75,
-            img: "https://i.postimg.cc/xjh9n08f/image.png",
-          },
-          {
-            id: 111,
-            name: "HERO",
-            category: "MATCH BOX",
-            unit: "1 BOX",
-            mrp: 1500,
-            sale: 150,
-            img: "https://i.postimg.cc/LsxM7SGM/image.png",
-          },
-          {
-            id: 112,
-            name: "ROYAL SUPER MEGA",
-            category: "MATCH BOX",
-            unit: "1 BOX",
-            mrp: 2000,
-            sale: 200,
-            img: "https://i.postimg.cc/W3JTJKfL/image-removebg-preview-4.jpg",
-          },
-          {
-            id: 113,
-            name: "GUN SMALL",
-            category: "GUN",
-            unit: "1 PIECE",
-            mrp: 400,
-            sale: 40,
-            img: "https://i.postimg.cc/X7n6Vp30/image.png",
-          },
-          {
-            id: 114,
-            name: "GUN MEDIUM",
-            category: "GUN",
-            unit: "1 PIECE",
-            mrp: 600,
-            sale: 60,
-            img: "https://i.postimg.cc/2ywJq7mN/image.png",
-          },
-          {
-            id: 115,
-            name: "GUN BIG",
-            category: "GUN",
-            unit: "1 PIECE",
-            mrp: 900,
-            sale: 90,
-            img: "https://i.postimg.cc/vZ1qMs1s/image.png",
-          },
-          {
-            id: 116,
-            name: "GUN BADA BIG",
-            category: "GUN",
-            unit: "1 PIECE",
-            mrp: 1350,
-            sale: 135,
-            img: "https://i.postimg.cc/gjTVBxH6/image.png",
-          },
-          {
-            id: 117,
-            name: "ROLL CAP",
-            category: "GUN",
-            unit: "1 PIECE",
-            mrp: 100,
-            sale: 10,
-            img: "https://i.postimg.cc/hjxLfZSf/image.png",
-          },
-          {
-            id: 118,
-            name: "RING CAP",
-            category: "GUN",
-            unit: "1 PKT",
-            mrp: 80,
-            sale: 8,
-            img: "https://i.postimg.cc/bvg2BGzN/image.png",
-          },
-          {
-            id: 119,
-            name: "POP-POP",
-            category: "GUN",
-            unit: "1 BOX",
-            mrp: 100,
-            sale: 10,
-            img: "https://i.postimg.cc/t4StfVSC/image.png",
-          },
-          {
-            id: 120,
-            name: "APPLE - MIX",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            sale: 175,
-            mrp: 1750,
-            img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
-          },
-          {
-            id: 121,
-            name: "POPEYE (TRICOLOUR FOUNTAINS)",
-            category: "FANCY FOUNTAINS",
-            unit: "5 PCS",
-            sale: 260,
-            mrp: 2600,
-            img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
-          },
-          {
-            id: 122,
-            name: "RAJAKALA MEGA FOUNTAIN",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            sale: 400,
-            mrp: 4000,
-            img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
-          },
-          {
-            id: 123,
-            name: "DHANDIYA PEACOCK",
-            category: "FANCY FOUNTAINS",
-            unit: "1 PCS",
-            sale: 450,
-            mrp: 4500,
-            img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
-          },
-          {
-            id: 124,
-            name: "KURKURE MIX (10 SMOKE SHOT)",
-            category: "FANCY FOUNTAINS",
-            unit: "1 BOX",
-            sale: 350,
-            mrp: 3500,
-            img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
-          },
-        ];
+        const PRODUCT_VIDEOS = {
+          120: "Videos/apple.mp4",
+          126: "Videos/strawberry-fountain.mp4",
+          127: "Videos/pumpkin-fountain.mp4",
+          128: "Videos/pineapple.mp4",
+        };
+
         // --- State ---
-        const STORAGE_KEY = "abs_crackers_catalog_v10";
+        const STORAGE_KEY = "abs_crackers_catalog_v15";
         const CART_KEY = "abs_crackers_cart_v1";
 
         const Catalog = {
@@ -2092,6 +1655,14 @@
         };
 
         console.log("First item with image:", Catalog.list[0]);
+        function toastAdd(message) {
+          const el = document.createElement("div");
+          el.className = "toast-add";
+          el.textContent = "🎉 " + message;
+          document.body.appendChild(el);
+          el.style.display = "block";
+          setTimeout(() => el.remove(), 3000);
+        }
 
         const Cart = {
           items: {},
@@ -2117,7 +1688,7 @@
             this.items[id] = (this.items[id] || 0) + qty;
             this.save();
             renderCart();
-            toast("Added to cart");
+            toastAdd("Added to Cart");
           },
           set(id, qty) {
             if (qty <= 0) delete this.items[id];
@@ -2149,7 +1720,7 @@
           ).sort();
           const sel = el("#categoryFilter");
           sel.innerHTML =
-            `<option value="">All categories</option>` +
+            `<option value="">All categories ▼ </option>` +
             categories.map((c) => `<option>${c}</option>`).join("");
         }
         function filteredItems() {
@@ -2173,9 +1744,17 @@
             <div class="card" role="group" aria-label="${it.name}">
 
               <!-- Product Image (fixed square thumbnail) -->
-              <div class="img-box" style="width:100%;height:150px;margin-bottom:8px;overflow:hidden;border-radius:12px;">
+              <div class="img-box" style="width:100%;height:150px;margin-bottom:8px;overflow:hidden;border-radius:12px;position:relative;">
                 <img src="${it.img}" alt="${it.name}"
                      style="width:100%;height:100%;object-fit:cover;display:block;"/>
+                     ${
+                       PRODUCT_VIDEOS[it.id]
+                         ? `<button class="video-btn" onclick="openVideo('${
+                             PRODUCT_VIDEOS[it.id]
+                           }')" 
+                   style="position:absolute;bottom:8px;right:8px;">▶</button>`
+                         : ""
+                     }
               </div>
 
               <!-- Category & Unit -->
@@ -2218,6 +1797,7 @@
 
           // Empty state toggle
           el("#emptyState").style.display = items.length ? "none" : "block";
+          addBadges();
         }
 
         function chgQty(id, delta) {
@@ -2486,87 +2066,6 @@
         // --- Events ---
         el("#search").addEventListener("input", renderGrid);
         el("#categoryFilter").addEventListener("change", renderGrid);
-        //   el('#placeOrder').addEventListener('click', async ()=>{
-        //   if(Object.keys(Cart.items).length===0){
-        //     toast('Add items first');
-        //     return;
-        //   }
-        //   if(!validateCustomer()){
-        //     toast('Please fix errors');
-        //     return;
-        //   }
-
-        //   // --- Collect customer details ---
-        //   const name = el('#custName').value.trim();
-        //   const phone = el('#custPhone').value.trim();
-        //   const addr = el('#custAddress').value.trim();
-
-        //   // Amount from Discount Total
-        //   const amount = parseInt(el('#sumSale').textContent.replace(/[₹,]/g,''), 10);
-
-        //   // Prepare items list
-        //   const items = Object.entries(Cart.items).map(([id, qty]) => {
-        //     const it = Catalog.list.find(x => x.id == id);
-        //     return { name: it?.name || '', qty, price: it?.sale || 0 };
-        //   });
-
-        //   // --- Download invoice ---
-        //   await downloadOrderPdf();
-
-        //   // --- Save to Firestore ---
-        //   await saveOrderToFirebase(name, phone, addr, amount, items);
-
-        //   // --- Success message ---
-        //   showSuccess('✅ Order placed successfully! Invoice downloaded.');
-
-        //   // --- Clear cart ---
-        //   Cart.clear();
-        // });
-
-        // el("#placeOrder").addEventListener("click", async () => {
-        //   if (Object.keys(Cart.items).length === 0) {
-        //     toast("Add items first");
-        //     return;
-        //   }
-        //   if (!validateCustomer()) {
-        //     toast("Please fix errors");
-        //     return;
-        //   }
-
-        //   try {
-        //     // --- Collect customer details ---
-        //     const name = el("#custName").value.trim();
-        //     const phone = el("#custPhone").value.trim();
-        //     const addr = el("#custAddress").value.trim();
-
-        //     // Amount from Discount Total
-        //     const amount = parseInt(
-        //       el("#sumSale").textContent.replace(/[₹,]/g, ""),
-        //       10
-        //     );
-
-        //     // Prepare items list
-        //     const items = Object.entries(Cart.items).map(([id, qty]) => {
-        //       const it = Catalog.list.find((x) => x.id == id);
-        //       return { name: it?.name || "", qty, price: it?.sale || 0 };
-        //     });
-
-        //     // --- Download invoice ---
-        //     await downloadOrderPdf();
-
-        //     // --- Save to Firestore ---
-        //     await saveOrderToFirebase(name, phone, addr, amount, items);
-
-        //     // --- Show success ---
-        //     showSuccess("✅ Order placed successfully! Invoice downloaded.");
-
-        //     // --- Clear cart ---
-        //     Cart.clear();
-        //   } catch (err) {
-        //     console.error("❌ Error in Place Order:", err);
-        //     toast("Something went wrong while placing order.");
-        //   }
-        // });
 
         el("#placeOrder").addEventListener("click", async (e) => {
           // 🆕 Added: disable + spinner
@@ -2711,9 +2210,99 @@
           URL.revokeObjectURL(a.href);
         }
       });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // 👉 Names exactly as they appear in aria-label from products.js
+        const limitedProducts = [
+          "STRAWBERRY FOUNTAIN",
+          "ORANGE FOUNTAIN",
+          "PINEAPPLE FOUNTAIN",
+          "APPLE - MIX",
+          "PUMPKIN FOUNTAIN",
+          "BADA PEACOCK",
+          // add more product names here
+        ];
+
+        limitedProducts.forEach((name) => {
+          // Find the card whose aria-label matches the product name
+          const card = document.querySelector(`.card[aria-label="${name}"]`);
+          if (card) {
+            const imgBox = card.querySelector(".img-box");
+            if (imgBox && !imgBox.querySelector(".limited-badge")) {
+              const badge = document.createElement("div");
+              badge.className = "limited-badge";
+              badge.textContent = "Limited Stock";
+              imgBox.appendChild(badge);
+            }
+          }
+        });
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const soldOutProducts = ["DRONE", "MEGA SIREN (3 PCS)"];
+
+        soldOutProducts.forEach((name) => {
+          const card = document.querySelector(`.card[aria-label="${name}"]`);
+          if (card) {
+            // badge
+            const imgBox = card.querySelector(".img-box");
+            if (imgBox && !imgBox.querySelector(".soldout-badge")) {
+              const badge = document.createElement("div");
+              badge.className = "soldout-badge";
+              badge.textContent = "Sold Out";
+              imgBox.appendChild(badge);
+            }
+            // disable Add button
+            const addBtn = card.querySelector(".add-btn");
+            if (addBtn) {
+              addBtn.classList.add("soldout-disabled");
+              addBtn.textContent = "Sold Out";
+            }
+          }
+        });
+      });
+      function addBadges() {
+        const limitedProducts = [
+          "STRAWBERRY FOUNTAIN",
+          "ORANGE FOUNTAIN",
+          "PINEAPPLE FOUNTAIN",
+          "APPLE - MIX",
+          "PUMPKIN FOUNTAIN",
+          "BADA PEACOCK",
+          // add more product names here
+        ];
+        const soldOutProducts = ["DRONE", "MEGA SIREN (3 PCS)"];
+
+        // Limited Stock
+        limitedProducts.forEach((name) => {
+          const card = document.querySelector(`.card[aria-label="${name}"]`);
+          if (card && !card.querySelector(".limited-badge")) {
+            const imgBox = card.querySelector(".img-box");
+            if (imgBox) {
+              const badge = document.createElement("div");
+              badge.className = "limited-badge";
+              badge.textContent = "Limited Stock";
+              imgBox.appendChild(badge);
+            }
+          }
+        });
+
+        // Sold Out
+        soldOutProducts.forEach((name) => {
+          const card = document.querySelector(`.card[aria-label="${name}"]`);
+          if (card && !card.querySelector(".soldout-badge")) {
+            const imgBox = card.querySelector(".img-box");
+            if (imgBox) {
+              const badge = document.createElement("div");
+              badge.className = "soldout-badge";
+              badge.textContent = "Sold Out";
+              imgBox.appendChild(badge);
+            }
+            card.querySelectorAll(".btn.btn-primary").forEach((btn) => {
+              btn.style.display = "none";
+            });
+          }
+        });
+      }
     </script>
   </body>
 </html>
-
-
-
