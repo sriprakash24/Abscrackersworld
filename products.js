@@ -1077,8 +1077,8 @@ const STARTER_ITEMS = [
     name: "APPLE - MIX",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 175,
-    mrp: 1750,
+    sale: 275,
+    mrp: 2750,
     img: "https://i.postimg.cc/PrdyCYX6/Gemini-Generated-Image-d7alyzd7alyzd7al.png",
   },
   {
@@ -1154,3 +1154,4 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/prvdW2tS/Gemini-Generated-Image-pvqlhvpvqlhvpvql.png",
   },
 ];
+
