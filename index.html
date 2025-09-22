@@ -11,6 +11,12 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Modern Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito:wght@400;700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
       :root {
         --bg: #0b1220;
@@ -28,11 +34,20 @@
       body {
         margin: 0;
         height: 100%;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
-          "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        font-family: "Poppins", "Inter", "Nunito", system-ui, -apple-system,
+          Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
         background: linear-gradient(180deg, #0a0f1c, #0b1220 40%);
         color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
+      h1,
+      h2,
+      h3 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+      }
+
       a {
         color: inherit;
       }
@@ -125,7 +140,7 @@
       }
       .muted {
         color: var(--muted);
-        font-size: 12px;
+        font-size: 11px;
       }
       .row {
         display: flex;
@@ -1319,6 +1334,21 @@
       .error.show {
         display: block;
       }
+      .new-badge {
+        position: absolute;
+        top: 30px;
+        left: 6px;
+        padding: 4px 12px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(45deg, #3b82f6, #2563eb);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        text-transform: uppercase;
+        z-index: 3;
+        /* animation: badgePulse 1.6s infinite; */
+      }
     </style>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
@@ -1375,8 +1405,9 @@
           >
             <!-- The Product Image is only for your reference, the packing and brand
             may change -->
-            ⚠️ Price has been Increased due to high demand | The Product Image
-            is only for your reference, the packing and brand may change
+            🎇 Vanakkam Makkale! New Arrival Added! | ⚠️ Price has been
+            Increased due to high demand | The Product Image is only for your
+            reference, the packing and brand may change
           </span>
         </div>
       </div>
@@ -1618,9 +1649,31 @@
           127: "Videos/pumpkin-fountain.mp4",
           128: "Videos/pineapple.mp4",
         };
+        // NEW / LIMITED lists (share with addBadges)
+        const NEW_PRODUCTS = [
+          "STRAWBERRY FOUNTAIN",
+          "ORANGE FOUNTAIN",
+          "PINEAPPLE FOUNTAIN",
+          "APPLE - MIX",
+          "PUMPKIN FOUNTAIN",
+          // add more exact product names here
+        ];
+
+        const LIMITED_PRODUCTS = [
+          "STRAWBERRY FOUNTAIN",
+          "ORANGE FOUNTAIN",
+          "PINEAPPLE FOUNTAIN",
+          "APPLE - MIX",
+          "PUMPKIN FOUNTAIN",
+          "BADA PEACOCK",
+          "GUITAR",
+          "HANUMAN KADA",
+
+          // add more product names here
+        ];
 
         // --- State ---
-        const STORAGE_KEY = "abs_crackers_catalog_v15";
+        const STORAGE_KEY = "abs_crackers_catalog_v18";
         const CART_KEY = "abs_crackers_cart_v1";
 
         const Catalog = {
@@ -1724,19 +1777,53 @@
             `<option value="">All Categories ▼ </option>` +
             categories.map((c) => `<option>${c}</option>`).join("");
         }
+        // function filteredItems() {
+        //   const q = el("#search").value.trim().toLowerCase();
+        //   const cat = el("#categoryFilter").value;
+        //   return Catalog.list.filter((it) => {
+        //     const okCat = !cat || it.category === cat;
+        //     const okQ = !q || it.name.toLowerCase().includes(q);
+        //     return okCat && okQ;
+        //   });
+        // }
+
         function filteredItems() {
           const q = el("#search").value.trim().toLowerCase();
           const cat = el("#categoryFilter").value;
-          return Catalog.list.filter((it) => {
+
+          // base, in the same order as Catalog.list
+          const base = Catalog.list.filter((it) => {
             const okCat = !cat || it.category === cat;
             const okQ = !q || it.name.toLowerCase().includes(q);
             return okCat && okQ;
           });
+
+          // only apply priority on default "All" view with no search
+          const applyPriority = !cat && !q;
+          if (!applyPriority) return base;
+
+          const newSet = new Set(NEW_PRODUCTS.map((s) => s.toLowerCase()));
+          const limitedSet = new Set(
+            LIMITED_PRODUCTS.map((s) => s.toLowerCase())
+          );
+
+          const newItems = [],
+            limitedItems = [],
+            others = [];
+          for (const it of base) {
+            const name = (it.name || "").toLowerCase();
+            if (newSet.has(name)) newItems.push(it);
+            else if (limitedSet.has(name)) limitedItems.push(it);
+            else others.push(it);
+          }
+
+          return [...newItems, ...limitedItems, ...others];
         }
 
         function renderGrid() {
           const grid = el("#productGrid");
           const items = filteredItems();
+          console.log("Render order:", items.map((it) => it.name).slice(0, 10));
 
           grid.innerHTML = items
             .map((it) => {
@@ -2212,55 +2299,6 @@
         }
       });
 
-      document.addEventListener("DOMContentLoaded", () => {
-        // 👉 Names exactly as they appear in aria-label from products.js
-        const limitedProducts = [
-          "STRAWBERRY FOUNTAIN",
-          "ORANGE FOUNTAIN",
-          "PINEAPPLE FOUNTAIN",
-          "APPLE - MIX",
-          "PUMPKIN FOUNTAIN",
-          "BADA PEACOCK",
-          // add more product names here
-        ];
-
-        limitedProducts.forEach((name) => {
-          // Find the card whose aria-label matches the product name
-          const card = document.querySelector(`.card[aria-label="${name}"]`);
-          if (card) {
-            const imgBox = card.querySelector(".img-box");
-            if (imgBox && !imgBox.querySelector(".limited-badge")) {
-              const badge = document.createElement("div");
-              badge.className = "limited-badge";
-              badge.textContent = "Limited Stock";
-              imgBox.appendChild(badge);
-            }
-          }
-        });
-      });
-      document.addEventListener("DOMContentLoaded", () => {
-        const soldOutProducts = ["DRONE", "MEGA SIREN (3 PCS)"];
-
-        soldOutProducts.forEach((name) => {
-          const card = document.querySelector(`.card[aria-label="${name}"]`);
-          if (card) {
-            // badge
-            const imgBox = card.querySelector(".img-box");
-            if (imgBox && !imgBox.querySelector(".soldout-badge")) {
-              const badge = document.createElement("div");
-              badge.className = "soldout-badge";
-              badge.textContent = "Sold Out";
-              imgBox.appendChild(badge);
-            }
-            // disable Add button
-            const addBtn = card.querySelector(".add-btn");
-            if (addBtn) {
-              addBtn.classList.add("soldout-disabled");
-              addBtn.textContent = "Sold Out";
-            }
-          }
-        });
-      });
       function addBadges() {
         const limitedProducts = [
           "STRAWBERRY FOUNTAIN",
@@ -2269,9 +2307,26 @@
           "APPLE - MIX",
           "PUMPKIN FOUNTAIN",
           "BADA PEACOCK",
+          "GUITAR",
+          "HANUMAN KADA",
+
           // add more product names here
         ];
         const soldOutProducts = ["DRONE", "MEGA SIREN (3 PCS)"];
+
+        const newProducts = [
+          "STRAWBERRY FOUNTAIN",
+          "ORANGE FOUNTAIN",
+          "PINEAPPLE FOUNTAIN",
+          "APPLE - MIX",
+          "PUMPKIN FOUNTAIN",
+          // add more new arrivals here
+        ];
+
+        // // replace limitedProducts = [...] with:
+        // const limitedProducts = LIMITED_PRODUCTS;
+        // // replace newProducts = [...] with:
+        // const newProducts = NEW_PRODUCTS;
 
         // Limited Stock
         limitedProducts.forEach((name) => {
@@ -2303,9 +2358,21 @@
             });
           }
         });
+
+        //  🆕 New Arrival
+        newProducts.forEach((name) => {
+          const card = document.querySelector(`.card[aria-label="${name}"]`);
+          if (card && !card.querySelector(".new-badge")) {
+            const imgBox = card.querySelector(".img-box");
+            if (imgBox) {
+              const badge = document.createElement("div");
+              badge.className = "new-badge";
+              badge.textContent = "NEW";
+              imgBox.appendChild(badge);
+            }
+          }
+        });
       }
     </script>
   </body>
 </html>
-
-
