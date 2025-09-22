@@ -1443,6 +1443,7 @@
 
       .drawer-content {
         padding: 20px;
+        position: relative;
       }
 
       .drawer-content h3 {
@@ -1506,53 +1507,24 @@
         --btn-text: #ffffff;
       }
 
-      /* Primary button */
-      .btn-primary {
-        background: var(--brand-accent);
-        color: var(--btn-text);
-        border: none;
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-        transition: transform 0.12s ease, background 0.12s ease;
-      }
-      .btn-primary:hover {
-        background: var(--brand-accent-hover);
-        transform: translateY(-1px);
-      }
-      .btn-primary:active {
-        background: #355014;
-        transform: translateY(0);
-      }
-      .btn-primary:focus {
-        outline: 3px solid var(--brand-focus);
-        outline-offset: 2px;
-      }
       :root {
         --brand-accent: linear-gradient(90deg, #8b5cf6, #ec4899);
         --brand-accent-hover: #c43c75;
         --brand-accent-bright: #ff5fa6;
         --btn-text: #ffffff;
       }
-
-      .btn-primary {
-        background: var(--brand-accent);
-        color: var(--btn-text);
-        border: none;
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-weight: 600;
+      .drawer-close {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
         cursor: pointer;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-        transition: transform 0.12s ease, background 0.12s ease;
+        z-index: 10;
       }
-      .btn-primary:hover {
-        background: var(--brand-accent-hover);
-      }
-      .btn-primary:active {
-        background: #a62e61;
+      .drawer-close:hover {
+        color: #ef4444;
       }
     </style>
     <script
@@ -2682,9 +2654,10 @@
     <!-- 📱 Side Drawer for Filters -->
     <div id="filterDrawer" class="drawer">
       <div class="drawer-content">
+        <span class="drawer-close" onclick="closeFilterDrawer()">×</span>
         <h3>Filter by Category</h3>
         <ul id="drawerCategories"></ul>
-        <button class="close-btn" onclick="closeFilterDrawer()">✖ Close</button>
+        <!-- <button class="close-btn" onclick="closeFilterDrawer()">✖ Close</button> -->
       </div>
     </div>
   </body>
