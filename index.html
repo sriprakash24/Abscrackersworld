@@ -1983,48 +1983,48 @@
             `<option value="">All Categories  </option>` +
             categories.map((c) => `<option>${c}</option>`).join("");
         }
-        // function filteredItems() {
-        //   const q = el("#search").value.trim().toLowerCase();
-        //   const cat = el("#categoryFilter").value;
-        //   return Catalog.list.filter((it) => {
-        //     const okCat = !cat || it.category === cat;
-        //     const okQ = !q || it.name.toLowerCase().includes(q);
-        //     return okCat && okQ;
-        //   });
-        // }
-
         function filteredItems() {
           const q = el("#search").value.trim().toLowerCase();
           const cat = el("#categoryFilter").value;
-
-          // base, in the same order as Catalog.list
-          const base = Catalog.list.filter((it) => {
+          return Catalog.list.filter((it) => {
             const okCat = !cat || it.category === cat;
             const okQ = !q || it.name.toLowerCase().includes(q);
             return okCat && okQ;
           });
-
-          // only apply priority on default "All" view with no search
-          const applyPriority = !cat && !q;
-          if (!applyPriority) return base;
-
-          const newSet = new Set(NEW_PRODUCTS.map((s) => s.toLowerCase()));
-          const limitedSet = new Set(
-            LIMITED_PRODUCTS.map((s) => s.toLowerCase())
-          );
-
-          const newItems = [],
-            limitedItems = [],
-            others = [];
-          for (const it of base) {
-            const name = (it.name || "").toLowerCase();
-            if (newSet.has(name)) newItems.push(it);
-            else if (limitedSet.has(name)) limitedItems.push(it);
-            else others.push(it);
-          }
-
-          return [...newItems, ...limitedItems, ...others];
         }
+
+        // function filteredItems() {
+        //   const q = el("#search").value.trim().toLowerCase();
+        //   const cat = el("#categoryFilter").value;
+
+        //   // base, in the same order as Catalog.list
+        //   const base = Catalog.list.filter((it) => {
+        //     const okCat = !cat || it.category === cat;
+        //     const okQ = !q || it.name.toLowerCase().includes(q);
+        //     return okCat && okQ;
+        //   });
+
+        //   // only apply priority on default "All" view with no search
+        //   const applyPriority = !cat && !q;
+        //   if (!applyPriority) return base;
+
+        //   const newSet = new Set(NEW_PRODUCTS.map((s) => s.toLowerCase()));
+        //   const limitedSet = new Set(
+        //     LIMITED_PRODUCTS.map((s) => s.toLowerCase())
+        //   );
+
+        //   const newItems = [],
+        //     limitedItems = [],
+        //     others = [];
+        //   for (const it of base) {
+        //     const name = (it.name || "").toLowerCase();
+        //     if (newSet.has(name)) newItems.push(it);
+        //     else if (limitedSet.has(name)) limitedItems.push(it);
+        //     else others.push(it);
+        //   }
+
+        //   return [...newItems, ...limitedItems, ...others];
+        // }
 
         function renderGrid() {
           const grid = el("#productGrid");
@@ -2662,3 +2662,4 @@
     </div>
   </body>
 </html>
+
