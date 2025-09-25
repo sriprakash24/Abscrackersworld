@@ -1526,6 +1526,345 @@
       .drawer-close:hover {
         color: #ef4444;
       }
+      
+
+      /* Show only on mobile */
+      @media (max-width: 720px) {
+        .mobile-banner {
+          display: block;
+        }
+      }
+
+     
+
+      
+
+     
+
+     
+
+      
+      /* 📱 Hide the old offer badge only in mobile */
+@media (max-width: 720px) {
+  .offer-badge {
+    display: none !important;
+  }
+}
+
+
+/* Show only on mobile */
+@media (max-width: 720px) {
+  .mobile-banner-carousel {
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+.mobile-promo-carousel {
+  display: none; /* hidden on desktop */
+  position: relative;
+  margin: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 720px) {
+  .mobile-promo-carousel { display: block; }
+}
+
+/* .carousel-track {
+  display: flex;
+  width: 300%; 
+  transform: translateX(0); 
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+} */
+
+
+
+
+/* Each slide */
+/* .carousel-track {
+  display: flex;
+  width: 300%; 
+  transform: translateX(0);
+  transition: transform 1.5s ease-in-out; 
+  will-change: transform; 
+} */
+
+
+/* Backgrounds */
+.promo-1 {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  /* background: url('https://i.postimg.cc/k4RWtVsB/image.png') center/cover no-repeat; */
+}
+.promo-2 {
+  /* background: url('https://i.postimg.cc/k4RWtVsB/image.png') center center / contain no-repeat; */
+   background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  
+}
+.promo-3 {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+}
+
+
+
+/* Content overlay */
+.promo-content {
+  background: rgba(0,0,0,0.4);
+  padding: 12px 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.promo-content h2 {
+  font-size: 18px;
+  margin: 0 0 4px;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+.promo-content p {
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.promo-btn {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899);
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+.promo-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  transition: background 0.3s;
+}
+.carousel-dots .dot.active {
+  background: #fff;
+}
+
+/* Make each slide exactly the width of the viewport (carousel container) */
+.carousel-item {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+/* Keep a single definitive carousel-track rule (remove duplicates) */
+/* .carousel-track {
+  display: flex;
+  width: 300%; 
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out; 
+  will-change: transform;
+} */
+ .carousel-track {
+  display: flex;
+  transform: translateX(0);
+  transition: transform 1.2s ease-in-out;
+  will-change: transform;
+}
+
+/* highlight used after scrolling to product */
+.product-highlight {
+  animation: productPulse 2s ease forwards;
+  box-shadow: 0 10px 30px rgba(255, 200, 80, 0.15), 0 4px 10px rgba(255, 100, 80, 0.06);
+  border: 1px solid rgba(250,160,60,0.9);
+  transform: translateZ(0);
+}
+@keyframes productPulse {
+  0% { outline: 3px solid rgba(250,160,60,0.0); transform: scale(0.995); }
+  20% { outline: 3px solid rgba(250,160,60,0.5); transform: scale(1.01); }
+  60% { outline: 3px solid rgba(250,160,60,0.25); transform: scale(1.005); }
+  100% { outline: 0px solid rgba(250,160,60,0); transform: scale(1); }
+}
+
+/* place ordr code */
+
+
+/* Override Success Modal size & style */
+.success-modal {
+  display: none; /* default hidden, shown via JS */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-modal-content {
+  background: #fff;
+  width: 80%;         /* take 80% of screen width */
+  max-width: 600px;   /* but don’t get too huge on desktop */
+  padding: 30px 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.3s ease-out;
+}
+
+.success-modal-content p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* simple animation */
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+/* Success Modal Override */
+.success-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* dark overlay */
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-modal-content {
+  background: #ffffff;      /* white box */
+  color: #222;              /* dark readable text */
+  width: 90%;               /* mobile-friendly */
+  max-width: 600px;         /* cap size on desktop */
+  padding: 24px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  animation: scaleIn 0.3s ease-out;
+}
+
+.success-modal-content p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Animation */
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+/* ===== Success modal layout override (place AFTER existing modal CSS) ===== */
+.success-modal {
+  /* keep your overlay */
+  display: none;
+  position: fixed;
+  inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+  background: rgba(0,0,0,0.65);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+/* main box: column layout, room for button at bottom */
+.success-modal-content {
+  display: block !important;        /* override any previous flex row */
+  position: relative;               /* for absolute-positioning actions */
+  background: #ffffff;
+  color: #111;                      /* ensure readable text */
+  width: 90%;
+  max-width: 640px;
+  padding: 28px 20px 76px;          /* extra bottom padding for the button */
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  animation: scaleIn 0.28s ease-out;
+  min-height: 120px;
+}
+
+/* message (first, centered) */
+#successMessage {
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.45;
+  color: #111;                       /* override white text */
+  word-break: break-word;
+  max-width: 92%;
+}
+
+/* actions container positioned bottom-right on desktop/tablet */
+.success-modal-actions {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+/* button style inside modal (small friendly pill) */
+.success-modal-actions .btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* on very small screens, stack and center the button under the message */
+@media (max-width: 420px) {
+  .success-modal-content {
+    padding: 20px 14px 20px; /* remove extra bottom padding (button flows below) */
+    min-height: initial;
+  }
+  .success-modal-actions {
+    position: static;
+    margin-top: 14px;
+    justify-content: center;
+  }
+  .success-modal-actions .btn {
+    width: 84%;
+  }
+}
+
+/* small pop animation */
+@keyframes scaleIn {
+  from { transform: scale(0.96); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+
+
     </style>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
@@ -1553,6 +1892,51 @@
           <h1>ABS Crackers World</h1>
         </div>
 
+       <!-- 📱 Mobile Promo Carousel -->
+<div class="mobile-promo-carousel">
+  <div class="carousel-track">
+    
+    <!-- Slide 1 -->
+    <div class="carousel-item promo-1">
+      <div class="promo-content">
+        <h2>🎆 90% OFF</h2>
+        <p>Min Order ₹3500</p>
+        <a href="#productGrid" class="promo-btn">Shop Now</a>
+      </div>
+      
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-item promo-2">
+      <div class="promo-content">
+        <h2>🆕 New Arrivals</h2>
+        <p>Fresh stock just added</p>
+        <a href="#productGrid" class="promo-btn" data-target-name="ORANGE FOUNTAIN">Explore</a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-item promo-3">
+      <div class="promo-content">
+        <h2>⚠️ Price Update</h2>
+        <p>High demand – limited stock!</p>
+        <a href="#productGrid" class="promo-btn">Grab Fast</a>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Dots -->
+  <div class="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+
+
+
         <!-- Offer Badge -->
         <div class="offer-badge">
           🎆 90% OFFER 🎆<br />
@@ -1570,7 +1954,7 @@
         </div>
 
         <!-- Customer Note -->
-        <div style="margin-top: 6px; overflow: hidden; white-space: nowrap">
+        <!-- <div style="margin-top: 6px; overflow: hidden; white-space: nowrap">
           <span
             style="
               display: inline-block;
@@ -1579,15 +1963,15 @@
               color: #facc15; /* golden-yellow accent */
               animation: slideNote 20s ease-in-out infinite;
             "
-          >
+          > -->
             <!-- The Product Image is only for your reference, the packing and brand
             may change -->
-            🎇 Vanakkam Makkale! New Arrival Added! | ⚠️ Price has been
+            <!-- 🎇 Vanakkam Makkale! New Arrival Added! | ⚠️ Price has been
             Increased due to high demand | The Product Image is only for your
             reference, the packing and brand may change
           </span>
         </div>
-      </div>
+      </div> -->
 
       <div class="cart-icon" onclick="scrollToCart()">
         <svg
@@ -1695,15 +2079,25 @@
           </label>
         </div>
 
-        <!-- 🆕 Success Modal -->
-        <div id="successModal" class="success-modal">
-          <div class="success-modal-content">
-            <!-- <span style="font-size: 22px">🎇</span> -->
-            <p id="successMessage" style="margin: 0">
-              Order placed successfully! Invoice downloaded.
-            </p>
-          </div>
-        </div>
+       <div id="successModal" class="success-modal">
+  <div class="success-modal-content">
+    <p id="successMessage">🎇 Order placed successfully! Invoice downloaded.</p>
+
+    <!-- extra info lines -->
+    <p class="success-subtext">
+      We will be contacting you shortly regarding payment and delivery.
+    </p>
+    <p class="success-thanks">
+      🙏 Thank you for choosing ABS Crackers! — Team ABS
+    </p>
+
+    <!-- actions: keep inside .success-modal-content -->
+    <div class="success-modal-actions">
+      <button id="successOkBtn" class="btn btn-primary">Close</button>
+    </div>
+  </div>
+</div>
+
 
         <div class="divider"></div>
         <div class="row" style="gap: 8px">
@@ -2325,14 +2719,19 @@
         function showSuccessModal(message) {
           const modal = document.getElementById("successModal");
           const msgBox = document.getElementById("successMessage");
+          const okBtn = document.getElementById("successOkBtn");
           msgBox.textContent = message;
 
           modal.style.display = "flex";
 
-          // Auto-close after 4s
+           // Manual close on OK
+  okBtn.onclick = () => {
+    modal.style.display = "none";
+  };
+          // Auto-close after 25s
           setTimeout(() => {
             modal.style.display = "none";
-          }, 4000);
+          }, 25000);
         }
 
         function validateCustomer() {
@@ -2585,6 +2984,7 @@
           }
         });
       }
+      
     </script>
     <!-- 📱 Mobile Bottom Nav -->
     <div class="mobile-nav">
@@ -2660,6 +3060,260 @@
         <!-- <button class="close-btn" onclick="closeFilterDrawer()">✖ Close</button> -->
       </div>
     </div>
+    <!-- <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".carousel-track");
+  const slides = document.querySelectorAll(".carousel-item");
+  const dots = document.querySelectorAll(".carousel-dots .dot");
+  let index = 0;
+  let interval;
+
+  function goToSlide(i) {
+  index = i;
+
+  // ✅ remove any transition reset
+  track.style.transition = "";
+
+  // ✅ force browser reflow (makes transition apply next frame)
+  void track.offsetWidth;
+
+  // ✅ now apply transform, CSS transition will animate it
+  track.style.transform = `translateX(-${i * 100}%)`;
+
+  dots.forEach((dot, d) => dot.classList.toggle("active", d === i));
+}
+
+
+
+
+  function nextSlide() {
+    index = (index + 1) % slides.length;
+    goToSlide(index);
+  }
+
+  interval = setInterval(nextSlide, 8000); // auto 6s
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      goToSlide(i);
+      clearInterval(interval);
+      interval = setInterval(nextSlide, 8000);
+    });
+  });
+
+  // Swipe support
+  let startX = 0;
+// On load, disable transition for first placement
+track.style.transition = "none";
+track.style.transform = "translateX(0)";
+
+// Re-enable after DOM paints
+setTimeout(() => {
+  track.style.transition = "transform 1.5s ease-in-out";
+}, 50);
+
+
+
+  track.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  track.addEventListener("touchend", e => {
+    let diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) index = (index - 1 + slides.length) % slides.length;
+      else index = (index + 1) % slides.length;
+      goToSlide(index);
+      clearInterval(interval);
+      interval = setInterval(nextSlide, 8000);
+    }
+  });
+});
+</script> -->
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".carousel-track");
+  const slides = Array.from(document.querySelectorAll(".carousel-item"));
+  const dots = Array.from(document.querySelectorAll(".carousel-dots .dot"));
+  if (!track || slides.length === 0) return;
+
+  const slideCount = slides.length;
+  let index = 0;
+  let interval;
+
+  // Ensure slides and track sizing (defensive; useful if you change slide count)
+  slides.forEach(s => { s.style.flex = "0 0 100%"; s.style.width = "100%"; });
+  track.style.width = `${slideCount * 100}%`;
+
+  // helper: set transform using fraction of track width
+  // function setShift(i, animate = true) {
+  //   const normalized = ((i % slideCount) + slideCount) % slideCount; // keep in range
+  //   index = normalized;
+  //   const shiftPercent = (index * 100) / slideCount; // correct fraction
+  //   if (!animate) {
+  //     // temporarily disable transition for instant placement (first paint)
+  //     const prev = track.style.transition;
+  //     track.style.transition = "none";
+  //     track.style.transform = `translateX(-${shiftPercent}%)`;
+  //     // force reflow then restore transition after a tick
+  //     void track.offsetWidth;
+  //     track.style.transition = prev || "transform 0.6s ease-in-out";
+  //   } else {
+  //     track.style.transform = `translateX(-${shiftPercent}%)`;
+  //   }
+  //   dots.forEach((d, idx) => d.classList.toggle("active", idx === index));
+  // }
+  function setShift(i, animate = true) {
+  const normalized = ((i % slideCount) + slideCount) % slideCount;
+  index = normalized;
+  const shiftPercent = index * 100; // ✅ full slide width each time
+  if (!animate) {
+    const prev = track.style.transition;
+    track.style.transition = "none";
+    track.style.transform = `translateX(-${shiftPercent}%)`;
+    void track.offsetWidth;
+    track.style.transition = prev || "transform 0.6s ease-in-out";
+  } else {
+    track.style.transform = `translateX(-${shiftPercent}%)`;
+  }
+  dots.forEach((d, idx) => d.classList.toggle("active", idx === index));
+}
+
+
+  function goToSlide(i) { setShift(i, true); }
+  function nextSlide() { goToSlide(index + 1); }
+
+  // Initial placement with no animation (avoids initial sliding effect on load)
+  setShift(0, false);
+
+  // Auto-play
+  const AUTO_MS = 5000; // change to taste
+  interval = setInterval(nextSlide, AUTO_MS);
+
+  // Dots
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      goToSlide(i);
+      clearInterval(interval);
+      interval = setInterval(nextSlide, AUTO_MS);
+    });
+  });
+
+  // Swipe support (touch)
+  let startX = 0;
+  track.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  track.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goToSlide(index - 1);
+      else goToSlide(index + 1);
+      clearInterval(interval);
+      interval = setInterval(nextSlide, AUTO_MS);
+    }
+  });
+
+  // Optional: pause on mouseover (good UX on desktop)
+  track.addEventListener("mouseenter", () => clearInterval(interval));
+  track.addEventListener("mouseleave", () => interval = setInterval(nextSlide, AUTO_MS));
+});
+</script>
+
+<script>
+/**
+ * Call exploreToProduct(idOrName) to scroll to a product card.
+ * Usage:
+ *  - Add id="product-100" or data-product-id="100" to product DOM node, OR
+ *  - Pass the product name (partial match) to exploreToProduct("Product Name")
+ *  - Add data-target-id or data-target-name to a .promo-btn
+ *
+ * Example promo button:
+ *   <a class="promo-btn" data-target-id="100">Explore</a>
+ *   <a class="promo-btn" data-target-name="Nescafe">Explore</a>
+ */
+
+(function () {
+  // helper — show message safely
+  const toastFn = (typeof window.toast === "function")
+    ? window.toast
+    : function (m) {
+        if (typeof alert === "function") {
+          alert(m);
+        } else {
+          console.log(m);
+        }
+      };
+
+  function findProductElement(idOrName) {
+    if (!idOrName && idOrName !== 0) return null;
+    const str = String(idOrName).trim();
+
+    // try by id="product-<id>"
+    let el = document.querySelector(`#product-${CSS.escape(str)}`);
+    if (el) return el;
+
+    // try by data-product-id
+    el = document.querySelector(`[data-product-id="${CSS.escape(str)}"]`);
+    if (el) return el;
+
+    // try by data-id
+    el = document.querySelector(`[data-id="${CSS.escape(str)}"]`);
+    if (el) return el;
+
+    // fallback: search inside product cards by visible text
+    const allProducts = document.querySelectorAll(".product-card, .card, [data-product-id]");
+    for (let prod of allProducts) {
+      if (prod.textContent && prod.textContent.toLowerCase().includes(str.toLowerCase())) {
+        return prod;
+      }
+    }
+
+    return null;
+  }
+
+  function highlightElement(el) {
+    if (!el) return;
+    el.classList.add("product-highlight");
+    setTimeout(() => el.classList.remove("product-highlight"), 2200);
+  }
+
+  // Public function
+  window.exploreToProduct = function (idOrName) {
+    if (typeof idOrName === "undefined" || idOrName === null) {
+      toastFn("No product id or name provided.");
+      return;
+    }
+    const str = String(idOrName).trim();
+    const target = findProductElement(str);
+
+    if (!target) {
+      toastFn("Product not found: " + str);
+      return;
+    }
+
+    try {
+      target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    } catch (e) {
+      target.scrollIntoView(true);
+    }
+
+    setTimeout(() => highlightElement(target), 350);
+  };
+
+  // Attach to promo buttons automatically if they have data-target-id or data-target-name
+  document.addEventListener("click", function (ev) {
+    const btn = ev.target.closest && ev.target.closest(".promo-btn");
+    if (!btn) return;
+    const id = btn.getAttribute("data-target-id") || btn.dataset.targetId;
+    const name = btn.getAttribute("data-target-name") || btn.dataset.targetName;
+    if (!id && !name) return; // let normal anchor work
+    ev.preventDefault();
+    window.exploreToProduct(id || name);
+  });
+
+  // Optional: dev helper
+  window.__explore = window.exploreToProduct;
+})();
+</script>
+
+
+
   </body>
 </html>
-
