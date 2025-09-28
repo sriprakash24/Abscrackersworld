@@ -649,7 +649,7 @@ const STARTER_ITEMS = [
     sale: 60,
     img: "https://i.postimg.cc/15MGdYJZ/image.png",
   },
-  {
+  /*{
     id: 73,
     name: "GANGA JAMUNA",
     category: "FANCY FOUNTAINS",
@@ -657,7 +657,7 @@ const STARTER_ITEMS = [
     mrp: 1000,
     sale: 100,
     img: "https://i.postimg.cc/wTBy1xcS/image.png",
-  },
+  }
   {
     id: 74,
     name: "TOM & JERRY",
@@ -666,7 +666,7 @@ const STARTER_ITEMS = [
     mrp: 2000,
     sale: 200,
     img: "https://i.postimg.cc/KYt461xg/image.png",
-  },
+  },*/
   {
     id: 75,
     name: "MASTER TREAT CRACKLING",
@@ -676,7 +676,7 @@ const STARTER_ITEMS = [
     sale: 175,
     img: "https://i.postimg.cc/5ySGYdLt/image.png",
   },
-  {
+  /*{
     id: 76,
     name: "DRONE",
     category: "FANCY FOUNTAINS",
@@ -684,7 +684,7 @@ const STARTER_ITEMS = [
     mrp: 1500,
     sale: 150,
     img: "https://i.postimg.cc/d1psDvsK/image-removebg-preview.jpg",
-  },
+  },*/
   {
     id: 77,
     name: "DANCING BAMBARAM (5 PCS)",
@@ -694,7 +694,7 @@ const STARTER_ITEMS = [
     sale: 150,
     img: "https://i.postimg.cc/pd7bJZgf/image.png",
   },
-  {
+  /*{
     id: 78,
     name: "BINGO SHOWER (5 PCS)",
     category: "FANCY FOUNTAINS",
@@ -720,7 +720,7 @@ const STARTER_ITEMS = [
     mrp: 1600,
     sale: 160,
     img: "https://i.postimg.cc/ZnWWDVRJ/image.png",
-  },
+  },*/
   {
     id: 81,
     name: "PEACOCK (RED, GREEN, GOLD)",
@@ -730,7 +730,7 @@ const STARTER_ITEMS = [
     sale: 180,
     img: "https://i.postimg.cc/6p8N2gPW/image-removebg-preview-2.jpg",
   },
-  {
+  /*{
     id: 82,
     name: "PENTA FANCY (5 PCS)",
     category: "FANCY FOUNTAINS",
@@ -738,7 +738,7 @@ const STARTER_ITEMS = [
     mrp: 1750,
     sale: 175,
     img: "https://i.postimg.cc/Wb4BCxTG/image.png",
-  },
+  },*/
   {
     id: 83,
     name: "RAINBOW COLOUR SMOKE (3 PCS)",
@@ -748,7 +748,7 @@ const STARTER_ITEMS = [
     sale: 250,
     img: "https://i.postimg.cc/T2tSVQgp/image.png",
   },
-  {
+  /*{
     id: 84,
     name: "MEGA SIREN (3 PCS)",
     category: "FANCY FOUNTAINS",
@@ -756,7 +756,7 @@ const STARTER_ITEMS = [
     mrp: 2500,
     sale: 250,
     img: "https://i.postimg.cc/NjBpZH1W/image.png",
-  },
+  },*/
   {
     id: 85,
     name: "SILVER MOON",
@@ -784,7 +784,7 @@ const STARTER_ITEMS = [
     sale: 275,
     img: "https://i.postimg.cc/fTB8nbBy/image.png",
   },
-  {
+ /* {
     id: 88,
     name: "WELCOME ANGEL",
     category: "FANCY FOUNTAINS",
@@ -792,7 +792,7 @@ const STARTER_ITEMS = [
     mrp: 1750,
     sale: 175,
     img: "https://i.postimg.cc/J465Y2zB/image.png",
-  },
+  },*/
   {
     id: 89,
     name: "TRICOLOUR FOUNTAIN (5 PCS)",
@@ -802,7 +802,7 @@ const STARTER_ITEMS = [
     sale: 275,
     img: "https://i.postimg.cc/kMjS7t30/image.png",
   },
-  {
+  /*{
     id: 90,
     name: "FIRE EGG (2 PCS)",
     category: "FANCY FOUNTAINS",
@@ -810,7 +810,7 @@ const STARTER_ITEMS = [
     mrp: 2000,
     sale: 200,
     img: "https://i.postimg.cc/0QVz5h3Y/image.png",
-  },
+  },*/
   {
     id: 91,
     name: "HANUMAN KADA",
@@ -1154,4 +1154,5 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/prvdW2tS/Gemini-Generated-Image-pvqlhvpvqlhvpvql.png",
   },
 ];
+
 
