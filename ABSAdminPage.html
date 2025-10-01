@@ -1260,59 +1260,233 @@
       }
 
       // ---------- Package checklist logic ----------
+      // function openPackageChecklist(id, order) {
+      //   const items = order.items || [];
+      //   const packedArr =
+      //     (order.packing && order.packing.packedQty) || items.map(() => 0);
+      //   const total = items.reduce((s, it) => s + (it.qty || 1), 0);
+
+      //   packageChecklistEl.innerHTML = `
+      //     <div class="package-summary">
+      //       <div><strong>Order:</strong> INV-${id
+      //         .slice(0, 6)
+      //         .toUpperCase()} • <small>${escapeHtml(
+      //     order.name || ""
+      //   )}</small></div>
+      //       <div id="packProgress">0 / ${total} packed</div>
+      //     </div>
+
+      //     <div style="overflow:auto;max-height:56vh">
+      //       <table class="inv-table">
+      //         <thead>
+      //           <tr><th>Item</th><th style="text-align:right">Qty</th><th style="text-align:right">Packed Qty</th><th style="text-align:center">Done</th></tr>
+      //         </thead>
+      //         <tbody>
+      //           ${items
+      //             .map((it, idx) => {
+      //               const packed = packedArr[idx] || 0;
+      //               return `
+      //               <tr>
+      //                 <td>${escapeHtml(it.name || "")}</td>
+      //                 <td style="text-align:right">${it.qty || 1}</td>
+      //                 <td style="text-align:right">
+      //                   <input class="packed-qty-input" type="number" min="0" max="${
+      //                     it.qty || 1
+      //                   }" value="${packed}" data-idx="${idx}">
+      //                 </td>
+      //                 <td style="text-align:center">
+      //                   <input type="checkbox" data-idx="${idx}" ${
+      //                 packed >= (it.qty || 1) ? "checked" : ""
+      //               }>
+      //                 </td>
+      //               </tr>
+      //             `;
+      //             })
+      //             .join("")}
+      //         </tbody>
+      //       </table>
+      //     </div>
+
+      //     <div style="display:flex;gap:8px;margin-top:12px">
+      //       <button id="savePackingBtn" class="btn btn-primary btn-xs">Save Progress</button>
+      //       <button id="markPackedBtn" class="btn btn-primary btn-xs">Mark as Packed</button>
+      //       <button id="closePackageBtnInline" class="btn btn-xs">Close</button>
+      //     </div>
+      //   `;
+
+      //   packageModal.classList.add("show");
+      //   packageModal.setAttribute("aria-hidden", "false");
+
+      //   // attach listeners inside modal
+      //   attachPackageListeners();
+      //   updatePackProgress();
+      // }
+
+      // function attachPackageListeners() {
+      //   // Save / Mark / Inline close
+      //   const saveBtn = packageChecklistEl.querySelector("#savePackingBtn");
+      //   const markBtn = packageChecklistEl.querySelector("#markPackedBtn");
+      //   const inlineClose = packageChecklistEl.querySelector(
+      //     "#closePackageBtnInline"
+      //   );
+
+      //   if (saveBtn)
+      //     saveBtn.addEventListener("click", () => savePackingProgress(false));
+      //   if (markBtn)
+      //     markBtn.addEventListener("click", () => savePackingProgress(true));
+      //   if (inlineClose)
+      //     inlineClose.addEventListener("click", () => closePackageModal());
+
+      //   // Input sync (qty <-> checkbox)
+      //   packageChecklistEl.addEventListener("input", (e) => {
+      //     if (
+      //       e.target.classList &&
+      //       e.target.classList.contains("packed-qty-input")
+      //     ) {
+      //       const idx = e.target.dataset.idx;
+      //       const max = Number(e.target.max) || 1;
+      //       let val = Number(e.target.value) || 0;
+      //       if (val > max) {
+      //         e.target.value = max;
+      //         val = max;
+      //       }
+      //       const cb = packageChecklistEl.querySelector(
+      //         `input[type="checkbox"][data-idx="${idx}"]`
+      //       );
+      //       if (cb) cb.checked = val >= max;
+      //       updatePackProgress();
+      //     }
+      //   });
+
+      //   packageChecklistEl.addEventListener("change", (e) => {
+      //     if (e.target.type === "checkbox") {
+      //       const idx = e.target.dataset.idx;
+      //       const qtyInput = packageChecklistEl.querySelector(
+      //         `.packed-qty-input[data-idx="${idx}"]`
+      //       );
+      //       const max = Number(qtyInput?.max) || 1;
+      //       if (e.target.checked) qtyInput.value = max;
+      //       else qtyInput.value = 0;
+      //       updatePackProgress();
+      //     }
+      //   });
+      // }
+
+      // function updatePackProgress() {
+      //   const inputs = packageChecklistEl.querySelectorAll(".packed-qty-input");
+      //   let packed = 0,
+      //     total = 0;
+      //   inputs.forEach((inp) => {
+      //     const max = Number(inp.max) || 1;
+      //     const val = Math.min(Number(inp.value) || 0, max);
+      //     total += max;
+      //     packed += val;
+      //   });
+      //   const progEl = packageChecklistEl.querySelector("#packProgress");
+      //   if (progEl) progEl.textContent = `${packed} / ${total} packed`;
+      // }
+
+      // async function savePackingProgress(markPacked = false) {
+      //   if (!CURRENT_ORDER_ID) return;
+      //   const items = CURRENT_ORDER.items || [];
+      //   const packedQty = items.map((it, idx) => {
+      //     const inp = packageChecklistEl.querySelector(
+      //       `.packed-qty-input[data-idx="${idx}"]`
+      //     );
+      //     const val = Math.max(
+      //       0,
+      //       Math.min(Number(inp?.value) || 0, it.qty || 1)
+      //     );
+      //     return val;
+      //   });
+
+      //   const packedCount = packedQty.reduce((a, b) => a + b, 0);
+      //   const inferredStatus = packedQty.every(
+      //     (q, idx) => q >= (items[idx].qty || 1)
+      //   )
+      //     ? "packed"
+      //     : "packing";
+      //   const status = markPacked ? "packed" : inferredStatus;
+
+      //   const packingObj = {
+      //     packedQty,
+      //     packedCount,
+      //     status,
+      //     updatedAt: serverTimestamp(),
+      //     updatedBy: auth.currentUser?.email || null,
+      //   };
+
+      //   await updateDoc(doc(db, "orders", CURRENT_ORDER_ID), {
+      //     packing: packingObj,
+      //     status,
+      //   });
+      //   alert(
+      //     markPacked ? "Order marked as packed ✅" : "Packing progress saved"
+      //   );
+      //   closePackageModal();
+      // }
+
+      // ---------- Package checklist logic with localStorage auto-save ----------
       function openPackageChecklist(id, order) {
         const items = order.items || [];
-        const packedArr =
-          (order.packing && order.packing.packedQty) || items.map(() => 0);
+
+        // Load local draft if exists, else fallback to Firestore data
+        const savedKey = `package_progress_${id}`;
+        let packedArr = JSON.parse(localStorage.getItem(savedKey) || "null");
+        if (!packedArr) {
+          packedArr =
+            (order.packing && order.packing.packedQty) || items.map(() => 0);
+        }
+
         const total = items.reduce((s, it) => s + (it.qty || 1), 0);
 
         packageChecklistEl.innerHTML = `
-          <div class="package-summary">
-            <div><strong>Order:</strong> INV-${id
-              .slice(0, 6)
-              .toUpperCase()} • <small>${escapeHtml(
-          order.name || ""
-        )}</small></div>
-            <div id="packProgress">0 / ${total} packed</div>
-          </div>
+    <div class="package-summary">
+      <div><strong>Order:</strong> INV-${id.slice(0, 6).toUpperCase()} • 
+        <small>${escapeHtml(order.name || "")}</small>
+      </div>
+      <div id="packProgress">0 / ${total} packed</div>
+    </div>
 
-          <div style="overflow:auto;max-height:56vh">
-            <table class="inv-table">
-              <thead>
-                <tr><th>Item</th><th style="text-align:right">Qty</th><th style="text-align:right">Packed Qty</th><th style="text-align:center">Done</th></tr>
-              </thead>
-              <tbody>
-                ${items
-                  .map((it, idx) => {
-                    const packed = packedArr[idx] || 0;
-                    return `
-                    <tr>
-                      <td>${escapeHtml(it.name || "")}</td>
-                      <td style="text-align:right">${it.qty || 1}</td>
-                      <td style="text-align:right">
-                        <input class="packed-qty-input" type="number" min="0" max="${
-                          it.qty || 1
-                        }" value="${packed}" data-idx="${idx}">
-                      </td>
-                      <td style="text-align:center">
-                        <input type="checkbox" data-idx="${idx}" ${
-                      packed >= (it.qty || 1) ? "checked" : ""
-                    }>
-                      </td>
-                    </tr>
-                  `;
-                  })
-                  .join("")}
-              </tbody>
-            </table>
-          </div>
+    <div style="overflow:auto;max-height:56vh">
+      <table class="inv-table">
+        <thead>
+          <tr><th>Item</th><th style="text-align:right">Qty</th>
+          <th style="text-align:right">Packed Qty</th><th style="text-align:center">Done</th></tr>
+        </thead>
+        <tbody>
+          ${items
+            .map((it, idx) => {
+              const packed = packedArr[idx] || 0;
+              return `
+              <tr>
+                <td>${escapeHtml(it.name || "")}</td>
+                <td style="text-align:right">${it.qty || 1}</td>
+                <td style="text-align:right">
+                  <input class="packed-qty-input" type="number" min="0" max="${
+                    it.qty || 1
+                  }" 
+                    value="${packed}" data-idx="${idx}">
+                </td>
+                <td style="text-align:center">
+                  <input type="checkbox" data-idx="${idx}" ${
+                packed >= (it.qty || 1) ? "checked" : ""
+              }>
+                </td>
+              </tr>
+            `;
+            })
+            .join("")}
+        </tbody>
+      </table>
+    </div>
 
-          <div style="display:flex;gap:8px;margin-top:12px">
-            <button id="savePackingBtn" class="btn btn-primary btn-xs">Save Progress</button>
-            <button id="markPackedBtn" class="btn btn-primary btn-xs">Mark as Packed</button>
-            <button id="closePackageBtnInline" class="btn btn-xs">Close</button>
-          </div>
-        `;
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button id="savePackingBtn" class="btn btn-primary btn-xs">Save Progress</button>
+      <button id="markPackedBtn" class="btn btn-primary btn-xs">Mark as Packed</button>
+      <button id="closePackageBtnInline" class="btn btn-xs">Close</button>
+    </div>
+  `;
 
         packageModal.classList.add("show");
         packageModal.setAttribute("aria-hidden", "false");
@@ -1323,7 +1497,6 @@
       }
 
       function attachPackageListeners() {
-        // Save / Mark / Inline close
         const saveBtn = packageChecklistEl.querySelector("#savePackingBtn");
         const markBtn = packageChecklistEl.querySelector("#markPackedBtn");
         const inlineClose = packageChecklistEl.querySelector(
@@ -1337,12 +1510,9 @@
         if (inlineClose)
           inlineClose.addEventListener("click", () => closePackageModal());
 
-        // Input sync (qty <-> checkbox)
+        // Input sync + local autosave
         packageChecklistEl.addEventListener("input", (e) => {
-          if (
-            e.target.classList &&
-            e.target.classList.contains("packed-qty-input")
-          ) {
+          if (e.target.classList.contains("packed-qty-input")) {
             const idx = e.target.dataset.idx;
             const max = Number(e.target.max) || 1;
             let val = Number(e.target.value) || 0;
@@ -1355,6 +1525,7 @@
             );
             if (cb) cb.checked = val >= max;
             updatePackProgress();
+            autoSaveLocal(); // save to localStorage
           }
         });
 
@@ -1368,6 +1539,7 @@
             if (e.target.checked) qtyInput.value = max;
             else qtyInput.value = 0;
             updatePackProgress();
+            autoSaveLocal(); // save to localStorage
           }
         });
       }
@@ -1386,6 +1558,23 @@
         if (progEl) progEl.textContent = `${packed} / ${total} packed`;
       }
 
+      // Save progress into localStorage only
+      function autoSaveLocal() {
+        if (!CURRENT_ORDER_ID) return;
+        const items = CURRENT_ORDER.items || [];
+        const packedQty = items.map((it, idx) => {
+          const inp = packageChecklistEl.querySelector(
+            `.packed-qty-input[data-idx="${idx}"]`
+          );
+          return Math.max(0, Math.min(Number(inp?.value) || 0, it.qty || 1));
+        });
+        localStorage.setItem(
+          `package_progress_${CURRENT_ORDER_ID}`,
+          JSON.stringify(packedQty)
+        );
+      }
+
+      // Save to Firestore when user confirms
       async function savePackingProgress(markPacked = false) {
         if (!CURRENT_ORDER_ID) return;
         const items = CURRENT_ORDER.items || [];
@@ -1393,11 +1582,7 @@
           const inp = packageChecklistEl.querySelector(
             `.packed-qty-input[data-idx="${idx}"]`
           );
-          const val = Math.max(
-            0,
-            Math.min(Number(inp?.value) || 0, it.qty || 1)
-          );
-          return val;
+          return Math.max(0, Math.min(Number(inp?.value) || 0, it.qty || 1));
         });
 
         const packedCount = packedQty.reduce((a, b) => a + b, 0);
@@ -1420,6 +1605,10 @@
           packing: packingObj,
           status,
         });
+
+        // Clear local draft after saving to Firestore
+        localStorage.removeItem(`package_progress_${CURRENT_ORDER_ID}`);
+
         alert(
           markPacked ? "Order marked as packed ✅" : "Packing progress saved"
         );
