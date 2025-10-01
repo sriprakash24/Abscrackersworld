@@ -1863,6 +1863,39 @@
   to   { transform: scale(1); opacity: 1; }
 }
 
+/* 🚚 Notice Modal */
+.notice-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+.notice-content {
+  background: #ffffff;
+  color: #111;
+  padding: 28px 24px;
+  width: 90%;
+  max-width: 560px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  animation: scaleIn 0.3s ease-out;
+}
+
+.notice-content h2 {
+  margin-top: 0;
+  color: #ec4899;
+}
+
+.notice-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 16px 0 20px;
+} 
 
 
     </style>
@@ -2273,7 +2306,7 @@
         ];
 
         // --- State ---
-        const STORAGE_KEY = "abs_crackers_catalog_v19";
+        const STORAGE_KEY = "abs_crackers_catalog_v20";
         const CART_KEY = "abs_crackers_cart_v1";
 
         const Catalog = {
@@ -2707,6 +2740,22 @@
           doc.setLineWidth(0.5);
           doc.line(150, finalY - 4, 200, finalY - 4);
           doc.text(`Total: ${subText}`, 200, finalY + 4, { align: "right" });
+
+  // --- Add Payment Note Box ---
+const noteY = finalY + 20; // leave some space below total
+
+// Draw gray background box
+doc.setFillColor(240, 240, 240); // light gray
+doc.roundedRect(14, noteY, 180, 15, 3, 3, "F"); // x,y,w,h,rx,ry,F=filled
+
+// Add Note text inside box
+doc.setFontSize(11);
+doc.setTextColor(40); // dark gray text
+doc.setFont(undefined, "bold");
+doc.text("Note:", 18, noteY + 10);
+
+doc.setFont(undefined, "normal");
+doc.text("Payments once made are non-refundable.", 40, noteY + 10);
 
           // --- Footer ---
           doc.setFontSize(12);
@@ -3283,10 +3332,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const str = String(idOrName).trim();
     const target = findProductElement(str);
 
-    if (!target) {
-      toastFn("Product not found: " + str);
-      return;
-    }
+    // if (!target) {
+    //   toastFn("Product not found: " + str);
+    //   return;
+    // } 
 
     try {
       target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
@@ -3312,9 +3361,80 @@ document.addEventListener("DOMContentLoaded", () => {
   window.__explore = window.exploreToProduct;
 })();
 </script>
+<script> 
+  window.addEventListener("load", () => {
+    const modal = document.getElementById("noticeModal");
+    const okBtn = document.getElementById("noticeOkBtn");
+    const translateBtn = document.getElementById("translateBtn");
+    const message = document.getElementById("noticeMessage");
+
+    // Tamil text (default)
+    const tamilText = `
+ABS Crackers நிறுவனம் எப்போதும் பாதுகாப்பான பாக்கிங் செய்து, 
+சரியாக அனுப்புவதில் கவனம் செலுத்துகிறது.  
+பொருள் எங்கள் மூன்றாம் தரப்பு போக்குவரத்து கூட்டாளரிடம் 
+ஒப்படைக்கப்பட்டு, அதன் LR நகல் வழங்கப்பட்ட பிறகு,  
+பொருளின் பொறுப்பு போக்குவரத்து சேவைக்கும் வாடிக்கையாளருக்கும் உட்பட்டதாகும்.  
+ABS Crackers நேரடி பொறுப்பில்லையென அன்புடன் தெரிவித்துக் கொள்கிறோம். 🙏`;
+
+    // English text
+    const englishText = `
+ABS Crackers always ensures safe packing and dispatch.  
+After the goods are handed over to our transport partner and the LR copy is issued,  
+responsibility rests with the transport service and the customer.  
+ABS Crackers is not directly responsible for any issues during transit,  
+and we kindly seek your understanding. 🙏`;
+
+    let inTamil = true;
+
+    // show modal only once per session
+    if (!sessionStorage.getItem("noticeShown")) {
+      modal.style.display = "flex";
+      sessionStorage.setItem("noticeShown", "true");
+    }
+
+    okBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    translateBtn.addEventListener("click", () => {
+      if (inTamil) {
+        message.innerHTML = englishText;
+        translateBtn.textContent = "தமிழில் பார்க்க";
+        okBtn.textContent = "OK";
+        inTamil = false;
+      } else {
+        message.innerHTML = tamilText;
+        translateBtn.textContent = "Translate to English";
+        okBtn.textContent = "சரி";
+        inTamil = true;
+      }
+    });
+  });
+</script>
 
 
+<!-- 🚚 Notice Modal -->
+<div id="noticeModal" class="notice-modal">
+  <div class="notice-content">
+    <h2>⚠️ முக்கிய அறிவிப்பு</h2>
+    <p id="noticeMessage">
+    
+ABS Crackers நிறுவனம் எப்போதும் பாதுகாப்பான பாக்கிங் செய்து, 
+சரியாக அனுப்புவதில் கவனம் செலுத்துகிறது.  
+பொருள் எங்கள் மூன்றாம் தரப்பு போக்குவரத்து கூட்டாளரிடம் 
+ஒப்படைக்கப்பட்டு, அதன் LR நகல் வழங்கப்பட்ட பிறகு,  
+பொருளின் பொறுப்பு போக்குவரத்து சேவைக்கும் வாடிக்கையாளருக்கும் உட்பட்டதாகும்.  
+ABS Crackers நேரடி பொறுப்பில்லையென அன்புடன் தெரிவித்துக் கொள்கிறோம். 🙏
+    </p>
+
+    <!-- Action buttons -->
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+      <button id="translateBtn" class="btn btn-ghost">Translate to English</button>
+      <button id="noticeOkBtn" class="btn btn-primary">சரி</button>
+    </div>
+  </div>
+</div>
 
   </body>
 </html>
-
