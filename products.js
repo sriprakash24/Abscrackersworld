@@ -969,8 +969,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (40 ITEMS)",
     category: "GIFT BOX",
     unit: "40 ITEMS",
-    mrp: 8000,
-    sale: 800,
+    mrp: 10000,
+    sale: 1000,
     img: "https://i.postimg.cc/NjYRH4M8/IMG-20250912-WA0002.jpg",
   },
   {
@@ -978,8 +978,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (50 ITEMS)",
     category: "GIFT BOX",
     unit: "50 ITEMS",
-    mrp: 11000,
-    sale: 1100,
+    mrp: 15000,
+    sale: 1500,
     img: "https://i.postimg.cc/BbH18Lfw/IMG-20250912-WA0001.jpg",
   },
   {
@@ -1163,3 +1163,4 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/dtGSZfwd/Gemini-Generated-Image-uubap3uubap3uuba.png",
   },
 ];
+
