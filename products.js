@@ -1169,8 +1169,9 @@ const STARTER_ITEMS = [
     unit: "1 PCS",
     sale: 350,
     mrp: 3500,
-    img: "https://i.postimg.cc/fRz07fpP/Gemini-Generated-Image-258nfq258nfq258n.png",
+    img: "https://i.postimg.cc/j5f53MLw/Gemini-Generated-Image-x0uc9ix0uc9ix0uc.png",
   },
 ];
+
 
 
