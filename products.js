@@ -1162,5 +1162,15 @@ const STARTER_ITEMS = [
     sale: 700,
     img: "https://i.postimg.cc/dtGSZfwd/Gemini-Generated-Image-uubap3uubap3uuba.png",
   },
+  {
+    id: 130,
+    name: "CYLINDER BOMB",
+    category: "FANCY FOUNTAINS",
+    unit: "1 PCS",
+    sale: 350,
+    mrp: 3500,
+    img: "https://i.postimg.cc/fRz07fpP/Gemini-Generated-Image-258nfq258nfq258n.png",
+  },
 ];
+
 
