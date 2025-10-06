@@ -150,8 +150,8 @@ const STARTER_ITEMS = [
     name: "CHAKKARAM BIG (25 PCS)",
     category: "GROUND CHAKKARAS",
     unit: "1 BOX",
-    mrp: 800,
-    sale: 80,
+    mrp: 950,
+    sale: 95,
     img: "https://i.postimg.cc/MHVQpnmR/image.png",
   },
   {
@@ -384,8 +384,8 @@ const STARTER_ITEMS = [
     name: "1K",
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
-    mrp: 1650,
-    sale: 165,
+    mrp: 2250,
+    sale: 225,
     img: "https://i.postimg.cc/s2QRt7cV/image.png",
   },
   {
@@ -555,8 +555,8 @@ const STARTER_ITEMS = [
     name: "30 SHOT MULTI COLOUR (GOLD)",
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
-    mrp: 3850,
-    sale: 385,
+    mrp: 4500,
+    sale: 450,
     img: "https://i.postimg.cc/k5R1vcJd/image.png",
   },
   {
@@ -1172,6 +1172,7 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/j5f53MLw/Gemini-Generated-Image-x0uc9ix0uc9ix0uc.png",
   },
 ];
+
 
 
 
