@@ -684,7 +684,7 @@ const STARTER_ITEMS = [
     mrp: 1500,
     sale: 150,
     img: "https://i.postimg.cc/d1psDvsK/image-removebg-preview.jpg",
-  },*/
+  },
   {
     id: 77,
     name: "DANCING BAMBARAM (5 PCS)",
@@ -693,7 +693,7 @@ const STARTER_ITEMS = [
     mrp: 1500,
     sale: 150,
     img: "https://i.postimg.cc/pd7bJZgf/image.png",
-  },
+  },*/
   /*{
     id: 78,
     name: "BINGO SHOWER (5 PCS)",
@@ -799,7 +799,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2750,
-    sale: 275,
+    sale: 400,
     img: "https://i.postimg.cc/kMjS7t30/image.png",
   },
   /*{
@@ -942,8 +942,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (18 ITEMS)",
     category: "GIFT BOX",
     unit: "18 ITEMS",
-    mrp: 2650,
-    sale: 265,
+    mrp: 3500,
+    sale: 350,
     img: "https://i.postimg.cc/W3ZXZ6Gf/image.png",
   },
   {
@@ -951,8 +951,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (21 ITEMS)",
     category: "GIFT BOX",
     unit: "21 ITEMS",
-    mrp: 3500,
-    sale: 350,
+    mrp: 4500,
+    sale: 450,
     img: "https://i.postimg.cc/T1p59569/IMG-20250912-WA0000.jpg",
   },
   {
@@ -960,8 +960,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (30 ITEMS)",
     category: "GIFT BOX",
     unit: "30 ITEMS",
-    mrp: 5500,
-    sale: 550,
+    mrp: 700,
+    sale: 700,
     img: "https://i.postimg.cc/Jzc0j5X8/IMG-20250912-WA0003.jpg",
   },
   {
@@ -969,8 +969,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (40 ITEMS)",
     category: "GIFT BOX",
     unit: "40 ITEMS",
-    mrp: 10000,
-    sale: 1000,
+    mrp: 13500,
+    sale: 1350,
     img: "https://i.postimg.cc/NjYRH4M8/IMG-20250912-WA0002.jpg",
   },
   {
@@ -978,8 +978,8 @@ const STARTER_ITEMS = [
     name: "GIFT BOX (50 ITEMS)",
     category: "GIFT BOX",
     unit: "50 ITEMS",
-    mrp: 15000,
-    sale: 1500,
+    mrp: 18000,
+    sale: 1800,
     img: "https://i.postimg.cc/BbH18Lfw/IMG-20250912-WA0001.jpg",
   },
   {
@@ -987,17 +987,17 @@ const STARTER_ITEMS = [
     name: "ANNAM",
     category: "MATCH BOX",
     unit: "1 BOX",
-    mrp: 750,
-    sale: 75,
+    mrp: 1000,
+    sale: 100,
     img: "https://i.postimg.cc/xjh9n08f/image.png",
   },
   {
     id: 111,
-    name: "HERO",
+    name: "HERO (LAPTOP BOX)",
     category: "MATCH BOX",
     unit: "1 BOX",
-    mrp: 1500,
-    sale: 150,
+    mrp: 2000,
+    sale: 200,
     img: "https://i.postimg.cc/LsxM7SGM/image.png",
   },
   {
@@ -1005,8 +1005,8 @@ const STARTER_ITEMS = [
     name: "ROYAL SUPER MEGA",
     category: "MATCH BOX",
     unit: "1 BOX",
-    mrp: 2000,
-    sale: 200,
+    mrp: 3000,
+    sale: 300,
     img: "https://i.postimg.cc/W3JTJKfL/image-removebg-preview-4.jpg",
   },
   {
@@ -1015,7 +1015,7 @@ const STARTER_ITEMS = [
     category: "GUN",
     unit: "1 PIECE",
     mrp: 400,
-    sale: 40,
+    sale: 60,
     img: "https://i.postimg.cc/X7n6Vp30/image.png",
   },
   {
@@ -1024,7 +1024,7 @@ const STARTER_ITEMS = [
     category: "GUN",
     unit: "1 PIECE",
     mrp: 600,
-    sale: 60,
+    sale: 80,
     img: "https://i.postimg.cc/2ywJq7mN/image.png",
   },
   {
@@ -1033,7 +1033,7 @@ const STARTER_ITEMS = [
     category: "GUN",
     unit: "1 PIECE",
     mrp: 900,
-    sale: 90,
+    sale: 110,
     img: "https://i.postimg.cc/vZ1qMs1s/image.png",
   },
   {
@@ -1042,7 +1042,7 @@ const STARTER_ITEMS = [
     category: "GUN",
     unit: "1 PIECE",
     mrp: 1350,
-    sale: 135,
+    sale: 150,
     img: "https://i.postimg.cc/gjTVBxH6/image.png",
   },
   {
@@ -1060,7 +1060,7 @@ const STARTER_ITEMS = [
     category: "GUN",
     unit: "1 PKT",
     mrp: 80,
-    sale: 8,
+    sale: 10,
     img: "https://i.postimg.cc/bvg2BGzN/image.png",
   },
   {
@@ -1086,7 +1086,7 @@ const STARTER_ITEMS = [
     name: "POPEYE (TRICOLOUR FOUNTAINS)",
     category: "FANCY FOUNTAINS",
     unit: "5 PCS",
-    sale: 260,
+    sale: 400,
     mrp: 2600,
     img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
   },
@@ -1099,7 +1099,7 @@ const STARTER_ITEMS = [
     mrp: 4000,
     img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
   },
-  {
+  /*{
     id: 123,
     name: "DHANDIYA PEACOCK",
     category: "FANCY FOUNTAINS",
@@ -1107,13 +1107,13 @@ const STARTER_ITEMS = [
     sale: 450,
     mrp: 4500,
     img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
-  },
+  },*/
   {
     id: 124,
     name: "KURKURE MIX (10 SMOKE SHOT)",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 350,
+    sale: 575,
     mrp: 3500,
     img: "https://i.postimg.cc/9Fj7rpxZ/abs-logo.jpg",
   },
@@ -1172,6 +1172,7 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/j5f53MLw/Gemini-Generated-Image-x0uc9ix0uc9ix0uc.png",
   },
 ];
+
 
 
 
