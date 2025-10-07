@@ -367,7 +367,7 @@ const STARTER_ITEMS = [
     category: "GIANT & DELUXE",
     unit: "1 PKT",
     mrp: 1200,
-    sale: 120,
+    sale: 135,
     img: "https://i.postimg.cc/Mp43BRmj/image.png",
   },
   // {
@@ -385,7 +385,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 2250,
-    sale: 225,
+    sale: 275,
     img: "https://i.postimg.cc/s2QRt7cV/image.png",
   },
   {
@@ -394,7 +394,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 3750,
-    sale: 375,
+    sale: 450,
     img: "https://i.postimg.cc/Cx92ntGg/image.png",
   },
   {
@@ -403,7 +403,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 7750,
-    sale: 775,
+    sale: 900,
     img: "https://i.postimg.cc/8zSQz4vc/image.png",
   },
   {
@@ -412,7 +412,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 17000,
-    sale: 1700,
+    sale: 2000,
     img: "https://i.postimg.cc/gJMByqrV/image.png",
   },
   {
@@ -421,7 +421,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 4000,
-    sale: 400,
+    sale: 600,
     img: "https://i.postimg.cc/wT7F52TT/image.png",
   },
   {
@@ -430,7 +430,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 7000,
-    sale: 700,
+    sale: 900,
     img: "https://i.postimg.cc/CKYj2sY8/image.png",
   },
   {
@@ -439,7 +439,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 18000,
-    sale: 1800,
+    sale: 2200,
     img: "https://i.postimg.cc/zD9pjWLC/image.png",
   },
   {
@@ -448,7 +448,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 27000,
-    sale: 2700,
+    sale: 3000,
     img: "https://i.postimg.cc/fL178nbz/image.png",
   },
   {
@@ -457,7 +457,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 500,
-    sale: 50,
+    sale: 65,
     img: "https://i.postimg.cc/3xvfg1JQ/image.png",
   },
   {
@@ -466,7 +466,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 1500,
-    sale: 150,
+    sale: 200,
     img: "https://i.postimg.cc/nhPBTfrX/image.png",
   },
   {
@@ -475,7 +475,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "3 PCS",
     mrp: 3500,
-    sale: 350,
+    sale: 450,
     img: "https://i.postimg.cc/PJXCTSNG/image.png",
   },
   {
@@ -484,7 +484,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 3500,
-    sale: 350,
+    sale: 450,
     img: "https://i.postimg.cc/N0CzmkK1/image.png",
   },
   {
@@ -493,7 +493,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 4100,
-    sale: 410,
+    sale: 510,
     img: "https://i.postimg.cc/R0hPSJgq/image.png",
   },
   {
@@ -502,7 +502,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 4750,
-    sale: 475,
+    sale: 600,
     img: "https://i.postimg.cc/tJ3kS34v/image.png",
   },
   {
@@ -511,7 +511,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 6750,
-    sale: 675,
+    sale: 900,
     img: "https://i.postimg.cc/8cSB67mR/image.png",
   },
   {
@@ -520,7 +520,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 8500,
-    sale: 850,
+    sale: 1250,
     img: "https://i.postimg.cc/wvKDC1PC/image.png",
   },
   {
@@ -529,7 +529,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "2 PCS",
     mrp: 18500,
-    sale: 1850,
+    sale: 2000,
     img: "https://i.postimg.cc/DZByqDqx/image.png",
   },
   {
@@ -538,7 +538,7 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 1750,
-    sale: 175,
+    sale: 205,
     img: "https://i.postimg.cc/GhZqhDP7/image.png",
   },
   {
@@ -547,7 +547,7 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 2750,
-    sale: 275,
+    sale: 290,
     img: "https://i.postimg.cc/nzPqS80R/image.png",
   },
   {
@@ -565,7 +565,7 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 9500,
-    sale: 950,
+    sale: 1100,
     img: "https://i.postimg.cc/ryNhjzkz/image.png",
   },
   {
@@ -574,7 +574,7 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 16750,
-    sale: 1675,
+    sale: 1900,
     img: "https://i.postimg.cc/L593wBp5/image.png",
   },
   {
@@ -583,7 +583,7 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 31250,
-    sale: 3125,
+    sale: 3499,
     img: "https://i.postimg.cc/prmxKdVd/image.png",
   },
   {
@@ -628,7 +628,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 270,
-    sale: 27,
+    sale: 30,
     img: "https://i.postimg.cc/GtGMYJCm/image.png",
   },
   {
@@ -646,7 +646,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 750,
-    sale: 75,
+    sale: 90,
     img: "https://i.postimg.cc/15MGdYJZ/image.png",
   },
   /*{
@@ -673,7 +673,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 1750,
-    sale: 175,
+    sale: 300,
     img: "https://i.postimg.cc/5ySGYdLt/image.png",
   },
   /*{
@@ -727,7 +727,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2000,
-    sale: 200,
+    sale: 250,
     img: "https://i.postimg.cc/6p8N2gPW/image-removebg-preview-2.jpg",
   },
   /*{
@@ -763,7 +763,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2000,
-    sale: 200,
+    sale: 275,
     img: "https://i.postimg.cc/zXSkwG9p/image.png",
   },
   {
@@ -772,7 +772,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 850,
-    sale: 85,
+    sale: 100,
     img: "https://i.postimg.cc/nrTCzgPK/image.png",
   },
   {
@@ -817,7 +817,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 PCS",
     mrp: 2500,
-    sale: 250,
+    sale: 300,
     img: "https://i.postimg.cc/0y7rKzF2/image.png",
   },
   {
@@ -826,7 +826,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2500,
-    sale: 250,
+    sale: 300,
     img: "https://i.postimg.cc/y8f6Z0nK/image-removebg-preview-3.jpg",
   },
   {
@@ -835,7 +835,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 PCS",
     mrp: 3500,
-    sale: 350,
+    sale: 400,
     img: "https://i.postimg.cc/fyZQFb55/image.png",
   },
   {
@@ -844,7 +844,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 PCS",
     mrp: 4500,
-    sale: 450,
+    sale: 600,
     img: "https://i.postimg.cc/BbJRpVQV/image.png",
   },
   {
@@ -853,7 +853,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2750,
-    sale: 275,
+    sale: 350,
     img: "https://i.postimg.cc/VsHFDh60/image.png",
   },
   {
@@ -916,7 +916,7 @@ const STARTER_ITEMS = [
     category: "ROCKET",
     unit: "1 BOX",
     mrp: 800,
-    sale: 80,
+    sale: 100,
     img: "https://i.postimg.cc/MGMvdcfB/image.png",
   },
   {
@@ -925,7 +925,7 @@ const STARTER_ITEMS = [
     category: "ROCKET",
     unit: "1 BOX",
     mrp: 1500,
-    sale: 150,
+    sale: 160,
     img: "https://i.postimg.cc/13L9Rv4g/image.png",
   },
   {
@@ -934,7 +934,7 @@ const STARTER_ITEMS = [
     category: "ROCKET",
     unit: "1 BOX",
     mrp: 1750,
-    sale: 175,
+    sale: 200,
     img: "https://i.postimg.cc/j5xBRf6w/image.png",
   },
   {
@@ -1167,11 +1167,21 @@ const STARTER_ITEMS = [
     name: "CYLINDER BOMB",
     category: "FANCY FOUNTAINS",
     unit: "1 PCS",
-    sale: 350,
+    sale: 425,
     mrp: 3500,
     img: "https://i.postimg.cc/j5f53MLw/Gemini-Generated-Image-x0uc9ix0uc9ix0uc.png",
   },
+  {
+    id: 131,
+    name: "GIFT BOX (60 ITEMS)",
+    category: "GIFT BOX",
+    unit: "60 ITEMS",
+    mrp: 18000,
+    sale: 3000,
+    img: "https://i.postimg.cc/BbH18Lfw/IMG-20250912-WA0001.jpg",
+  },
 ];
+
 
 
 
