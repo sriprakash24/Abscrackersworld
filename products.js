@@ -657,7 +657,7 @@ const STARTER_ITEMS = [
     mrp: 1000,
     sale: 100,
     img: "https://i.postimg.cc/wTBy1xcS/image.png",
-  }
+  },
   {
     id: 74,
     name: "TOM & JERRY",
@@ -1190,6 +1190,7 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/0Qk3mG0y/product-jpeg-500x500.jpg",
   },
 ];
+
 
 
 
