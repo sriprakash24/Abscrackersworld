@@ -142,7 +142,7 @@ const STARTER_ITEMS = [
     category: "GROUND CHAKKARAS",
     unit: "1 BOX",
     mrp: 350,
-    sale: 35,
+    sale: 40,
     img: "https://i.postimg.cc/MHVQpnmR/image.png",
   },
   {
@@ -169,7 +169,7 @@ const STARTER_ITEMS = [
     category: "GROUND CHAKKARAS",
     unit: "1 BOX",
     mrp: 1500,
-    sale: 150,
+    sale: 160,
     img: "https://i.postimg.cc/MG2gnNwQ/image.png",
   },
   {
@@ -187,7 +187,7 @@ const STARTER_ITEMS = [
     category: "FLOWER POT",
     unit: "1 BOX",
     mrp: 1000,
-    sale: 100,
+    sale: 110,
     img: "https://i.postimg.cc/3xDd85SQ/image.png",
   },
   {
@@ -232,7 +232,7 @@ const STARTER_ITEMS = [
     category: "TWINKLING STAR",
     unit: "1 BOX",
     mrp: 800,
-    sale: 80,
+    sale: 90,
     img: "https://i.postimg.cc/GhMLVkDf/image.png",
   },
   {
@@ -255,11 +255,11 @@ const STARTER_ITEMS = [
   },
   {
     id: 29,
-    name: "4' PARROT",
+    name: "4' Lion",
     category: "ONE SOUND CRACKERS",
     unit: "1 PKT",
     mrp: 250,
-    sale: 25,
+    sale: 30,
     img: "https://i.postimg.cc/MKQKQkR6/image.png",
   },
   {
@@ -286,10 +286,10 @@ const STARTER_ITEMS = [
     category: "ONE SOUND CRACKERS",
     unit: "1 PKT",
     mrp: 450,
-    sale: 45,
+    sale: 55,
     img: "https://i.postimg.cc/DZkc73qS/image.png",
   },
-  {
+  /*{
     id: 33,
     name: "BULLET (FOILS BOMB)",
     category: "BOMB",
@@ -297,14 +297,14 @@ const STARTER_ITEMS = [
     mrp: 300,
     sale: 30,
     img: "https://i.postimg.cc/L41z33qm/image.png",
-  },
+  },*/
   {
     id: 34,
     name: "HYDRO BOMB CLASSIC",
     category: "BOMB",
     unit: "1BOX",
     mrp: 500,
-    sale: 50,
+    sale: 55,
     img: "https://i.postimg.cc/rmsjswvw/image.png",
   },
   {
@@ -313,7 +313,7 @@ const STARTER_ITEMS = [
     category: "BOMB",
     unit: "1 BOX",
     mrp: 750,
-    sale: 75,
+    sale: 80,
     img: "https://i.postimg.cc/g0jhXVFF/image.png",
   },
   {
@@ -340,7 +340,7 @@ const STARTER_ITEMS = [
     category: "BOMB",
     unit: "1BOX",
     mrp: 3500,
-    sale: 350,
+    sale: 400,
     img: "https://i.postimg.cc/gcQxf2sH/image.png",
   },
   {
@@ -370,15 +370,15 @@ const STARTER_ITEMS = [
     sale: 135,
     img: "https://i.postimg.cc/Mp43BRmj/image.png",
   },
-  // {
-  //   id: 42,
-  //   name: "4' 100 MEGA DELUXE",
-  //   category: "GIANT & DELUXE",
-  //   unit: "1 PKT",
-  //   mrp: 2200,
-  //   sale: 220,
-  //   img: "https://i.postimg.cc/ZncDvMwT/image.png",
-  // },
+   {
+   id: 42,
+    name: "4' 100 MEGA DELUXE",
+     category: "GIANT & DELUXE",
+   unit: "1 PKT",
+    mrp: 2200,
+     sale: 220,
+     img: "https://i.postimg.cc/ZncDvMwT/image.png",
+   },
   {
     id: 43,
     name: "1K",
@@ -475,7 +475,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "3 PCS",
     mrp: 3500,
-    sale: 450,
+    sale: 425,
     img: "https://i.postimg.cc/PJXCTSNG/image.png",
   },
   {
@@ -538,10 +538,10 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 1750,
-    sale: 205,
+    sale: 195,
     img: "https://i.postimg.cc/GhZqhDP7/image.png",
   },
-  {
+  /*{
     id: 61,
     name: "25 SHOT",
     category: "MULTI COLOUR SKY SHOT",
@@ -549,14 +549,14 @@ const STARTER_ITEMS = [
     mrp: 2750,
     sale: 290,
     img: "https://i.postimg.cc/nzPqS80R/image.png",
-  },
+  },*/
   {
     id: 62,
     name: "30 SHOT MULTI COLOUR (GOLD)",
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 4500,
-    sale: 450,
+    sale: 455,
     img: "https://i.postimg.cc/k5R1vcJd/image.png",
   },
   {
@@ -637,7 +637,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 PKT",
     mrp: 250,
-    sale: 25,
+    sale: 30,
     img: "https://i.postimg.cc/q7WXLhQh/image.png",
   },
   {
@@ -646,10 +646,10 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 750,
-    sale: 90,
+    sale: 105,
     img: "https://i.postimg.cc/15MGdYJZ/image.png",
   },
-  /*{
+  {
     id: 73,
     name: "GANGA JAMUNA",
     category: "FANCY FOUNTAINS",
@@ -666,7 +666,7 @@ const STARTER_ITEMS = [
     mrp: 2000,
     sale: 200,
     img: "https://i.postimg.cc/KYt461xg/image.png",
-  },*/
+  },
   {
     id: 75,
     name: "MASTER TREAT CRACKLING",
@@ -676,16 +676,16 @@ const STARTER_ITEMS = [
     sale: 300,
     img: "https://i.postimg.cc/5ySGYdLt/image.png",
   },
-  /*{
+  {
     id: 76,
-    name: "DRONE",
+    name: "Helicopter",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 1500,
-    sale: 150,
+    sale: 160,
     img: "https://i.postimg.cc/d1psDvsK/image-removebg-preview.jpg",
   },
-  {
+  /*{
     id: 77,
     name: "DANCING BAMBARAM (5 PCS)",
     category: "FANCY FOUNTAINS",
@@ -702,7 +702,7 @@ const STARTER_ITEMS = [
     mrp: 1500,
     sale: 150,
     img: "https://i.postimg.cc/CMbTbbJ8/image.png",
-  },
+  },*/
   {
     id: 79,
     name: "TIN BEER (RED, GREEN, CRACKLING)",
@@ -712,7 +712,7 @@ const STARTER_ITEMS = [
     sale: 120,
     img: "https://i.postimg.cc/wjCQ5Rwt/image-removebg-preview-1.jpg",
   },
-  {
+  /*{
     id: 80,
     name: "GOLDEN POPS (5 PCS)",
     category: "FANCY FOUNTAINS",
@@ -730,16 +730,16 @@ const STARTER_ITEMS = [
     sale: 250,
     img: "https://i.postimg.cc/6p8N2gPW/image-removebg-preview-2.jpg",
   },
-  /*{
+  {
     id: 82,
     name: "PENTA FANCY (5 PCS)",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 1750,
-    sale: 175,
+    sale: 205,
     img: "https://i.postimg.cc/Wb4BCxTG/image.png",
-  },*/
-  {
+  },
+  /*{
     id: 83,
     name: "RAINBOW COLOUR SMOKE (3 PCS)",
     category: "FANCY FOUNTAINS",
@@ -747,7 +747,7 @@ const STARTER_ITEMS = [
     mrp: 2500,
     sale: 250,
     img: "https://i.postimg.cc/T2tSVQgp/image.png",
-  },
+  },*/
   /*{
     id: 84,
     name: "MEGA SIREN (3 PCS)",
@@ -772,7 +772,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 850,
-    sale: 100,
+    sale: 110,
     img: "https://i.postimg.cc/nrTCzgPK/image.png",
   },
   {
@@ -784,15 +784,15 @@ const STARTER_ITEMS = [
     sale: 310,
     img: "https://i.postimg.cc/fTB8nbBy/image.png",
   },
-  /* {
+  {
     id: 88,
     name: "WELCOME ANGEL",
     category: "FANCY FOUNTAINS",
     unit: "1 PCS",
     mrp: 1750,
-    sale: 175,
+    sale: 185,
     img: "https://i.postimg.cc/J465Y2zB/image.png",
-  },*/
+  },
   {
     id: 89,
     name: "TRICOLOUR FOUNTAIN (5 PCS)",
@@ -802,7 +802,7 @@ const STARTER_ITEMS = [
     sale: 400,
     img: "https://i.postimg.cc/kMjS7t30/image.png",
   },
-  /*{
+  {
     id: 90,
     name: "FIRE EGG (2 PCS)",
     category: "FANCY FOUNTAINS",
@@ -810,7 +810,7 @@ const STARTER_ITEMS = [
     mrp: 2000,
     sale: 200,
     img: "https://i.postimg.cc/0QVz5h3Y/image.png",
-  },*/
+  },
   {
     id: 91,
     name: "HANUMAN KADA",
@@ -925,7 +925,7 @@ const STARTER_ITEMS = [
     category: "ROCKET",
     unit: "1 BOX",
     mrp: 1500,
-    sale: 160,
+    sale: 170,
     img: "https://i.postimg.cc/13L9Rv4g/image.png",
   },
   {
@@ -1159,7 +1159,7 @@ const STARTER_ITEMS = [
     category: "FLOWER POT",
     unit: "1 BOX",
     mrp: 7000,
-    sale: 700,
+    sale: 750,
     img: "https://i.postimg.cc/dtGSZfwd/Gemini-Generated-Image-uubap3uubap3uuba.png",
   },
   {
@@ -1180,7 +1180,17 @@ const STARTER_ITEMS = [
     sale: 3000,
     img: "https://i.postimg.cc/BbH18Lfw/IMG-20250912-WA0001.jpg",
   },
+       {
+    id: 132,
+    name: "HAND SHOT (50 SHOT)",
+    category: "MULTI COLOUR SKY SHOT",
+    unit: "1 PCS",
+    mrp: 31250,
+    sale: 2999,
+    img: "https://i.postimg.cc/0Qk3mG0y/product-jpeg-500x500.jpg",
+  },
 ];
+
 
 
 
