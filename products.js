@@ -340,7 +340,7 @@ const STARTER_ITEMS = [
     category: "BOMB",
     unit: "1BOX",
     mrp: 3500,
-    sale: 450,
+    sale: 800,
     img: "https://i.postimg.cc/gcQxf2sH/image.png",
   },
   {
@@ -1190,6 +1190,7 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/0Qk3mG0y/product-jpeg-500x500.jpg",
   },
 ];
+
 
 
 
