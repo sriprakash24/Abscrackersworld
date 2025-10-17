@@ -133,7 +133,7 @@ const STARTER_ITEMS = [
     category: "SPARKLERS",
     unit: "1 BOX",
     mrp: 2500,
-    sale: 250,
+    sale: 300,
     img: "https://i.postimg.cc/Qx7BQK5W/image.png",
   },
   {
@@ -205,10 +205,10 @@ const STARTER_ITEMS = [
     category: "FLOWER POT",
     unit: "1 BOX",
     mrp: 2500,
-    sale: 250,
+    sale: 300,
     img: "https://i.postimg.cc/FHjNC9Cz/image.png",
   },
-  {
+  /*{
     id: 24,
     name: "COLOR KOTI",
     category: "FLOWER POT",
@@ -216,14 +216,14 @@ const STARTER_ITEMS = [
     mrp: 2500,
     sale: 250,
     img: "https://i.postimg.cc/FHZssryq/image.png",
-  },
+  },*/
   {
     id: 25,
     name: "1 1/2 TWINKLING STAR",
     category: "TWINKLING STAR",
     unit: "1 BOX",
     mrp: 300,
-    sale: 30,
+    sale: 40,
     img: "https://i.postimg.cc/J7ZHfd72/image.png",
   },
   {
@@ -232,7 +232,7 @@ const STARTER_ITEMS = [
     category: "TWINKLING STAR",
     unit: "1 BOX",
     mrp: 800,
-    sale: 90,
+    sale: 100,
     img: "https://i.postimg.cc/GhMLVkDf/image.png",
   },
   {
@@ -259,7 +259,7 @@ const STARTER_ITEMS = [
     category: "ONE SOUND CRACKERS",
     unit: "1 PKT",
     mrp: 250,
-    sale: 30,
+    sale: 35,
     img: "https://i.postimg.cc/MKQKQkR6/image.png",
   },
   {
@@ -282,11 +282,11 @@ const STARTER_ITEMS = [
   },
   {
     id: 32,
-    name: "5' JALLIKATTU DLX",
+    name: "6' LION DLX",
     category: "ONE SOUND CRACKERS",
     unit: "1 PKT",
     mrp: 450,
-    sale: 55,
+    sale: 75,
     img: "https://i.postimg.cc/DZkc73qS/image.png",
   },
   /*{
@@ -318,11 +318,11 @@ const STARTER_ITEMS = [
   },
   {
     id: 36,
-    name: "DINOSAUR BOMB",
+    name: "DRAGON BOMB",
     category: "BOMB",
     unit: "1BOX",
     mrp: 1250,
-    sale: 125,
+    sale: 100,
     img: "https://i.postimg.cc/Z57BSW9f/image.png",
   },
   {
@@ -340,7 +340,7 @@ const STARTER_ITEMS = [
     category: "BOMB",
     unit: "1BOX",
     mrp: 3500,
-    sale: 400,
+    sale: 450,
     img: "https://i.postimg.cc/gcQxf2sH/image.png",
   },
   {
@@ -376,7 +376,7 @@ const STARTER_ITEMS = [
      category: "GIANT & DELUXE",
    unit: "1 PKT",
     mrp: 2200,
-     sale: 220,
+     sale: 270,
      img: "https://i.postimg.cc/ZncDvMwT/image.png",
    },
   {
@@ -403,7 +403,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 7750,
-    sale: 900,
+    sale: 1200,
     img: "https://i.postimg.cc/8zSQz4vc/image.png",
   },
   {
@@ -412,7 +412,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 17000,
-    sale: 2000,
+    sale: 2500,
     img: "https://i.postimg.cc/gJMByqrV/image.png",
   },
   {
@@ -421,7 +421,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 4000,
-    sale: 600,
+    sale: 550,
     img: "https://i.postimg.cc/wT7F52TT/image.png",
   },
   {
@@ -439,7 +439,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 18000,
-    sale: 2200,
+    sale: 2500,
     img: "https://i.postimg.cc/zD9pjWLC/image.png",
   },
   {
@@ -448,7 +448,7 @@ const STARTER_ITEMS = [
     category: "RED MAGIC CRACKERS",
     unit: "1 BOX",
     mrp: 27000,
-    sale: 3000,
+    sale: 3500,
     img: "https://i.postimg.cc/fL178nbz/image.png",
   },
   {
@@ -484,7 +484,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 3500,
-    sale: 450,
+    sale: 550,
     img: "https://i.postimg.cc/N0CzmkK1/image.png",
   },
   {
@@ -502,7 +502,7 @@ const STARTER_ITEMS = [
     category: "MEGA FANCY OUT",
     unit: "1 PCS",
     mrp: 4750,
-    sale: 600,
+    sale: 650,
     img: "https://i.postimg.cc/tJ3kS34v/image.png",
   },
   {
@@ -574,7 +574,7 @@ const STARTER_ITEMS = [
     category: "MULTI COLOUR SKY SHOT",
     unit: "1 BOX",
     mrp: 16750,
-    sale: 1900,
+    sale: 2200,
     img: "https://i.postimg.cc/L593wBp5/image.png",
   },
   {
@@ -682,7 +682,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 1500,
-    sale: 160,
+    sale: 200,
     img: "https://i.postimg.cc/d1psDvsK/image-removebg-preview.jpg",
   },
   /*{
@@ -727,7 +727,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2000,
-    sale: 250,
+    sale: 200,
     img: "https://i.postimg.cc/6p8N2gPW/image-removebg-preview-2.jpg",
   },
   {
@@ -763,7 +763,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
     mrp: 2000,
-    sale: 275,
+    sale: 175,
     img: "https://i.postimg.cc/zXSkwG9p/image.png",
   },
   {
@@ -844,7 +844,7 @@ const STARTER_ITEMS = [
     category: "FANCY FOUNTAINS",
     unit: "1 PCS",
     mrp: 4500,
-    sale: 600,
+    sale: 650,
     img: "https://i.postimg.cc/BbJRpVQV/image.png",
   },
   {
@@ -997,7 +997,7 @@ const STARTER_ITEMS = [
     category: "MATCH BOX",
     unit: "1 BOX",
     mrp: 2000,
-    sale: 200,
+    sale: 250,
     img: "https://i.postimg.cc/LsxM7SGM/image.png",
   },
   {
@@ -1006,7 +1006,7 @@ const STARTER_ITEMS = [
     category: "MATCH BOX",
     unit: "1 BOX",
     mrp: 3000,
-    sale: 300,
+    sale: 350,
     img: "https://i.postimg.cc/W3JTJKfL/image-removebg-preview-4.jpg",
   },
   {
@@ -1077,7 +1077,7 @@ const STARTER_ITEMS = [
     name: "APPLE - MIX",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 275,
+    sale: 399,
     mrp: 2750,
     img: "https://i.postimg.cc/PrdyCYX6/Gemini-Generated-Image-d7alyzd7alyzd7al.png",
   },
@@ -1122,7 +1122,7 @@ const STARTER_ITEMS = [
     name: "ORANGE FOUNTAIN",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 275,
+    sale: 399,
     mrp: 2750,
     img: "https://i.postimg.cc/Pxf9b9h7/Gemini-Generated-Image-hirpfwhirpfwhirp.png",
   },
@@ -1131,7 +1131,7 @@ const STARTER_ITEMS = [
     name: "STRAWBERRY FOUNTAIN",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 275,
+    sale: 399,
     mrp: 2750,
     img: "https://i.postimg.cc/3Rcy3Mw5/Gemini-Generated-Image-dyeto3dyeto3dyet.png",
   },
@@ -1140,7 +1140,7 @@ const STARTER_ITEMS = [
     name: "PINEAPPLE FOUNTAIN",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 275,
+    sale: 399,
     mrp: 2750,
     img: "https://i.postimg.cc/fRz07fpP/Gemini-Generated-Image-258nfq258nfq258n.png",
   },
@@ -1149,7 +1149,7 @@ const STARTER_ITEMS = [
     name: "PUMPKIN FOUNTAIN",
     category: "FANCY FOUNTAINS",
     unit: "1 BOX",
-    sale: 275,
+    sale: 399,
     mrp: 2750,
     img: "https://i.postimg.cc/prvdW2tS/Gemini-Generated-Image-pvqlhvpvqlhvpvql.png",
   },
@@ -1190,6 +1190,7 @@ const STARTER_ITEMS = [
     img: "https://i.postimg.cc/0Qk3mG0y/product-jpeg-500x500.jpg",
   },
 ];
+
 
 
 
